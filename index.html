@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amparo · Fracciones y transformaciones</title>
+<meta name="color-scheme" content="light">
+<meta name="apple-mobile-web-app-title" content="Matemáticas">
+<meta name="theme-color" content="#FBF7F0">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+:root{
+  --bg:#FBF7F0; --card:#FFFFFF; --ink:#1F2A37; --muted:#5B6675; --line:#E6DFD3;
+  --blue:#3A86D6; --blue-soft:#DCEBFA; --blue-ink:#1D5FA8;
+  --orange:#F0A43C; --orange-soft:#FDEBD1; --orange-ink:#A4610A;
+  --fig:#C9CDD2; --fig-ink:#3A3F45;
+  --green:#23915F; --green-soft:#DFF3E9; --red:#D64545; --red-soft:#FBE3E3;
+  --gold:#E9B325; --gold-soft:#FFF4D3;
+  --radius:16px; --shadow:0 1px 2px rgba(31,42,55,.06),0 4px 14px rgba(31,42,55,.06);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;touch-action:manipulation}
+button,.opt,.slot,.chip,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{line-height:1.2;margin:0 0 .5em}
+h1{font-size:1.9rem} h2{font-size:1.45rem} h3{font-size:1.15rem} h4{font-size:1rem}
+p{margin:.4em 0 .8em}
+button{font:inherit;color:inherit;cursor:pointer}
+input{font:inherit;color:inherit}
+a{color:var(--blue-ink)}
+.muted{color:var(--muted)} .small{font-size:.86rem}
+.hide{display:none!important}
+
+/* ---------- barra superior ---------- */
+header.top{position:sticky;top:0;z-index:20;background:rgba(251,247,240,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{max-width:960px;margin:0 auto;padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.05rem;margin-right:auto;white-space:nowrap}
+.brand span{color:var(--blue)}
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap}
+nav.tabs button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-size:.92rem;font-weight:600}
+nav.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+@media (max-width:900px){.top-in{gap:8px}.brand{font-size:.95rem}nav.tabs{gap:4px}nav.tabs button{padding:5px 10px;font-size:.84rem}}
+
+main{max-width:960px;margin:0 auto;padding:20px 16px 80px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px;margin:0 0 18px}
+@media (max-width:560px){.card{padding:18px 16px}}
+
+/* ---------- inicio ---------- */
+.hero{padding:28px 26px}
+.hero h1 span{color:var(--blue)}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
+@media (max-width:760px){.paths{grid-template-columns:1fr}}
+.path{border:1px solid var(--line);border-radius:14px;padding:16px;background:#FFFDF9;display:flex;flex-direction:column;gap:6px}
+.path .step{font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.path h3{margin:0}
+.path p{margin:0 0 6px;font-size:.95rem;color:var(--muted);flex:1}
+.path .state{font-size:.85rem;font-weight:700}
+
+/* ---------- botones ---------- */
+.btn{border:0;border-radius:12px;padding:10px 18px;font-weight:700;background:var(--ink);color:#fff}
+.btn.blue{background:var(--blue)} .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.small{padding:6px 12px;font-size:.9rem;border-radius:10px}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* ---------- fracciones ---------- */
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 .12em;line-height:1.08;font-variant-numeric:tabular-nums;font-weight:700}
+.fr>span{padding:0 .18em;min-width:.9em;text-align:center}
+.fr>.n{border-bottom:2px solid currentColor}
+.mx{display:inline-flex;align-items:center;vertical-align:middle;font-weight:700}
+.mx>.w{margin-right:.02em}
+.big{font-size:1.35em}
+.fin{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;gap:3px;margin:0 .15em}
+.fin .bar{width:100%;height:2px;background:var(--ink);border-radius:2px}
+.inp{font-size:max(16px,1em);width:3.1em;height:2.1em;text-align:center;border:1.5px solid #CFC6B8;border-radius:9px;background:#FFFDF9;font-weight:700;padding:0 2px}
+.inp.w{width:2.4em}
+.inp:focus{outline:3px solid var(--blue-soft);border-color:var(--blue)}
+.inp.ok{border-color:var(--green);background:var(--green-soft)}
+.inp.bad{border-color:var(--red);background:var(--red-soft)}
+.inp.wide{width:12em;text-align:left;padding:0 10px}
+
+/* ---------- módulo ---------- */
+.lesson-nav{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.lesson-nav button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 11px;font-size:.88rem;font-weight:600}
+.lesson-nav button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.lesson-nav button.done::after{content:" ✓";color:var(--green)}
+.lesson-nav button.on.done::after{color:#fff}
+.sec-num{display:inline-block;background:var(--blue-soft);color:var(--blue-ink);font-weight:800;border-radius:8px;padding:1px 9px;margin-right:6px}
+.box{border-radius:12px;padding:12px 16px;margin:12px 0}
+.box.tip{background:var(--blue-soft)}
+.box.warn{background:var(--red-soft)}
+.box.gold{background:var(--gold-soft)}
+.box.green{background:var(--green-soft)}
+.box h4{margin:0 0 4px}
+.lab{border:1px dashed #CFC6B8;border-radius:14px;padding:14px;margin:14px 0;background:#FFFDF9}
+.lab-title{font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--orange-ink);margin-bottom:8px}
+.ctrl{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px 6px}
+.ctrl button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#fff;font-weight:800;font-size:1.1rem}
+.ctrl .v{min-width:1.6em;text-align:center;font-weight:800}
+.eq{font-size:1.3em;margin:8px 0;display:flex;align-items:center;gap:.35em;flex-wrap:wrap}
+table.t{border-collapse:collapse;width:100%;margin:10px 0;font-size:.95rem}
+table.t th,table.t td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle}
+table.t th{background:#F4EFE6}
+.tablewrap{overflow-x:auto}
+.check{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.check-title{font-weight:800;margin-bottom:6px}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+svg{max-width:100%;height:auto;display:block}
+.fig{margin:10px 0}
+ul.clean{list-style:none;padding:0;margin:0}
+.tick{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.tick input{width:22px;height:22px;margin-top:3px;flex:none}
+
+/* ---------- preguntas ---------- */
+.part-h{margin:26px 0 10px;font-size:1.2rem}
+.q{position:relative}
+.q-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.q-num{flex:none;min-width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;padding:0 6px}
+.q-text{flex:1;padding-top:3px}
+.q-pts{flex:none;font-size:.82rem;color:var(--muted);font-weight:700;padding-top:6px;white-space:nowrap}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.opts.tall{grid-template-columns:1fr 1fr}
+@media (max-width:640px){.opts{grid-template-columns:1fr 1fr}.opts.tall{grid-template-columns:1fr}}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;text-align:left;min-height:58px}
+.opt .l{flex:none;width:28px;height:28px;border-radius:8px;background:#F1ECE3;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.opt.sel .l{background:var(--blue);color:#fff}
+.opt.ok{border-color:var(--green);background:var(--green-soft)}
+.opt.ok .l{background:var(--green);color:#fff}
+.opt.bad{border-color:var(--red);background:var(--red-soft)}
+.opt.bad .l{background:var(--red);color:#fff}
+.locked .opt{cursor:default}
+.sub{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.sub:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.sub-h{font-weight:700;margin-bottom:6px}
+.line{display:flex;align-items:center;gap:.45em;flex-wrap:wrap;margin:8px 0;font-size:1.1em}
+.calc{font-size:.9em;color:var(--muted);display:inline-flex;align-items:center;gap:.35em;flex-wrap:wrap;margin-left:.6em}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.seg button{border:0;background:#fff;padding:8px 14px;font-weight:800;min-width:44px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button.sel{background:var(--blue);color:#fff}
+.seg.ok{border-color:var(--green)} .seg.bad{border-color:var(--red)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:6px 12px;font-size:1.1em}
+.chip.used{opacity:.3}
+.slots{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0;font-size:1.1em}
+.slot{min-width:56px;min-height:58px;border:2px dashed #CFC6B8;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#FFFDF9;cursor:pointer}
+.slot.filled{border-style:solid;border-color:var(--blue);background:var(--blue-soft)}
+.fb{border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.95rem}
+.fb.ok{background:var(--green-soft)} .fb.bad{background:var(--red-soft)} .fb.part{background:var(--gold-soft)}
+.fb b.tag{display:inline-block;margin-right:6px}
+.fb a{font-weight:700}
+.q-actions{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.score-chip{font-weight:800;font-size:.9rem;border-radius:999px;padding:3px 10px;background:#F1ECE3}
+.score-chip.ok{background:var(--green-soft);color:var(--green)}
+.score-chip.bad{background:var(--red-soft);color:var(--red)}
+.score-chip.part{background:var(--gold-soft);color:#8A6A0A}
+.gridwrap{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.tools button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:6px 12px;font-weight:700}
+.tools button.sel{border-color:var(--orange);background:var(--orange-soft)}
+.fig3{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.fig3 .seg{display:grid;grid-template-columns:repeat(3,1fr);width:100%}
+.fig3 .seg button{min-width:0;padding:9px 4px;font-size:.88rem}
+.fig3 .cell{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff}
+
+/* ---------- barra del ensayo ---------- */
+.testbar{position:sticky;top:calc(var(--hdr,58px) + 8px);z-index:10;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:14px;padding:10px 16px;margin-bottom:16px}
+.testbar .grow{flex:1}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.2rem}
+.timer.late{color:#FF9A9A}
+.progress{height:8px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden;min-width:120px;flex:1}
+.progress i{display:block;height:100%;background:var(--gold);width:0}
+
+/* ---------- resultados ---------- */
+.result-top{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.nota{font-size:3rem;font-weight:900;line-height:1}
+.nota.ok{color:var(--green)} .nota.bad{color:var(--red)}
+.meter{height:12px;background:#F1ECE3;border-radius:99px;overflow:hidden}
+.meter i{display:block;height:100%}
+.focos{display:grid;gap:10px;margin-top:10px}
+.foco{display:grid;grid-template-columns:1fr 150px 64px;gap:12px;align-items:center;font-size:.95rem}
+@media (max-width:640px){.foco{grid-template-columns:1fr 70px}.foco .meter{grid-column:1/-1}}
+.foco b{font-variant-numeric:tabular-nums;text-align:right}
+.hist td,.hist th{font-size:.92rem}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="brand">Amparo · <span>Matemáticas 5°</span></div>
+  <nav class="tabs" id="tabs">
+    <button data-go="inicio">Inicio</button>
+    <button data-go="aprender">1 · Aprender</button>
+    <button data-go="ensayoA">2 · Ensayo A</button>
+    <button data-go="ensayoB">3 · Ensayo B</button>
+    <button data-go="resultados">Mis resultados</button>
+  </nav>
+</div></header>
+
+<main id="app">
+
+<!-- ================= INICIO ================= -->
+<section id="v-inicio" class="view">
+  <div class="card hero">
+    <p class="muted small" style="margin:0 0 6px">Prueba N°2 · jueves 24-09-2026</p>
+    <h1>Hola, Amparo. Vamos a preparar la prueba de <span>fracciones y transformaciones</span>.</h1>
+    <p>Son tres pasos. Primero repasas cada tema con dibujos que puedes mover. Después haces el Ensayo A con ayuda: cada vez que respondes te digo si está bien y por qué. Al final haces el Ensayo B como si fuera la prueba de verdad, con tiempo y sin ayuda.</p>
+    <div class="paths">
+      <div class="path"><div class="step">Paso 1</div><h3>Aprender</h3><p>Nueve lecciones cortas, cada una con una pregunta para ver si quedó claro.</p><div class="state" id="st-aprender"></div><button class="btn blue" data-go="aprender">Empezar a repasar</button></div>
+      <div class="path"><div class="step">Paso 2</div><h3>Ensayo A · práctica</h3><p>60 puntos. Compruebas cada pregunta y ves la explicación.</p><div class="state" id="st-ensayoA"></div><button class="btn" data-go="ensayoA">Ir al Ensayo A</button></div>
+      <div class="path"><div class="step">Paso 3</div><h3>Ensayo B · simulacro</h3><p>60 puntos, 70 minutos. La nota sale al entregar.</p><div class="state" id="st-ensayoB"></div><button class="btn" data-go="ensayoB">Ir al Ensayo B</button></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Lo que entra en la prueba</h3>
+    <p style="margin:0">Fracciones equivalentes (amplificar y simplificar) · fracciones propias, impropias y número mixto · comparar y ordenar fracciones · transformaciones isométricas: traslación, reflexión y rotación.</p>
+  </div>
+</section>
+
+<!-- ================= APRENDER ================= -->
+<section id="v-aprender" class="view hide">
+  <div class="lesson-nav" id="lessonNav"></div>
+
+  <!-- 1 -->
+  <div class="card lesson" data-sec="1" data-title="Qué es una fracción">
+    <h2><span class="sec-num">1</span>Primero, ¿qué es una fracción?</h2>
+    <p>Una fracción representa <b>partes iguales de un entero</b>. En la fracción <span class="big">[[3/4]]</span>:</p>
+    <p>El <b>denominador</b> (abajo, el 4) dice en cuántas partes iguales se dividió el entero. El <b>numerador</b> (arriba, el 3) dice cuántas de esas partes tomamos.</p>
+    <p>Si una pizza se corta en 4 trozos iguales y te comes 3, te comiste <span class="big">[[3/4]]</span> de la pizza.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · arma tu fracción</div><div id="lab1"></div></div>
+    <div class="check" data-check="c1"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card lesson" data-sec="2" data-title="Equivalentes">
+    <h2><span class="sec-num">2</span>Fracciones equivalentes: amplificar y simplificar</h2>
+    <p>Dos fracciones son <b>equivalentes</b> cuando representan la misma cantidad, aunque se escriban con números distintos. Mira: la parte pintada es igual en las tres barras.</p>
+    <div class="fig" id="fig2eq"></div>
+    <p>Por eso <span class="big">[[1/2]] = [[2/4]] = [[4/8]]</span>. Hay dos formas de obtener fracciones equivalentes.</p>
+
+    <h3>Amplificar: multiplicar arriba y abajo por el mismo número</h3>
+    <p>Es como cortar cada trozo en trozos más pequeños: hay más trozos, pero la cantidad de pizza es la misma.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · amplifica <span>[[2/3]]</span></div><div id="lab2amp"></div></div>
+
+    <h3>Simplificar: dividir arriba y abajo por el mismo número</h3>
+    <p>Simplificar <span class="big">[[12/18]]</span>. Ambos son pares, divido por 2: <span class="big">[[12/18]] = [[6/9]]</span>. Ambos son múltiplos de 3, divido por 3: <span class="big">[[6/9]] = [[2/3]]</span>.</p>
+    <p>Cuando ya no hay ningún número (distinto de 1) que divida al numerador y al denominador, la fracción es <b>irreducible</b>. <span class="big">[[2/3]]</span> es irreducible; <span class="big">[[6/9]]</span> todavía no lo es.</p>
+    <p><b>Atajo:</b> si encuentras el divisor común más grande, simplificas de una vez. 12 y 18 se pueden dividir los dos por 6: <span class="big">[[12/18]] = [[2/3]]</span>.</p>
+    <div class="box tip"><h4>¿Por qué número divido? Usa los criterios de divisibilidad</h4>
+      <b>Por 2:</b> el número es par. &nbsp; <b>Por 3:</b> la suma de sus cifras es múltiplo de 3. &nbsp; <b>Por 5:</b> termina en 0 o en 5. &nbsp; <b>Por 10:</b> termina en 0.<br>
+      Ejemplo: <span class="big">[[15/20]]</span>: los dos terminan en 0 o 5, divido por 5 → <span class="big">[[3/4]]</span>.</div>
+    <div class="lab"><div class="lab-title">Pruébalo · la máquina de simplificar</div><div id="lab2simp"></div></div>
+
+    <h3>Completar una fracción equivalente</h3>
+    <p><span class="big">[[3/5]] = [[□/20]]</span>. Pregúntate: ¿por cuánto multipliqué el 5 para llegar a 20? Por 4. Entonces hago lo mismo arriba: 3 · 4 = 12. Resultado: <span class="big">[[3/5]] = [[12/20]]</span>.</p>
+    <p><span class="big">[[4/6]] = [[2/□]]</span>. Aquí el 4 pasó a 2: se dividió por 2. Hago lo mismo abajo: 6 : 2 = 3. Resultado: <span class="big">[[4/6]] = [[2/3]]</span>.</p>
+    <div class="box warn"><h4>Cuidado</h4>Sumar o restar el mismo número <b>NO</b> da una fracción equivalente. Si a <span class="big">[[1/2]]</span> le sumo 1 arriba y abajo obtengo <span class="big">[[2/3]]</span>, que es otra cantidad. Solo sirve <b>multiplicar o dividir</b>.
+      <div class="fig" id="fig2warn"></div></div>
+    <div class="check" data-check="c2"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card lesson" data-sec="3" data-title="Impropias y mixtos">
+    <h2><span class="sec-num">3</span>Fracciones propias, impropias y número mixto</h2>
+    <p>Según cómo es el numerador comparado con el denominador, las fracciones se clasifican así:</p>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Tipo</th><th>¿Cómo es?</th><th>¿Cuánto vale?</th><th>Ejemplo</th></tr>
+      <tr><td><b>Propia</b></td><td>numerador menor que el denominador</td><td>menos que 1 entero</td><td class="big">[[3/5]]</td></tr>
+      <tr><td><b>Igual a la unidad</b></td><td>numerador igual al denominador</td><td>exactamente 1 entero</td><td class="big">[[5/5]] = 1</td></tr>
+      <tr><td><b>Impropia</b></td><td>numerador mayor que el denominador</td><td>más que 1 entero</td><td class="big">[[7/4]]</td></tr>
+    </table></div>
+
+    <h3>Cómo leer una fracción impropia en un dibujo</h3>
+    <p>Cada rectángulo es un entero. Si cada entero está dividido en 4 partes iguales, el denominador es 4. Después cuentas <b>todas</b> las partes pintadas.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · pinta partes y mira qué pasa</div><div id="lab3"></div></div>
+    <div class="box warn"><h4>El error más común</h4>Contar todas las partes de los rectángulos juntas y ponerlas abajo. Si hay 2 enteros de 4 partes y 7 pintadas, <b>no</b> es <span class="big">[[7/8]]</span>: es <span class="big">[[7/4]]</span>. El denominador dice en cuántas partes se divide <b>UN</b> entero, no los dos juntos. Otro ejemplo: cada entero tiene 3 partes y hay 5 pintadas. Es <span class="big">[[5/3]]</span>, no <span class="big">[[5/6]]</span>.</div>
+
+    <h3>El número mixto</h3>
+    <p>Un número mixto tiene una parte entera y una fracción propia: <span class="big">[[1 3/4]]</span> se lee «un entero tres cuartos». Toda fracción impropia se puede escribir como número mixto (o como número natural si la división es exacta). En la recta numérica, <span class="big">[[7/4]]</span> y <span class="big">[[1 3/4]]</span> están en el mismo punto: son el mismo número escrito de dos formas.</p>
+
+    <div class="box gold"><h4>De impropia a número mixto: se DIVIDE</h4>
+      Se divide el numerador por el denominador. El <b>cociente</b> son los enteros; el <b>resto</b> es el nuevo numerador; el denominador se mantiene.
+      <div class="eq">[[11/4]] <span class="small muted">&nbsp;11 : 4 = 2, resto 3&nbsp;</span> → [[2 3/4]]</div>
+      <div class="eq">[[17/5]] <span class="small muted">&nbsp;17 : 5 = 3, resto 2&nbsp;</span> → [[3 2/5]]</div>
+      Si el resto es 0, la fracción es un número natural: <span class="big">[[8/4]]</span> = 2, porque 8 : 4 = 2, resto 0.</div>
+    <div class="box green"><h4>De número mixto a impropia: se MULTIPLICA y después se SUMA</h4>
+      Se multiplica el entero por el denominador y al resultado se le suma el numerador. El denominador se mantiene.
+      <div class="eq">[[3 2/5]] <span class="small muted">&nbsp;3 · 5 + 2 = 15 + 2 = 17&nbsp;</span> → [[17/5]]</div>
+      ¿Por qué? Cada entero tiene 5 quintos, así que 3 enteros son 15 quintos; más los 2 quintos, son 17 quintos. Para comprobar, haz el camino de vuelta: 17 : 5 = 3, resto 2 → <span class="big">[[3 2/5]]</span> ✓</div>
+    <div class="lab"><div class="lab-title">Practica · convierte</div><div id="lab3conv"></div></div>
+    <div class="check" data-check="c3"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card lesson" data-sec="4" data-title="Comparar y ordenar">
+    <h2><span class="sec-num">4</span>Comparación y orden de fracciones</h2>
+    <p>Los signos: <b>&lt;</b> se lee «es menor que» y <b>&gt;</b> se lee «es mayor que». La punta siempre apunta al número más pequeño.</p>
+    <h3>Caso 1 · mismo denominador → gana el numerador mayor</h3>
+    <p><span class="big">[[3/8]] &lt; [[5/8]]</span>. Los trozos son del mismo tamaño; tener 5 trozos es más que tener 3.</p>
+    <div class="fig" id="fig4a"></div>
+    <h3>Caso 2 · mismo numerador → gana el denominador menor</h3>
+    <p><span class="big">[[2/3]] &gt; [[2/7]]</span>. Si una pizza se corta en 3 trozos y otra igual en 7, los trozos de la primera son más grandes. Dos trozos grandes son más que dos trozos chicos.</p>
+    <div class="fig" id="fig4b"></div>
+    <h3>Caso 3 · comparar con el 1</h3>
+    <p>Toda fracción propia es menor que 1 y toda impropia es mayor que 1. Por eso <span class="big">[[4/5]] &lt; [[6/5]]</span> y también <span class="big">[[9/10]] &lt; [[8/7]]</span>, sin hacer cálculos.</p>
+    <h3>Caso 4 · todo distinto → igualar denominadores</h3>
+    <p>Para comparar <span class="big">[[2/3]]</span> y <span class="big">[[3/4]]</span> se amplifican las dos hasta tener el mismo denominador. Un número que es múltiplo de 3 y de 4 es 12:</p>
+    <div class="eq">[[2/3]] = [[8/12]] <span class="small muted">(amplifiqué por 4)</span> &nbsp;&nbsp; [[3/4]] = [[9/12]] <span class="small muted">(amplifiqué por 3)</span></div>
+    <p>Como <span class="big">[[8/12]] &lt; [[9/12]]</span>, entonces <span class="big">[[2/3]] &lt; [[3/4]]</span>.</p>
+    <div class="box tip"><h4>¿Cómo encuentro el denominador común?</h4>Escribo los múltiplos del denominador mayor (4, 8, 12, …) hasta encontrar uno que también sea múltiplo del otro. Si no se me ocurre, multiplico los dos denominadores: 3 · 4 = 12.</div>
+    <h3>Caso 5 · números mixtos</h3>
+    <p>Primero se comparan los enteros: <span class="big">[[2 1/5]] &gt; [[1 4/5]]</span>, porque 2 enteros es más que 1 entero (no importa la fracción). Si los enteros son iguales, se comparan las fracciones: <span class="big">[[3 1/4]] &lt; [[3 3/4]]</span>.</p>
+    <p>Si hay que comparar una impropia con un número mixto, conviene escribir los dos de la misma forma. Ejemplo: <span class="big">[[7/4]]</span> y <span class="big">[[1 5/8]]</span>. Paso <span class="big">[[1 5/8]]</span> a impropia: 1 · 8 + 5 = 13 → <span class="big">[[13/8]]</span>. Amplifico <span class="big">[[7/4]] = [[14/8]]</span>. Como <span class="big">[[14/8]] &gt; [[13/8]]</span>, entonces <span class="big">[[7/4]] &gt; [[1 5/8]]</span>.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · el comparador</div><div id="lab4"></div></div>
+    <h3>Ordenar varias fracciones</h3>
+    <p>Se llevan todas al mismo denominador y se ordenan según el numerador. Ordenar de menor a mayor <span class="big">[[1/2]]</span>, <span class="big">[[3/4]]</span> y <span class="big">[[5/8]]</span>:</p>
+    <div class="eq">[[1/2]] = [[4/8]] &nbsp; [[3/4]] = [[6/8]] &nbsp; [[5/8]] = [[5/8]] &nbsp; → &nbsp; [[1/2]] &lt; [[5/8]] &lt; [[3/4]]</div>
+    <p>«De menor a mayor» se llama <b>orden creciente</b>; «de mayor a menor» se llama <b>orden decreciente</b>.</p>
+    <div class="check" data-check="c4"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card lesson" data-sec="5" data-title="Traslación">
+    <h2><span class="sec-num">5</span>Transformaciones isométricas · la traslación</h2>
+    <p>Una <b>transformación isométrica</b> mueve una figura <b>sin cambiar su forma ni su tamaño</b>. Solo cambia su posición o su orientación. La figura original se llama <b>F</b> y la que se obtiene, <b>F'</b> (se lee «F prima»). Las dos son congruentes: si las recortas, calzan perfectamente una sobre la otra.</p>
+    <p>Hay tres transformaciones isométricas: <b>traslación</b>, <b>reflexión</b> y <b>rotación</b>.</p>
+    <h3>Traslación: deslizar</h3>
+    <p>La figura se desliza en línea recta, <b>sin girar y sin darse vuelta</b>. Para describirla se dice hacia dónde se mueve y cuántos cuadrados (por ejemplo, 6 a la derecha y 2 hacia arriba). Para dibujarla, mueves cada vértice (esquina) la misma cantidad de cuadrados en la misma dirección y después unes los vértices nuevos.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · desliza F'</div><div id="lab5"></div></div>
+    <h3>Traslación en el plano cartesiano</h3>
+    <p>Un punto se escribe <b>(x, y)</b>: primero lo horizontal, después lo vertical. Al trasladar:</p>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Movimiento</th><th>¿Qué cambia?</th></tr>
+      <tr><td>hacia la derecha</td><td>se <b>suma</b> a la x</td></tr>
+      <tr><td>hacia la izquierda</td><td>se <b>resta</b> a la x</td></tr>
+      <tr><td>hacia arriba</td><td>se <b>suma</b> a la y</td></tr>
+      <tr><td>hacia abajo</td><td>se <b>resta</b> a la y</td></tr>
+    </table></div>
+    <p>Ejemplo: el triángulo ABC se traslada 5 a la derecha y 3 hacia arriba.</p>
+    <div class="fig" id="fig5tri"></div>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Vértice</th><th>Cálculo</th><th>Vértice trasladado</th></tr>
+      <tr><td>A (1, 1)</td><td>(1 + 5 , 1 + 3)</td><td><b>A' (6, 4)</b></td></tr>
+      <tr><td>B (3, 1)</td><td>(3 + 5 , 1 + 3)</td><td><b>B' (8, 4)</b></td></tr>
+      <tr><td>C (1, 3)</td><td>(1 + 5 , 3 + 3)</td><td><b>C' (6, 6)</b></td></tr>
+    </table></div>
+    <div class="lab"><div class="lab-title">Practica · traslada el punto</div><div id="lab5pt"></div></div>
+    <div class="check" data-check="c5"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card lesson" data-sec="6" data-title="Reflexión">
+    <h2><span class="sec-num">6</span>Reflexión: el espejo</h2>
+    <p>La figura se refleja como en un espejo respecto de una recta llamada <b>eje de reflexión</b> (o eje de simetría). Cada punto de F' queda <b>a la misma distancia del eje</b> que el punto original, pero al otro lado. La figura queda «dada vuelta».</p>
+    <p>El eje puede ser vertical (la figura se refleja hacia el lado) u horizontal (se refleja hacia abajo o hacia arriba).</p>
+    <div class="box tip"><h4>Cómo dibujarla</h4>Cuenta cuántos cuadrados hay desde cada vértice hasta el eje y cuenta la misma cantidad al otro lado. Después une los puntos. Lo que estaba más cerca del eje queda más cerca del eje; lo que estaba lejos queda lejos.</div>
+    <div class="lab"><div class="lab-title">Pruébalo · mira cómo se refleja</div><div id="lab6"></div></div>
+    <div class="lab"><div class="lab-title">Practica · pinta el reflejo</div><div id="lab6p"></div></div>
+    <div class="check" data-check="c6"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card lesson" data-sec="7" data-title="Rotación">
+    <h2><span class="sec-num">7</span>Rotación: girar</h2>
+    <p>La figura gira alrededor de un punto fijo llamado <b>centro de rotación</b>. Para describir una rotación se indica:</p>
+    <p><b>el centro</b> (el punto que no se mueve), <b>el ángulo</b> (90° es un cuarto de vuelta, 180° es media vuelta, 360° es una vuelta completa y la figura vuelve a su lugar) y <b>el sentido</b> (horario, como las manecillas del reloj, o antihorario, al revés).</p>
+    <div class="lab"><div class="lab-title">Pruébalo · gira la figura</div><div id="lab7"></div></div>
+    <div class="box gold"><h4>Truco</h4>Calca la figura en un papel transparente, pon la punta del lápiz sobre el centro y gira el papel.</div>
+    <div class="check" data-check="c7"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card lesson" data-sec="8" data-title="¿Cuál es?">
+    <h2><span class="sec-num">8</span>¿Cómo sé cuál transformación es?</h2>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Transformación</th><th>Pista para reconocerla</th></tr>
+      <tr><td><b>Traslación</b></td><td>F' mira hacia el mismo lado que F. Solo cambió de lugar.</td></tr>
+      <tr><td><b>Reflexión</b></td><td>F' está «en espejo»: lo que estaba a la derecha ahora está a la izquierda (o lo de arriba, abajo). Hay un eje entre las dos.</td></tr>
+      <tr><td><b>Rotación</b></td><td>F' está girada (acostada o de cabeza), pero NO en espejo.</td></tr>
+    </table></div>
+    <div class="box tip"><h4>Una forma segura de decidir</h4>
+      <b>1.</b> ¿La figura quedó <b>acostada</b>? (Lo que era alto ahora es ancho.) Entonces es una <b>rotación de 90°</b>.<br>
+      <b>2.</b> Si sigue parada igual que F, mira dónde quedó el «brazo» (la parte que sobresale):<br>
+      &nbsp;&nbsp;· en el mismo lugar (por ejemplo, arriba a la derecha) → <b>traslación</b>;<br>
+      &nbsp;&nbsp;· cambió <b>solo</b> de lado (derecha ↔ izquierda) o <b>solo</b> de altura (arriba ↔ abajo) → <b>reflexión</b>;<br>
+      &nbsp;&nbsp;· cambió <b>las dos cosas</b> (de arriba a la derecha pasó a abajo a la izquierda) → <b>rotación de 180°</b>, media vuelta.</div>
+    <div class="lab"><div class="lab-title">Juego · adivina la transformación</div><div id="lab8"></div></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card lesson" data-sec="9" data-title="Resumen">
+    <h2><span class="sec-num">9</span>Cuadro resumen</h2>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Tema</th><th>Lo que hay que recordar</th><th>Ejemplo</th></tr>
+      <tr><td>Amplificar</td><td>multiplicar numerador y denominador por el mismo número</td><td class="big">[[2/3]] = [[8/12]]</td></tr>
+      <tr><td>Simplificar</td><td>dividir numerador y denominador por el mismo número hasta llegar a la irreducible</td><td class="big">[[12/18]] = [[2/3]]</td></tr>
+      <tr><td>Impropia → mixto</td><td>dividir: cociente = enteros, resto = numerador</td><td class="big">[[11/4]] = [[2 3/4]]</td></tr>
+      <tr><td>Mixto → impropia</td><td>entero · denominador + numerador</td><td class="big">[[3 2/5]] = [[17/5]]</td></tr>
+      <tr><td>Comparar</td><td>igualar denominadores y comparar numeradores</td><td class="big">[[2/3]] &lt; [[3/4]]</td></tr>
+      <tr><td>Traslación</td><td>deslizar sin girar ni dar vuelta</td><td>(1, 1) → (6, 4)</td></tr>
+      <tr><td>Reflexión</td><td>espejo respecto de un eje; misma distancia al eje</td><td>F queda dada vuelta</td></tr>
+      <tr><td>Rotación</td><td>girar con centro, ángulo y sentido</td><td>90° horario, 180°</td></tr>
+    </table></div>
+    <h3 style="margin-top:18px">Antes de la prueba, revisa que…</h3>
+    <ul class="clean" id="checklist"></ul>
+    <div class="box green" style="margin-top:16px">Cuando termines el repaso, pasa al <a href="#ensayoA">Ensayo A</a>.</div>
+  </div>
+
+  <div class="pager"><button class="btn ghost" id="prevSec">← Anterior</button><button class="btn blue" id="nextSec">Siguiente →</button></div>
+</section>
+
+<!-- ================= ENSAYOS ================= -->
+<section id="v-ensayoA" class="view hide"></section>
+<section id="v-ensayoB" class="view hide"></section>
+
+<!-- ================= RESULTADOS ================= -->
+<section id="v-resultados" class="view hide"></section>
+
+</main>
+<script>
+"use strict";
+/* ============ utilidades ============ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a || 1; };
+const lcm = (a, b) => a / gcd(a, b) * b;
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const num = v => { const s = String(v ?? "").trim().replace(",", "."); if (s === "") return null; const n = Number(s); return Number.isFinite(n) ? n : null; };
+
+function F(n, d) { return `<span class="fr"><span class="n">${n}</span><span class="d">${d}</span></span>`; }
+function M(w, n, d) { return `<span class="mx"><span class="w">${w}</span>${F(n, d)}</span>`; }
+/* [[3/4]] → fracción · [[1 3/4]] → número mixto */
+function fx(s) { return String(s).replace(/\[\[(?:(\d+) )?([\d□·]+)\/([\d□·]+)\]\]/g, (m, w, n, d) => (w ? M(w, n, d) : F(n, d))); }
+function fxAll(root) { $$(".lesson, #v-inicio", root).forEach(el => { el.innerHTML = fx(el.innerHTML); }); }
+
+/* ============ guardado local ============ */
+const STORE = "amparo-fracciones-transformaciones-v1";
+let DB = (() => { try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch (e) { return {}; } })();
+DB.seen = DB.seen || {}; DB.checks = DB.checks || {}; DB.tests = DB.tests || {}; DB.history = DB.history || []; DB.list = DB.list || {};
+function save() { try { localStorage.setItem(STORE, JSON.stringify(DB)); } catch (e) { } }
+
+/* ============ SVG ============ */
+const C = { blue: "#3A86D6", blueSoft: "#DCEBFA", orange: "#F0A43C", fig: "#C9CDD2", ink: "#1F2A37", line: "#D9D2C6", red: "#D64545", green: "#23915F", paper: "#FFFFFF" };
+function svg(w, h, body, extra = "") { return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="aspect-ratio:${w} / ${h}" xmlns="http://www.w3.org/2000/svg" ${extra}>${body}</svg>`; }
+
+/* barras: wholes rectángulos de parts partes, pintadas las primeras `painted` (o un Set de índices) */
+function bars(wholes, parts, painted, o = {}) {
+  const W = o.w || 150, H = o.h || 56, gap = o.gap || 22, col = o.color || C.blue;
+  const set = painted instanceof Set ? painted : null;
+  let s = "";
+  for (let k = 0; k < wholes; k++) {
+    const x0 = 3 + k * (W + gap);
+    for (let i = 0; i < parts; i++) {
+      const idx = k * parts + i, on = set ? set.has(idx) : idx < painted;
+      s += `<rect x="${x0 + i * W / parts}" y="3" width="${W / parts}" height="${H}" fill="${on ? col : "#fff"}" stroke="${C.ink}" stroke-width="1.5" data-i="${idx}" ${o.click ? 'style="cursor:pointer"' : ""}/>`;
+    }
+    s += `<rect x="${x0}" y="3" width="${W}" height="${H}" fill="none" stroke="${C.ink}" stroke-width="2.5" pointer-events="none"/>`;
+  }
+  const tw = 6 + wholes * W + (wholes - 1) * gap;
+  return svg(tw, H + 6, s, o.attr || "");
+}
+
+/* cuadrícula de celdas (coordenadas desde arriba a la izquierda) */
+function gridLines(cols, rows, cs, ox = 0, oy = 0) {
+  let s = `<rect x="${ox}" y="${oy}" width="${cols * cs}" height="${rows * cs}" fill="#fff"/>`;
+  for (let i = 0; i <= cols; i++) s += `<line x1="${ox + i * cs}" y1="${oy}" x2="${ox + i * cs}" y2="${oy + rows * cs}" stroke="${C.line}" stroke-width="1"/>`;
+  for (let j = 0; j <= rows; j++) s += `<line x1="${ox}" y1="${oy + j * cs}" x2="${ox + cols * cs}" y2="${oy + j * cs}" stroke="${C.line}" stroke-width="1"/>`;
+  return s;
+}
+/* figura hecha de celdas: relleno + contorno exterior */
+function cellShape(cells, cs, fill, o = {}) {
+  const ox = o.ox || 0, oy = o.oy || 0, key = (x, y) => x + "," + y, S = new Set(cells.map(c => key(c[0], c[1])));
+  let s = "", e = "";
+  for (const [x, y] of cells) {
+    s += `<rect x="${ox + x * cs}" y="${oy + y * cs}" width="${cs}" height="${cs}" fill="${fill}" opacity="${o.op ?? 0.9}"/>`;
+    const X = ox + x * cs, Y = oy + y * cs;
+    if (!S.has(key(x, y - 1))) e += `M${X} ${Y}H${X + cs}`;
+    if (!S.has(key(x, y + 1))) e += `M${X} ${Y + cs}H${X + cs}`;
+    if (!S.has(key(x - 1, y))) e += `M${X} ${Y}V${Y + cs}`;
+    if (!S.has(key(x + 1, y))) e += `M${X + cs} ${Y}V${Y + cs}`;
+  }
+  s += `<path d="${e}" fill="none" stroke="${o.stroke || "#33373C"}" stroke-width="${o.sw || 3}" stroke-linecap="square"/>`;
+  if (o.label) {
+    const lc = o.labelAt || cells[0];
+    s += `<text x="${ox + lc[0] * cs + cs / 2}" y="${oy + lc[1] * cs + cs * 0.68}" text-anchor="middle" font-size="${cs * 0.5}" font-weight="800" fill="#111">${o.label}</text>`;
+  }
+  return s;
+}
+/* par F / F' en cuadrícula */
+function pairFig(g) {
+  const cs = g.cs || 34;
+  const body = gridLines(g.cols, g.rows, cs, 2, 2) +
+    cellShape(g.F, cs, C.fig, { ox: 2, oy: 2, label: "F", labelAt: g.Fl || g.F[0] }) +
+    cellShape(g.Fp, cs, C.orange, { ox: 2, oy: 2, label: "F'", labelAt: g.Fpl || g.Fp[0] });
+  return svg(g.cols * cs + 4, g.rows * cs + 4, body);
+}
+
+/* plano cartesiano: xmax, ymax, u = px por unidad */
+function plane(xmax, ymax, u = 36, body = "", extra = "") {
+  const L = 34, B = 30, T = 14, R = 26, W = L + xmax * u + R, H = T + ymax * u + B;
+  const px = x => L + x * u, py = y => T + (ymax - y) * u;
+  let s = `<rect width="${W}" height="${H}" fill="#fff"/>`;
+  for (let i = 0; i <= xmax; i++) s += `<line x1="${px(i)}" y1="${py(0)}" x2="${px(i)}" y2="${py(ymax)}" stroke="${C.line}"/>`;
+  for (let j = 0; j <= ymax; j++) s += `<line x1="${px(0)}" y1="${py(j)}" x2="${px(xmax)}" y2="${py(j)}" stroke="${C.line}"/>`;
+  s += `<line x1="${px(0)}" y1="${py(0)}" x2="${px(xmax) + 16}" y2="${py(0)}" stroke="${C.ink}" stroke-width="2"/><line x1="${px(0)}" y1="${py(0)}" x2="${px(0)}" y2="${py(ymax) - 10}" stroke="${C.ink}" stroke-width="2"/>`;
+  s += `<text x="${px(xmax) + 18}" y="${py(0) + 5}" font-size="15" font-style="italic">x</text><text x="${px(0) - 5}" y="${py(ymax) - 12}" font-size="15" font-style="italic" text-anchor="end">y</text>`;
+  for (let i = 0; i <= xmax; i++) s += `<text x="${px(i)}" y="${py(0) + 19}" font-size="13" text-anchor="middle" fill="#444">${i}</text>`;
+  for (let j = 1; j <= ymax; j++) s += `<text x="${px(0) - 9}" y="${py(j) + 4}" font-size="13" text-anchor="end" fill="#444">${j}</text>`;
+  const api = { px, py, W, H };
+  s += typeof body === "function" ? body(api) : body;
+  return { svg: svg(W, H, s, extra), px, py, W, H };
+}
+function tri(api, pts, fill, labels, o = {}) {
+  const P = pts.map(p => `${api.px(p[0])},${api.py(p[1])}`).join(" ");
+  let s = `<polygon points="${P}" fill="${fill}" fill-opacity="${o.op ?? 0.75}" stroke="#2B3036" stroke-width="2.5" stroke-linejoin="round"/>`;
+  if (labels) pts.forEach((p, i) => {
+    const dx = o.dx?.[i] ?? -12, dy = o.dy?.[i] ?? 16;
+    s += `<text x="${api.px(p[0]) + dx}" y="${api.py(p[1]) + dy}" font-size="15" font-weight="800" text-anchor="middle">${labels[i]}</text>`;
+  });
+  return s;
+}
+
+/* pizza de d trozos con n pintados */
+function pizza(d, n, r = 70) {
+  const cx = r + 4, cy = r + 4; let s = "";
+  if (d === 1) s += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${n ? C.blue : "#fff"}" stroke="${C.ink}" stroke-width="2"/>`;
+  else for (let i = 0; i < d; i++) {
+    const a0 = -Math.PI / 2 + i * 2 * Math.PI / d, a1 = a0 + 2 * Math.PI / d;
+    const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0), x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    s += `<path d="M${cx} ${cy}L${x0} ${y0}A${r} ${r} 0 0 1 ${x1} ${y1}Z" fill="${i < n ? C.blue : "#fff"}" stroke="${C.ink}" stroke-width="2"/>`;
+  }
+  return svg(2 * r + 8, 2 * r + 8, s);
+}
+
+/* recta numérica 0..max con un punto en v (número) */
+function numberLine(max, den, v, label) {
+  const W = 520, L = 20, u = (W - 2 * L) / max; let s = `<line x1="${L}" y1="40" x2="${W - L + 8}" y2="40" stroke="${C.ink}" stroke-width="2"/>`;
+  for (let k = 0; k <= max * den; k++) {
+    const x = L + k * u / den, big = k % den === 0;
+    s += `<line x1="${x}" y1="${big ? 30 : 35}" x2="${x}" y2="${big ? 50 : 45}" stroke="${C.ink}" stroke-width="${big ? 2 : 1}"/>`;
+    if (big) s += `<text x="${x}" y="70" font-size="15" font-weight="700" text-anchor="middle">${k / den}</text>`;
+  }
+  if (v != null) { const x = L + v * u; s += `<circle cx="${x}" cy="40" r="8" fill="${C.orange}" stroke="${C.ink}" stroke-width="2"/>`; if (label) s += `<text x="${x}" y="18" font-size="14" font-weight="800" text-anchor="middle" fill="${C.ink}">${label}</text>`; }
+  return svg(W, 78, s);
+}
+
+/* ============ control +/- ============ */
+function stepper(id, val, min, max, onChange) {
+  const wrap = document.createElement("span"); wrap.className = "ctrl";
+  wrap.innerHTML = `<button type="button" aria-label="menos">−</button><span class="v" id="${id}">${val}</span><button type="button" aria-label="más">+</button>`;
+  const [m, , p] = wrap.children; let v = val;
+  const set = nv => { v = Math.max(min(), Math.min(max(), nv)); wrap.children[1].textContent = v; onChange(v); };
+  m.onclick = () => set(v - 1); p.onclick = () => set(v + 1);
+  wrap.get = () => v; wrap.set = set;
+  return wrap;
+}
+
+/* ============ pregunta de alternativas simple (módulo) ============ */
+function miniMC(el, item, onDone) {
+  const letters = "ABCD";
+  el.innerHTML = `<div class="q-text" style="margin-bottom:8px">${fx(item.q)}</div><div class="opts ${item.tall ? "tall" : ""}">${item.opts.map((o, i) => `<button class="opt" data-i="${i}"><span class="l">${letters[i]}</span><span>${fx(o)}</span></button>`).join("")}</div><div class="fbx"></div>`;
+  let done = false;
+  $$(".opt", el).forEach(b => b.onclick = () => {
+    if (done) return;
+    const i = +b.dataset.i, ok = i === item.ans;
+    $$(".opt", el).forEach(x => x.classList.remove("bad"));
+    b.classList.add(ok ? "ok" : "bad");
+    $(".fbx", el).innerHTML = `<div class="fb ${ok ? "ok" : "bad"}"><b class="tag">${ok ? "¡Bien!" : "Todavía no."}</b>${fx(ok ? item.exp : (item.hint || "Vuelve a mirar la explicación de arriba y prueba otra alternativa."))}</div>`;
+    if (ok) { done = true; onDone && onDone(); }
+  });
+}
+
+/* ============ confeti ============ */
+function confetti() {
+  const c = document.createElement("canvas"); c.className = "confetti"; document.body.appendChild(c);
+  const x = c.getContext("2d"); c.width = innerWidth; c.height = innerHeight;
+  const cols = [C.blue, C.orange, C.green, "#E9B325", "#D64545"];
+  const P = Array.from({ length: 140 }, () => ({ x: Math.random() * c.width, y: -20 - Math.random() * c.height * 0.4, vx: -2 + Math.random() * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 5, c: pick(cols), a: Math.random() * 6 }));
+  let t = 0; (function f() { x.clearRect(0, 0, c.width, c.height); P.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += 0.1; x.save(); x.translate(p.x, p.y); x.rotate(p.a); x.fillStyle = p.c; x.fillRect(-p.r, -p.r / 2, 2 * p.r, p.r); x.restore(); }); if (++t < 200) requestAnimationFrame(f); else c.remove(); })();
+}
+
+/* ============ navegación ============ */
+const VIEWS = ["inicio", "aprender", "ensayoA", "ensayoB", "resultados"];
+function go(v, push = true) {
+  let sec = null;
+  if (v && v.startsWith("aprender-")) { sec = +v.split("-")[1]; v = "aprender"; }
+  if (!VIEWS.includes(v)) v = "inicio";
+  VIEWS.forEach(x => $("#v-" + x).classList.toggle("hide", x !== v));
+  $$("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.go === v));
+  if (v === "inicio") renderHome();
+  if (v === "aprender") showSec(sec || DB.lastSec || 1);
+  if (v === "ensayoA") renderTest("A");
+  if (v === "ensayoB") renderTest("B");
+  if (v === "resultados") renderResults();
+  const h = "#" + (sec ? "aprender-" + sec : v);
+  if (push && location.hash !== h) history.pushState(null, "", h);
+  window.scrollTo(0, 0);
+}
+document.addEventListener("click", e => {
+  const g = e.target.closest("[data-go]"); if (g) { e.preventDefault(); go(g.dataset.go); return; }
+  const a = e.target.closest('a[href^="#"]'); if (a) { e.preventDefault(); go(a.getAttribute("href").slice(1)); }
+});
+window.addEventListener("popstate", () => go(location.hash.slice(1), false));
+
+/* ============ entradas de fracción (se usan en módulo y ensayos) ============ */
+function finp(id) { return `<span class="fin"><input class="inp" id="${id}-n" inputmode="numeric" autocomplete="off"><span class="bar"></span><input class="inp" id="${id}-d" inputmode="numeric" autocomplete="off"></span>`; }
+function minp(id) { return `<span class="mx"><input class="inp w" id="${id}-w" inputmode="numeric" autocomplete="off">${finp(id)}</span>`; }
+function nin(id, cls = "") { return `<input class="inp ${cls}" id="${id}" inputmode="numeric" autocomplete="off">`; }
+const val = id => num(document.getElementById(id)?.value);
+function mark(id, ok) { const e = document.getElementById(id); if (e) { e.classList.remove("ok", "bad"); if (ok !== null) e.classList.add(ok ? "ok" : "bad"); } }
+
+/* ============ lecciones ============ */
+let SECS = [];
+function buildLessons() {
+  SECS = $$(".lesson").map(el => ({ n: +el.dataset.sec, t: el.dataset.title, el }));
+  $("#lessonNav").innerHTML = SECS.map(s => `<button data-sec="${s.n}">${s.n} · ${s.t}</button>`).join("");
+  $$("#lessonNav button").forEach(b => b.onclick = () => { showSec(+b.dataset.sec); history.pushState(null, "", "#aprender-" + b.dataset.sec); });
+  $("#prevSec").onclick = () => { showSec(DB.lastSec - 1); history.pushState(null, "", "#aprender-" + DB.lastSec); };
+  $("#nextSec").onclick = () => { if (DB.lastSec >= SECS.length) go("ensayoA"); else { showSec(DB.lastSec + 1); history.pushState(null, "", "#aprender-" + DB.lastSec); } };
+}
+function showSec(n) {
+  n = Math.max(1, Math.min(SECS.length, n));
+  SECS.forEach(s => s.el.classList.toggle("hide", s.n !== n));
+  DB.lastSec = n; DB.seen[n] = true; if (n === 9) DB.checks[9] = true; save();
+  $$("#lessonNav button").forEach(b => { const k = +b.dataset.sec; b.classList.toggle("on", k === n); b.classList.toggle("done", !!DB.checks[k]); });
+  $("#prevSec").disabled = n === 1;
+  $("#nextSec").textContent = n === SECS.length ? "Ir al Ensayo A →" : "Siguiente →";
+  window.scrollTo(0, 0);
+}
+function sectionDone(n) { DB.checks[n] = true; save(); $$("#lessonNav button").forEach(b => { if (+b.dataset.sec === n) b.classList.add("done"); }); }
+
+/* ============ preguntas de control ============ */
+const CHECKS = {
+  c1: [{ q: "Una barra se divide en 6 partes iguales y se pintan 5. ¿Qué fracción está pintada?", opts: ["[[5/6]]", "[[6/5]]", "[[1/6]]", "[[5/11]]"], ans: 0, exp: "Abajo va el 6, porque la barra se dividió en 6 partes iguales. Arriba va el 5, porque se pintaron 5.", hint: "Abajo va en cuántas partes se dividió; arriba, cuántas se pintaron." }],
+  c2: [
+    { q: "¿Cuál de estas fracciones NO es equivalente a [[2/3]]?", opts: ["[[4/6]]", "[[6/9]]", "[[3/4]]", "[[8/12]]"], ans: 2, exp: "[[3/4]] no se obtiene multiplicando el 2 y el 3 por el mismo número. Las otras sí: por 2, por 3 y por 4.", hint: "Revisa por cuánto se multiplicó arriba y abajo en cada una." },
+    { q: "Simplifica [[10/14]] hasta la fracción irreducible.", opts: ["[[5/7]]", "[[10/7]]", "[[20/28]]", "[[2/7]]"], ans: 0, exp: "10 y 14 son pares: divido por 2 → [[5/7]]. El 5 y el 7 ya no tienen un divisor común, así que es irreducible.", hint: "Busca un número que divida al 10 y al 14 a la vez, y divide los dos." },
+    { q: "[[4/5]] = [[□/15]]. ¿Qué número va en el cuadrado?", opts: ["12", "14", "9", "4"], ans: 0, exp: "El 5 se multiplicó por 3 para llegar a 15. Arriba se hace lo mismo: 4 · 3 = 12.", hint: "¿Por cuánto se multiplicó el 5 para llegar a 15? Haz lo mismo arriba (¡multiplicar, no sumar!)." }],
+  c3: [
+    { q: "Cada entero está dividido en 6 partes iguales y hay 8 partes pintadas en total. ¿Qué fracción es?", opts: ["[[8/6]]", "[[8/12]]", "[[6/8]]", "[[2/6]]"], ans: 0, exp: "El denominador es 6, las partes de UN entero. Hay 8 pintadas: [[8/6]].", hint: "El denominador no es el total de partes de todos los enteros: es el de uno solo." },
+    { q: "[[19/6]] escrita como número mixto es:", opts: ["[[3 1/6]]", "[[1 3/6]]", "[[2 7/6]]", "[[6 1/3]]"], ans: 0, exp: "19 : 6 = 3, resto 1. El cociente (3) son los enteros, el resto (1) va arriba y el denominador (6) se mantiene: [[3 1/6]].", hint: "Divide 19 por 6: el cociente son los enteros y el resto va arriba." },
+    { q: "[[4 2/3]] escrito como fracción impropia es:", opts: ["[[14/3]]", "[[11/3]]", "[[42/3]]", "[[9/3]]"], ans: 0, exp: "4 · 3 + 2 = 12 + 2 = 14 → [[14/3]]. Primero se multiplica y después se suma.", hint: "Multiplica el entero por el denominador y después suma el numerador." }],
+  c4: [
+    { q: "¿Cuál es la fracción mayor?", opts: ["[[5/12]]", "[[5/9]]", "[[5/11]]", "[[5/10]]"], ans: 1, exp: "Todas tienen numerador 5, así que gana la de denominador menor: sus trozos son los más grandes.", hint: "Si el numerador es igual, piensa en el tamaño de los trozos." },
+    { q: "¿Qué signo va entre [[3/4]] y [[5/6]]?", opts: ["&lt;", "&gt;", "="], ans: 0, exp: "En doceavos: [[3/4]] = [[9/12]] y [[5/6]] = [[10/12]]. Como 9 es menor que 10, [[3/4]] &lt; [[5/6]].", hint: "Amplifica las dos a denominador 12 y compara los numeradores." },
+    { q: "¿Qué alternativa ordena de menor a mayor [[2/3]], [[1/2]] y [[5/6]]?", tall: true, opts: ["[[1/2]], [[2/3]], [[5/6]]", "[[2/3]], [[1/2]], [[5/6]]", "[[5/6]], [[2/3]], [[1/2]]", "[[1/2]], [[5/6]], [[2/3]]"], ans: 0, exp: "En sextos: [[1/2]] = [[3/6]], [[2/3]] = [[4/6]] y [[5/6]]. Queda [[3/6]] &lt; [[4/6]] &lt; [[5/6]].", hint: "Lleva las tres a sextos y ordena por el numerador." }],
+  c5: [
+    { q: "El punto (4, 5) se traslada 2 unidades a la izquierda y 3 unidades hacia abajo. ¿Dónde queda?", opts: ["(2, 2)", "(6, 8)", "(6, 2)", "(2, 8)"], ans: 0, exp: "Izquierda resta a la x: 4 − 2 = 2. Abajo resta a la y: 5 − 3 = 2. Queda en (2, 2).", hint: "Izquierda y abajo restan; derecha y arriba suman." },
+    { q: "En una traslación, la figura…", tall: true, opts: ["se desliza sin girar y sin darse vuelta", "queda como en un espejo", "cambia de tamaño", "gira alrededor de un punto"], ans: 0, exp: "Trasladar es deslizar: la figura cambia de lugar, pero sigue mirando hacia el mismo lado.", hint: "Piensa en empujar un libro sobre la mesa, sin girarlo." }],
+  c6: [{ q: "Un vértice está 2 cuadrados a la izquierda de un eje vertical. ¿Dónde queda su reflejo?", tall: true, opts: ["2 cuadrados a la derecha del eje", "2 cuadrados a la izquierda del eje", "4 cuadrados a la derecha del eje", "justo sobre el eje"], ans: 0, exp: "El reflejo queda a la misma distancia del eje, pero al otro lado.", hint: "En un espejo, lo que está cerca queda cerca y lo que está lejos queda lejos." }],
+  c7: [
+    { q: "¿Cuántos grados tiene media vuelta?", opts: ["90°", "180°", "360°", "45°"], ans: 1, exp: "Media vuelta son 180°. Un cuarto de vuelta son 90° y una vuelta completa, 360°.", hint: "Una vuelta completa son 360°. ¿Cuánto es la mitad?" },
+    { q: "¿Qué hay que indicar para describir una rotación?", tall: true, opts: ["el centro, el ángulo y el sentido", "hacia dónde se mueve y cuántos cuadrados", "solo el eje de reflexión", "el nuevo tamaño de la figura"], ans: 0, exp: "Centro (el punto que no se mueve), ángulo (90°, 180°…) y sentido (horario o antihorario).", hint: "Mira la lista de tres cosas que aparece arriba." }]
+};
+function buildChecks() {
+  $$(".check[data-check]").forEach(box => {
+    const key = box.dataset.check, items = CHECKS[key], sec = +key.slice(1);
+    box.innerHTML = `<div class="check-title">¿Lo entendiste?</div>` + items.map((_, i) => `<div class="mini" data-k="${i}" style="margin:10px 0 16px"></div>`).join("");
+    let left = items.length;
+    items.forEach((it, i) => miniMC($(`.mini[data-k="${i}"]`, box), it, () => { if (--left === 0) sectionDone(sec); }));
+  });
+}
+
+/* ============ lab 1: arma tu fracción ============ */
+function lab1() {
+  const el = $("#lab1");
+  el.innerHTML = `<div class="row" style="gap:22px;align-items:center">
+    <div><div class="small muted">En cuántas partes iguales corto (denominador)</div><span id="l1d"></span>
+    <div class="small muted" style="margin-top:10px">Cuántas partes tomo (numerador)</div><span id="l1n"></span></div>
+    <div id="l1pz"></div><div id="l1tx" style="flex:1;min-width:180px"></div></div><div id="l1bar" style="margin-top:12px"></div>`;
+  let d = 4, n = 3;
+  const upd = () => {
+    $("#l1pz").innerHTML = pizza(d, n, 62);
+    $("#l1bar").innerHTML = bars(1, d, n, { w: 420, h: 46 });
+    $("#l1tx").innerHTML = `<div class="big" style="font-size:2.2em">${F(n, d)}</div><div class="small">El entero se cortó en <b>${d}</b> partes iguales y tomamos <b>${n}</b>.</div>`;
+  };
+  const sd = stepper("l1dv", d, () => 2, () => 12, v => { d = v; if (n > d) sn.set(d); upd(); });
+  const sn = stepper("l1nv", n, () => 0, () => d, v => { n = v; upd(); });
+  $("#l1d").appendChild(sd); $("#l1n").appendChild(sn); upd();
+}
+
+/* ============ lección 2 ============ */
+function barRow(label, svgStr) { return `<div class="row" style="gap:14px;margin:6px 0"><div class="big" style="width:64px;text-align:center">${label}</div><div style="flex:1;min-width:0">${svgStr}</div></div>`; }
+function fig2() {
+  $("#fig2eq").innerHTML = barRow(F(1, 2), bars(1, 2, 1, { w: 420, h: 40 })) + barRow(F(2, 4), bars(1, 4, 2, { w: 420, h: 40 })) + barRow(F(4, 8), bars(1, 8, 4, { w: 420, h: 40 }));
+  $("#fig2warn").innerHTML = barRow(F(1, 2), bars(1, 2, 1, { w: 360, h: 34, color: C.red })) + barRow(F(2, 3), bars(1, 3, 2, { w: 360, h: 34, color: C.red })) + `<div class="small">La parte pintada cambió: no son equivalentes.</div>`;
+}
+function lab2amp() {
+  const el = $("#lab2amp");
+  el.innerHTML = `<div class="row"><span class="small muted">Amplificar por</span><span id="l2k"></span></div><div id="l2eq" class="eq"></div><div id="l2bar"></div><div id="l2tx" class="small"></div>`;
+  const upd = k => {
+    const W = 420, H = 46; let s = "";
+    for (let i = 0; i < 3 * k; i++) s += `<rect x="${3 + i * W / (3 * k)}" y="3" width="${W / (3 * k)}" height="${H}" fill="${i < 2 * k ? C.blue : "#fff"}" stroke="${C.ink}" stroke-width="1"/>`;
+    for (let j = 0; j <= 3; j++) s += `<line x1="${3 + j * W / 3}" y1="3" x2="${3 + j * W / 3}" y2="${H + 3}" stroke="${C.ink}" stroke-width="3"/>`;
+    s += `<rect x="3" y="3" width="${W}" height="${H}" fill="none" stroke="${C.ink}" stroke-width="3"/>`;
+    $("#l2bar").innerHTML = svg(W + 6, H + 6, s);
+    $("#l2eq").innerHTML = k === 1 ? `${F(2, 3)}` : `${F(2, 3)} = ${F("2 · " + k, "3 · " + k)} = ${F(2 * k, 3 * k)}`;
+    $("#l2tx").innerHTML = k === 1 ? "Mueve el control: cada trozo se corta en trozos más chicos." : `Cada tercio se cortó en ${k} trozos. Ahora hay ${3 * k} trozos y hay ${2 * k} pintados, pero la parte pintada es la misma.`;
+  };
+  $("#l2k").appendChild(stepper("l2kv", 1, () => 1, () => 6, upd)); upd(1);
+}
+const SIMP_POOL = [[24, 36], [20, 30], [16, 40], [45, 60], [27, 36], [35, 50], [36, 48], [40, 60], [12, 30], [21, 35], [42, 56], [30, 70], [15, 45], [24, 40], [18, 45], [32, 48]];
+function lab2simp() {
+  const el = $("#lab2simp"); let n, d, chain, last = -1;
+  const start = () => { let i; do { i = rnd(0, SIMP_POOL.length - 1); } while (i === last); last = i;[n, d] = SIMP_POOL[i]; chain = [F(n, d)]; draw(""); };
+  const draw = msg => {
+    const irr = gcd(n, d) === 1;
+    el.innerHTML = `<div class="eq" style="font-size:1.25em">${chain.join(' <span class="small muted">→</span> ')}</div>
+      <div class="row">${irr ? "" : [2, 3, 5, 7].map(k => `<button class="btn small ghost" data-k="${k}">dividir por ${k}</button>`).join("")}<button class="btn small" id="l2new">Otra fracción</button></div>
+      <div class="fb ${irr ? "ok" : msg ? "bad" : ""}" style="${!irr && !msg ? "display:none" : ""}">${irr ? `<b>¡Irreducible!</b> ${F(n, d)} ya no se puede simplificar más.` : msg}</div>`;
+    $$("[data-k]", el).forEach(b => b.onclick = () => {
+      const k = +b.dataset.k;
+      if (n % k === 0 && d % k === 0) { n /= k; d /= k; chain.push(`<span class="small muted">÷${k}</span>`, F(n, d)); draw(""); }
+      else draw(`<b>No se puede:</b> ${n % k ? n : d} no se puede dividir por ${k}. Hay que dividir <b>los dos</b> por el mismo número.`);
+    });
+    $("#l2new", el).onclick = start;
+  };
+  start();
+}
+
+/* ============ lección 3 ============ */
+function lab3() {
+  const el = $("#lab3");
+  el.innerHTML = `<div class="row" style="gap:18px"><div><div class="small muted">Partes de cada entero</div><span id="l3d"></span></div><div><div class="small muted">Partes pintadas</div><span id="l3n"></span></div><div class="small muted" style="flex:1;min-width:160px">También puedes tocar las partes para pintarlas.</div></div>
+    <div id="l3bars" class="gridwrap" style="margin:12px 0"></div><div id="l3tx"></div><div id="l3nl" style="margin-top:6px"></div>`;
+  let d = 4, n = 7;
+  const upd = () => {
+    $("#l3bars").innerHTML = bars(3, d, n, { w: 190, h: 64, click: true });
+    $$("#l3bars rect[data-i]").forEach(r => r.onclick = () => { const i = +r.dataset.i + 1; sn.set(i === n ? i - 1 : i); });
+    const w = Math.floor(n / d), r = n % d;
+    let tipo, otra = "";
+    if (n < d) tipo = "Es una fracción <b>propia</b>: vale menos que 1 entero.";
+    else if (n === d) tipo = "Es <b>igual a la unidad</b>: vale exactamente 1 entero.";
+    else { tipo = "Es una fracción <b>impropia</b>: vale más que 1 entero."; otra = r ? ` = ${M(w, r, d)}` : ` = ${w}`; }
+    $("#l3tx").innerHTML = `<div class="eq"><span class="big" style="font-size:1.6em">${F(n, d)}${otra}</span></div>
+      <div class="small">Cada entero tiene <b>${d}</b> partes → denominador ${d}. Hay <b>${n}</b> partes pintadas → numerador ${n}. ${tipo}${n > d ? ` Son ${w} ${w === 1 ? "entero completo" : "enteros completos"}${r ? ` y ${F(r, d)} más` : ""}.` : ""}</div>`;
+    $("#l3nl").innerHTML = numberLine(3, d, n / d, "");
+  };
+  const sd = stepper("l3dv", d, () => 2, () => 6, v => { d = v; if (n > 3 * d) sn.set(3 * d); upd(); });
+  const sn = stepper("l3nv", n, () => 0, () => 3 * d, v => { n = v; upd(); });
+  $("#l3d").appendChild(sd); $("#l3n").appendChild(sn); upd();
+}
+function lab3conv() {
+  const el = $("#lab3conv"); let mode = 0, w, r, d;
+  const nuevo = () => { d = rnd(2, 9); w = rnd(1, 5); r = rnd(1, d - 1); draw(); };
+  const draw = () => {
+    const N = w * d + r;
+    el.innerHTML = `<div class="seg" id="l3m"><button class="${mode === 0 ? "sel" : ""}">Impropia → mixto</button><button class="${mode === 1 ? "sel" : ""}">Mixto → impropia</button></div>
+      <div class="line" style="margin-top:14px">${mode === 0 ? `<span class="big">${F(N, d)}</span> = ${minp("cv")}` : `<span class="big">${M(w, r, d)}</span> = ${finp("cv")}`}</div>
+      <div class="row"><button class="btn small blue" id="cvok">Comprobar</button><button class="btn small ghost" id="cvnew">Otro ejercicio</button></div><div id="cvfb"></div>`;
+    $$("#l3m button").forEach((b, i) => b.onclick = () => { mode = i; draw(); });
+    $("#cvnew").onclick = nuevo;
+    $("#cvok").onclick = () => {
+      let ok;
+      if (mode === 0) { const a = val("cv-w"), b = val("cv-n"), c = val("cv-d"); ok = a === w && b === r && c === d; mark("cv-w", a === w); mark("cv-n", b === r); mark("cv-d", c === d); }
+      else { const b = val("cv-n"), c = val("cv-d"); ok = b === N && c === d; mark("cv-n", b === N); mark("cv-d", c === d); }
+      $("#cvfb").innerHTML = `<div class="fb ${ok ? "ok" : "bad"}"><b class="tag">${ok ? "¡Bien!" : "Revisa:"}</b>${mode === 0
+        ? `${N} : ${d} = ${w}, resto ${r}. El cociente ${w} son los enteros, el resto ${r} va arriba y el ${d} se mantiene abajo: ${M(w, r, d)}.`
+        : `${w} · ${d} + ${r} = ${w * d} + ${r} = ${N}. El denominador se mantiene: ${F(N, d)}.`}</div>`;
+    };
+  };
+  nuevo();
+}
+
+/* ============ lección 4 ============ */
+function fig4() {
+  $("#fig4a").innerHTML = barRow(F(3, 8), bars(1, 8, 3, { w: 400, h: 36 })) + barRow(F(5, 8), bars(1, 8, 5, { w: 400, h: 36 }));
+  $("#fig4b").innerHTML = barRow(F(2, 3), bars(1, 3, 2, { w: 400, h: 36 })) + barRow(F(2, 7), bars(1, 7, 2, { w: 400, h: 36 }));
+}
+function lab4() {
+  const el = $("#lab4");
+  el.innerHTML = `<div class="line">${finp("cA")} <span class="big" id="cSign" style="min-width:1.4em;text-align:center">?</span> ${finp("cB")}<span class="small muted">&nbsp;Escribe dos fracciones (denominadores hasta 12).</span></div><div id="cBars"></div><div id="cTx" class="small"></div>`;
+  [["cA-n", 2], ["cA-d", 3], ["cB-n", 3], ["cB-d", 4]].forEach(([id, v]) => { const e = document.getElementById(id); e.value = v; e.oninput = upd; });
+  function upd() {
+    const a = val("cA-n"), b = val("cA-d"), c = val("cB-n"), d = val("cB-d");
+    const okIn = [a, b, c, d].every(x => Number.isInteger(x) && x >= 0) && b >= 1 && d >= 1 && b <= 12 && d <= 12 && a / b <= 3 && c / d <= 3;
+    if (!okIn) { $("#cSign").textContent = "?"; $("#cBars").innerHTML = ""; $("#cTx").innerHTML = "Usa números enteros, denominadores del 1 al 12 y fracciones que no pasen de 3 enteros."; return; }
+    const W = Math.max(1, Math.ceil(Math.max(a / b, c / d))), s = a * d === c * b ? "=" : a * d < c * b ? "<" : ">";
+    $("#cSign").textContent = s;
+    $("#cBars").innerHTML = barRow(F(a, b), bars(W, b, a, { w: 360 / W, h: 34, gap: 10 })) + barRow(F(c, d), bars(W, d, c, { w: 360 / W, h: 34, gap: 10, color: C.orange }));
+    let t;
+    if (b === d) t = `Mismo denominador: gana el numerador mayor.`;
+    else if (a === c) t = `Mismo numerador: gana el denominador menor (trozos más grandes).`;
+    else if ((a / b < 1 && c / d > 1) || (a / b > 1 && c / d < 1)) t = `Una es menor que 1 y la otra mayor que 1: no hace falta calcular.`;
+    else { const m = lcm(b, d); t = `Igualo denominadores a ${m}: ${F(a, b)} = ${F(a * m / b, m)} (amplifiqué por ${m / b}) y ${F(c, d)} = ${F(c * m / d, m)} (amplifiqué por ${m / d}).`; }
+    $("#cTx").innerHTML = `${t} Entonces ${F(a, b)} <b>${s.replace("<", "&lt;").replace(">", "&gt;")}</b> ${F(c, d)}.`;
+  }
+  upd();
+}
+
+/* ============ checklist e inicio ============ */
+const LIST = ["En un dibujo con varios enteros, el denominador es el número de partes de UN entero.", "Al simplificar, sigo hasta que la fracción sea irreducible.", "Al pasar de mixto a impropia, primero multiplico y después sumo.", "Para comparar fracciones con distinto denominador, primero las amplifico.", "En el plano cartesiano escribo primero la x y después la y.", "En la reflexión, cada vértice queda a la misma distancia del eje."];
+function buildChecklist() {
+  $("#checklist").innerHTML = LIST.map((t, i) => `<li><label class="tick"><input type="checkbox" data-i="${i}" ${DB.list[i] ? "checked" : ""}><span>${t}</span></label></li>`).join("");
+  $$("#checklist input").forEach(c => c.onchange = () => { DB.list[c.dataset.i] = c.checked; save(); });
+}
+function renderHome() {
+  const done = Object.keys(DB.checks).filter(k => DB.checks[k]).length;
+  $("#st-aprender").innerHTML = done ? `<span style="color:var(--green)">${done} de 9 lecciones listas</span>` : `<span class="muted">Sin empezar</span>`;
+  ["A", "B"].forEach(L => {
+    const h = DB.history.filter(x => x.t === L).slice(-1)[0], cur = DB.tests[L];
+    $("#st-ensayo" + L).innerHTML = h ? `<span style="color:${h.nota >= 4 ? "var(--green)" : "var(--red)"}">Último intento: ${h.pts} pts · nota ${h.nota.toFixed(1).replace(".", ",")}</span>` : cur && Object.keys(cur.ans || {}).length ? `<span style="color:var(--orange-ink)">En curso</span>` : `<span class="muted">Sin empezar</span>`;
+  });
+}
+
+/* ============ figuras de celdas: transformaciones ============ */
+const SHAPES = { L: [[0, 0], [1, 0], [0, 1], [0, 2]], P: [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2]], Y: [[0, 0], [0, 1], [1, 1], [0, 2], [0, 3]] };
+const EXTRA = [[[0, 0], [1, 0], [2, 0], [0, 1]], [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]], [[0, 0], [0, 1], [1, 1], [2, 1]], [[0, 0], [1, 0], [1, 1], [1, 2], [2, 2]], [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]];
+const norm = cells => { const mx = Math.min(...cells.map(c => c[0])), my = Math.min(...cells.map(c => c[1])); return cells.map(([x, y]) => [x - mx, y - my]).sort((a, b) => a[1] - b[1] || a[0] - b[0]); };
+const rotCW = cells => norm(cells.map(([x, y]) => [-y - 1, x]));
+const mirX = cells => norm(cells.map(([x, y]) => [-x - 1, y]));
+const mirY = cells => norm(cells.map(([x, y]) => [x, -y - 1]));
+const move = (cells, dx, dy) => cells.map(([x, y]) => [x + dx, y + dy]);
+const keyset = cells => new Set(cells.map(c => c[0] + "," + c[1]));
+const sameSet = (a, b) => { const A = keyset(a), B = keyset(b); return A.size === B.size && [...A].every(k => B.has(k)); };
+const sameShape = (a, b) => a.length === b.length && sameSet(norm(a), norm(b));
+const size = cells => { const n = norm(cells); return [Math.max(...n.map(c => c[0])) + 1, Math.max(...n.map(c => c[1])) + 1]; };
+function orientations(cells) { const out = []; let c = norm(cells); for (let i = 0; i < 4; i++) { out.push(c); out.push(mirX(c)); c = rotCW(c); } return out; }
+
+/* nota de una reflexión pintada: P pintado, E esperado, O original */
+function gradeReflection(P, E, O) {
+  if (sameSet(P, E)) return { pts: 3, msg: "¡Perfecto! Misma forma, en espejo y a la misma distancia del eje." };
+  if (!P.length) return { pts: 0, msg: "No pintaste ningún cuadro." };
+  if (sameShape(P, E)) return { pts: 2, msg: "La forma está bien y quedó en espejo, pero no quedó a la misma distancia del eje. Cuenta los cuadros desde cada vértice hasta el eje." };
+  if (sameShape(P, O)) return { pts: 1, msg: "Dibujaste la figura igual, sin darla vuelta: eso es una traslación. En el espejo, lo que estaba cerca del eje queda cerca del eje." };
+  if (orientations(O).some(o => sameShape(P, o))) return { pts: 1, msg: "La forma y el tamaño están bien, pero la figura quedó girada. En una reflexión queda en espejo respecto del eje." };
+  return { pts: 0, msg: "La figura no tiene la misma forma o tamaño que la original. Revisa vértice por vértice." };
+}
+
+/* cuadrícula pintable */
+function paintGrid(el, g, onChange) {
+  const cs = g.cs || 34, painted = keyset(g.start || []), fixed = keyset(g.O);
+  const draw = () => {
+    const P = [...painted].map(k => k.split(",").map(Number));
+    let s = gridLines(g.cols, g.rows, cs, 2, 2);
+    s += cellShape(g.O, cs, C.blue, { ox: 2, oy: 2, op: 0.7 });
+    if (P.length) s += cellShape(P, cs, C.orange, { ox: 2, oy: 2, op: 0.85 });
+    if (g.show) s += cellShape(g.show, cs, "none", { ox: 2, oy: 2, stroke: C.green, sw: 3.5 });
+    if (g.axis) s += g.axis.v != null ? `<line x1="${2 + g.axis.v * cs}" y1="0" x2="${2 + g.axis.v * cs}" y2="${g.rows * cs + 4}" stroke="${C.red}" stroke-width="3.5" stroke-dasharray="9 6"/>` : `<line x1="0" y1="${2 + g.axis.h * cs}" x2="${g.cols * cs + 4}" y2="${2 + g.axis.h * cs}" stroke="${C.red}" stroke-width="3.5" stroke-dasharray="9 6"/>`;
+    for (let x = 0; x < g.cols; x++) for (let y = 0; y < g.rows; y++) if (!fixed.has(x + "," + y) && !g.locked) s += `<rect x="${2 + x * cs}" y="${2 + y * cs}" width="${cs}" height="${cs}" fill="transparent" data-c="${x},${y}" style="cursor:pointer"/>`;
+    el.innerHTML = `<div class="gridwrap">${svg(g.cols * cs + 4, g.rows * cs + 4, s)}</div>`;
+    $$("rect[data-c]", el).forEach(r => r.onclick = () => { const k = r.dataset.c; painted.has(k) ? painted.delete(k) : painted.add(k); draw(); onChange && onChange(get()); });
+  };
+  const get = () => [...painted].map(k => k.split(",").map(Number));
+  draw();
+  return { get, clear() { painted.clear(); draw(); }, set(cells) { painted.clear(); cells.forEach(c => painted.add(c.join(","))); draw(); }, lock(show) { g.locked = true; g.show = show; draw(); }, redraw: draw };
+}
+
+/* ============ lección 5 ============ */
+function lab5() {
+  const el = $("#lab5"), cs = 32, cols = 12, rows = 8, F0 = move(SHAPES.L, 1, 4); let dx = 0, dy = 0;
+  el.innerHTML = `<div class="row" style="align-items:flex-start;gap:16px"><div id="l5g" style="flex:1;min-width:260px"></div>
+    <div><div class="tools" style="display:grid;grid-template-columns:repeat(3,48px);gap:6px">
+      <span></span><button data-m="0,-1">↑</button><span></span><button data-m="-1,0">←</button><button data-m="reset" title="volver">↺</button><button data-m="1,0">→</button><span></span><button data-m="0,1">↓</button><span></span></div>
+      <div id="l5t" class="small" style="max-width:220px;margin-top:8px"></div></div></div>`;
+  const upd = () => {
+    const Fp = move(F0, dx, dy);
+    let s = gridLines(cols, rows, cs, 2, 2) + cellShape(F0, cs, C.fig, { ox: 2, oy: 2, label: "F" }) + cellShape(Fp, cs, C.orange, { ox: 2, oy: 2, op: 0.8, label: "F'" });
+    if (dx || dy) s += `<line x1="${2 + F0[0][0] * cs}" y1="${2 + F0[0][1] * cs}" x2="${2 + Fp[0][0] * cs}" y2="${2 + Fp[0][1] * cs}" stroke="${C.red}" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#ar5)"/><circle cx="${2 + F0[0][0] * cs}" cy="${2 + F0[0][1] * cs}" r="4" fill="${C.red}"/>`;
+    s = `<defs><marker id="ar5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="${C.red}"/></marker></defs>` + s;
+    $("#l5g").innerHTML = svg(cols * cs + 4, rows * cs + 4, s);
+    const parts = [];
+    if (dx) parts.push(`${Math.abs(dx)} ${dx > 0 ? "a la derecha" : "a la izquierda"}`);
+    if (dy) parts.push(`${Math.abs(dy)} ${dy < 0 ? "hacia arriba" : "hacia abajo"}`);
+    $("#l5t").innerHTML = parts.length ? `F' se trasladó <b>${parts.join(" y ")}</b>. Fíjate: sigue mirando hacia el mismo lado que F.` : "Usa las flechas para deslizar F'.";
+  };
+  $$("[data-m]", el).forEach(b => b.onclick = () => {
+    if (b.dataset.m === "reset") { dx = dy = 0; } else { const [a, c] = b.dataset.m.split(",").map(Number); const Fp = move(F0, dx + a, dy + c); if (Fp.every(([x, y]) => x >= 0 && y >= 0 && x < cols && y < rows)) { dx += a; dy += c; } }
+    upd();
+  });
+  upd();
+}
+function fig5() {
+  const A = [[1, 1], [3, 1], [1, 3]], B = [[6, 4], [8, 4], [6, 6]];
+  const p = plane(10, 7, 34, api => {
+    let s = tri(api, A, C.blue, ["A", "B", "C"], { dx: [-12, 12, -12], dy: [16, 16, -4] }) + tri(api, B, C.orange, ["A'", "B'", "C'"], { dx: [-14, 14, -14], dy: [16, 16, -4] });
+    A.forEach((a, i) => s += `<line x1="${api.px(a[0])}" y1="${api.py(a[1])}" x2="${api.px(B[i][0])}" y2="${api.py(B[i][1])}" stroke="${C.red}" stroke-width="1.8" stroke-dasharray="5 4"/>`);
+    return s;
+  });
+  $("#fig5tri").innerHTML = p.svg;
+}
+function lab5pt() {
+  const el = $("#lab5pt"); let x, y, dx, dy;
+  const txt = () => { const a = [], b = []; if (dx) a.push(`${Math.abs(dx)} ${Math.abs(dx) === 1 ? "unidad" : "unidades"} ${dx > 0 ? "a la derecha" : "a la izquierda"}`); if (dy) a.push(`${Math.abs(dy)} ${Math.abs(dy) === 1 ? "unidad" : "unidades"} ${dy > 0 ? "hacia arriba" : "hacia abajo"}`); return a.join(" y "); };
+  const nuevo = () => { do { x = rnd(1, 8); y = rnd(1, 6); dx = rnd(-4, 4); dy = rnd(-3, 3); } while (!dx || !dy || x + dx < 0 || x + dx > 10 || y + dy < 0 || y + dy > 7); draw(false); };
+  const draw = (sol) => {
+    const p = plane(10, 7, 36, api => `<circle cx="${api.px(x)}" cy="${api.py(y)}" r="6" fill="${C.blue}" stroke="#222" stroke-width="1.5"/><text x="${api.px(x) + 10}" y="${api.py(y) - 8}" font-size="15" font-weight="800">P</text>` + (sol ? `<circle cx="${api.px(x + dx)}" cy="${api.py(y + dy)}" r="6" fill="${C.orange}" stroke="#222" stroke-width="1.5"/><text x="${api.px(x + dx) + 10}" y="${api.py(y + dy) - 8}" font-size="15" font-weight="800">P'</text>` : ""));
+    el.innerHTML = `<div class="row" style="align-items:flex-start;gap:16px"><div style="flex:1;min-width:260px">${p.svg}</div><div style="flex:1;min-width:220px">
+      <p>El punto <b>P(${x}, ${y})</b> se traslada <b>${txt()}</b>.</p>
+      <div class="line">P' = ( ${nin("pt-x", "w")} , ${nin("pt-y", "w")} )</div>
+      <div class="row"><button class="btn small blue" id="ptok">Comprobar</button><button class="btn small ghost" id="ptnew">Otro punto</button></div><div id="ptfb"></div></div></div>`;
+    $("#ptnew").onclick = nuevo;
+    $("#ptok").onclick = () => {
+      const a = val("pt-x"), b = val("pt-y"), ok = a === x + dx && b === y + dy, swapped = a === y + dy && b === x + dx && !ok;
+      const keep = [$("#pt-x").value, $("#pt-y").value];
+      draw(true); $("#pt-x").value = keep[0]; $("#pt-y").value = keep[1]; mark("pt-x", a === x + dx); mark("pt-y", b === y + dy);
+      const sx = dx > 0 ? `${x} + ${dx}` : `${x} − ${-dx}`, sy = dy > 0 ? `${y} + ${dy}` : `${y} − ${-dy}`;
+      $("#ptfb").innerHTML = `<div class="fb ${ok ? "ok" : "bad"}"><b class="tag">${ok ? "¡Bien!" : swapped ? "Casi: invertiste el orden." : "Revisa:"}</b>x: ${sx} = ${x + dx} · y: ${sy} = ${y + dy}. P' = (${x + dx}, ${y + dy}). ${swapped ? "Primero va la x (horizontal) y después la y (vertical)." : ""}</div>`;
+    };
+  };
+  nuevo();
+}
+
+/* ============ lección 6 ============ */
+function lab6() {
+  const el = $("#lab6"), cs = 30; let vert = true, pos, shape = SHAPES.L;
+  const place = () => { shape = pick([SHAPES.L, SHAPES.P, SHAPES.Y, ...EXTRA]); const [w, h] = size(shape); pos = vert ? [rnd(0, 5 - w + 1), rnd(0, 8 - h)] : [rnd(0, 10 - w), rnd(0, 4 - h)]; draw(false); };
+  const draw = (flip) => {
+    const cols = vert ? 12 : 10, rows = vert ? 8 : 8, O = move(shape, pos[0], pos[1]);
+    const ax = vert ? 2 + 6 * cs : 2 + 4 * cs, axis = vert ? `<line x1="${ax}" y1="0" x2="${ax}" y2="${rows * cs + 4}" stroke="${C.red}" stroke-width="3.5" stroke-dasharray="9 6"/>` : `<line x1="0" y1="${ax}" x2="${cols * cs + 4}" y2="${ax}" stroke="${C.red}" stroke-width="3.5" stroke-dasharray="9 6"/>`;
+    const s = gridLines(cols, rows, cs, 2, 2) + cellShape(O, cs, C.fig, { ox: 2, oy: 2, label: "F" }) +
+      `<g id="flipg" style="transform-box:view-box;transform-origin:${vert ? ax + "px 0px" : "0px " + ax + "px"};transition:transform 1.3s ease-in-out;transform:${vert ? "scaleX(1)" : "scaleY(1)"}">${cellShape(O, cs, C.orange, { ox: 2, oy: 2, op: 0.85 })}</g>` + axis;
+    el.innerHTML = `<div class="row"><div class="seg"><button class="${vert ? "sel" : ""}" data-a="v">Eje vertical</button><button class="${vert ? "" : "sel"}" data-a="h">Eje horizontal</button></div><button class="btn small blue" id="l6go">Reflejar</button><button class="btn small ghost" id="l6new">Otra figura</button></div>
+      <div style="margin-top:10px">${svg(cols * cs + 4, rows * cs + 4, s)}</div><div class="small" id="l6t">Aprieta «Reflejar» y mira cómo la figura se da vuelta sobre el eje, como en un espejo.</div>`;
+    $$("[data-a]", el).forEach(b => b.onclick = () => { vert = b.dataset.a === "v"; place(); });
+    $("#l6new").onclick = place;
+    $("#l6go").onclick = () => { const g = $("#flipg"); g.style.transform = vert ? "scaleX(-1)" : "scaleY(-1)"; $("#l6t").innerHTML = "Cada cuadro de F' quedó <b>a la misma distancia del eje</b> que su cuadro en F, pero al otro lado. Lo que estaba pegado al eje sigue pegado al eje."; };
+  };
+  place();
+}
+function lab6p() {
+  const el = $("#lab6p"); let pg, E, O, vert;
+  const nuevo = () => {
+    vert = Math.random() < 0.55; const shape = pick([SHAPES.L, SHAPES.P, SHAPES.Y, ...EXTRA]); const [w, h] = size(shape);
+    if (vert) { O = move(shape, rnd(0, 6 - w), rnd(0, 7 - h)); E = O.map(([x, y]) => [11 - x, y]); }
+    else { O = move(shape, rnd(0, 9 - w), rnd(0, 5 - h)); E = O.map(([x, y]) => [x, 9 - y]); }
+    el.innerHTML = `<p class="small">Toca los cuadros para pintar el reflejo de la figura azul respecto del eje rojo. Si te equivocas, vuelve a tocar el cuadro para borrarlo.</p><div id="l6pg"></div>
+      <div class="row" style="margin-top:8px"><button class="btn small blue" id="l6ok">Comprobar</button><button class="btn small ghost" id="l6sol">Ver solución</button><button class="btn small ghost" id="l6nx">Otra figura</button></div><div id="l6fb"></div>`;
+    pg = paintGrid($("#l6pg"), vert ? { cols: 12, rows: 7, cs: 42, O, axis: { v: 6 } } : { cols: 10, rows: 10, cs: 40, O, axis: { h: 5 } });
+    $("#l6ok").onclick = () => { const r = gradeReflection(pg.get(), E, O); $("#l6fb").innerHTML = `<div class="fb ${r.pts === 3 ? "ok" : r.pts ? "part" : "bad"}">${r.msg}</div>`; };
+    $("#l6sol").onclick = () => { pg.lock(E); $("#l6fb").innerHTML = `<div class="fb part">El contorno verde es la solución.</div>`; };
+    $("#l6nx").onclick = nuevo;
+  };
+  nuevo();
+}
+
+/* ============ lección 7 ============ */
+function lab7() {
+  const el = $("#lab7"), cs = 32, cols = 10, rows = 8, cx = 5, cy = 4, O = move(SHAPES.L, 5, 1); let ang = 0;
+  const X = 2 + cx * cs, Y = 2 + cy * cs;
+  const s = gridLines(cols, rows, cs, 2, 2) + cellShape(O, cs, C.fig, { ox: 2, oy: 2, op: 0.55, label: "F" }) +
+    `<g id="rotg" style="transform-box:view-box;transform-origin:${X}px ${Y}px;transition:transform 1.1s ease-in-out;transform:rotate(0deg)">${cellShape(O, cs, C.orange, { ox: 2, oy: 2, op: 0.85, label: "F'" })}</g>` +
+    `<circle cx="${X}" cy="${Y}" r="7" fill="${C.red}" stroke="#fff" stroke-width="2"/><text x="${X - 10}" y="${Y + 22}" font-size="13" font-weight="800" fill="${C.red}" text-anchor="end">centro</text>`;
+  el.innerHTML = `<div class="row" style="align-items:flex-start;gap:16px"><div style="flex:1;min-width:260px">${svg(cols * cs + 4, rows * cs + 4, s)}</div>
+    <div style="min-width:220px;flex:1"><div class="tools"><button data-r="90">90° horario ↻</button><button data-r="-90">90° antihorario ↺</button><button data-r="180">180°</button><button data-r="0">Volver</button></div><div id="l7t" class="small"></div></div></div>`;
+  const tx = () => { const a = ((ang % 360) + 360) % 360; return a === 0 ? (ang ? "Dio una vuelta completa (360°): volvió a su lugar." : "Aprieta un botón para girar F' alrededor del centro rojo.") : a === 90 ? "F' está girada <b>90° en sentido horario</b> (un cuarto de vuelta, como el reloj)." : a === 180 ? "F' está girada <b>180°</b>: media vuelta, quedó «de cabeza»." : "F' está girada <b>90° en sentido antihorario</b> (al revés del reloj)."; };
+  $$("[data-r]", el).forEach(b => b.onclick = () => { const r = +b.dataset.r; ang = r === 0 ? 0 : ang + r; $("#rotg").style.transform = `rotate(${ang}deg)`; $("#l7t").innerHTML = tx() + " El centro no se movió y la figura no cambió de forma ni de tamaño."; });
+  $("#l7t").innerHTML = tx();
+}
+
+/* ============ lección 8: juego ============ */
+function makePair(kind) {
+  const cols = 10, rows = 7; let tries = 0;
+  while (tries++ < 400) {
+    let F = norm(pick(Object.values(SHAPES))); for (let i = rnd(0, 3); i > 0; i--) F = rotCW(F); if (Math.random() < 0.5) F = mirX(F);
+    let G;
+    if (kind === "t") G = F;
+    else if (kind === "r") G = Math.random() < 0.6 ? mirX(F) : mirY(F);
+    else { const k = pick([1, 2, 3]); G = F; for (let i = 0; i < k; i++) G = rotCW(G); }
+    const [w, h] = size(F), [w2, h2] = size(G);
+    const Fp = move(F, rnd(0, cols - w), rnd(0, rows - h)), Gp = move(G, rnd(0, cols - w2), rnd(0, rows - h2));
+    const A = keyset(Fp), near = Gp.some(([x, y]) => A.has(x + "," + y) || A.has(x + 1 + "," + y) || A.has(x - 1 + "," + y) || A.has(x + "," + (y + 1)) || A.has(x + "," + (y - 1)));
+    if (near || sameSet(Fp, Gp)) continue;
+    return { cols, rows, cs: 40, F: Fp, Fp: Gp };
+  }
+}
+function lab8() {
+  const el = $("#lab8"); let right = DB.game8 || 0, streak = 0, cur, kind;
+  const names = { t: "Traslación", r: "Reflexión", o: "Rotación" };
+  const nuevo = () => {
+    kind = pick(["t", "r", "o"]); cur = makePair(kind);
+    el.innerHTML = `<div class="row small"><span>Aciertos: <b id="g8r">${right}</b></span><span>Racha: <b>${streak}</b></span><span class="muted">${right >= 5 ? "¡Lección lista!" : `Llega a 5 aciertos para completar la lección.`}</span></div>
+      <div style="margin:10px 0">${pairFig(cur)}</div><div class="seg" id="g8b">${Object.entries(names).map(([k, v]) => `<button data-k="${k}">${v}</button>`).join("")}</div><div id="g8fb"></div>`;
+    $$("#g8b button").forEach(b => b.onclick = () => {
+      if ($("#g8b").dataset.done) return; $("#g8b").dataset.done = 1;
+      const ok = b.dataset.k === kind; b.classList.add("sel"); $("#g8b").classList.add(ok ? "ok" : "bad");
+      if (ok) { right++; streak++; DB.game8 = right; save(); if (right >= 5) sectionDone(8); } else streak = 0;
+      const why = { t: "F' mira hacia el mismo lado que F: solo cambió de lugar.", r: "F' quedó en espejo: el «brazo» apunta al lado contrario.", o: "F' quedó girada (acostada o de cabeza), pero no en espejo." }[kind];
+      $("#g8fb").innerHTML = `<div class="fb ${ok ? "ok" : "bad"}"><b class="tag">${ok ? "¡Bien!" : "Era " + names[kind].toLowerCase() + "."}</b>${why} <button class="btn small" id="g8n" style="margin-left:8px">Siguiente</button></div>`;
+      $("#g8n").onclick = nuevo;
+    });
+  };
+  nuevo();
+}
+
+/* ============ datos de los ensayos (fuente: PRUEBA_AMPARO_…_EnsayoA/B y PAUTA_AMPARO_…) ============ */
+const ISO_OPTS_A = ["Traslación", "Reflexión", "Rotación", "No es una transformación isométrica"];
+const ISO_OPTS_B = ["Reflexión", "Traslación", "Rotación", "No es una transformación isométrica"];
+const F_BASE = [[1, 3], [2, 3], [1, 4], [1, 5]];
+const FOCOS = [
+  "El denominador es el número de partes de UN entero",
+  "Simplificar hasta la fracción irreducible",
+  "Mixto → impropia: multiplicar y después sumar",
+  "Amplificar antes de comparar",
+  "Plano cartesiano: orden (x, y) y signo del movimiento",
+  "Reflejar (no trasladar) y misma distancia al eje"
+];
+
+const TESTS = {
+  A: {
+    name: "Ensayo A", guided: true,
+    mc: [
+      { q: "¿Cuál de las siguientes fracciones es equivalente a [[3/4]]?", opts: ["[[6/8]]", "[[3/8]]", "[[6/4]]", "[[4/3]]"], ans: 0, sec: 2, exp: "[[3/4]] amplificada por 2 es [[6/8]]: se multiplicó arriba y abajo por 2. [[3/8]] y [[6/4]] cambian solo un número, y [[4/3]] está dada vuelta." },
+      { q: "Al simplificar [[12/18]] hasta obtener la fracción irreducible, se obtiene:", opts: ["[[6/9]]", "[[2/3]]", "[[4/6]]", "[[3/2]]"], ans: 1, sec: 2, foco: 2, exp: "12 y 18 se dividen los dos por 6: [[2/3]]. [[6/9]] y [[4/6]] son equivalentes, pero todavía se pueden simplificar, y la pregunta pide la irreducible." },
+      { q: "Si se amplifica [[2/5]] por 3, se obtiene:", opts: ["[[5/8]]", "[[2/15]]", "[[6/15]]", "[[6/5]]"], ans: 2, sec: 2, exp: "[[2/5]] = [[2·3/5·3]] = [[6/15]]. [[5/8]] es sumar 3 arriba y abajo, y sumar no amplifica. [[2/15]] y [[6/5]] multiplican solo un número." },
+      { q: "Cada rectángulo representa un entero. ¿Qué fracción representa la parte pintada?", fig: { bars: [2, 4, 7] }, opts: ["[[7/8]]", "[[4/7]]", "[[3/4]]", "[[7/4]]"], ans: 3, sec: 3, foco: 1, exp: "Cada entero tiene 4 partes y hay 7 pintadas: [[7/4]]. [[7/8]] es el error de juntar los dos enteros como si fueran uno: el denominador es el número de partes de UN entero." },
+      { q: "La fracción [[11/4]] escrita como número mixto es:", opts: ["[[3 1/4]]", "[[2 3/4]]", "[[2 1/4]]", "[[1 7/4]]"], ans: 1, sec: 3, exp: "11 : 4 = 2, resto 3 → [[2 3/4]]. [[3 1/4]] confunde el cociente con el resto, y [[1 7/4]] no es número mixto, porque la fracción tiene que ser propia." },
+      { q: "El número mixto [[3 2/5]] escrito como fracción impropia es:", opts: ["[[13/5]]", "[[32/5]]", "[[17/5]]", "[[5/17]]"], ans: 2, sec: 3, foco: 3, exp: "3 · 5 + 2 = 17 → [[17/5]]. [[13/5]] sale de intercambiar el entero con el numerador (2 · 5 + 3), y [[32/5]] es juntar las cifras." },
+      { q: "¿Cuál de las siguientes fracciones es mayor que 1?", opts: ["[[5/6]]", "[[6/6]]", "[[1/6]]", "[[7/6]]"], ans: 3, sec: 3, exp: "[[7/6]] tiene el numerador mayor que el denominador: es impropia y vale más que 1. [[6/6]] vale exactamente 1, no más que 1." },
+      { q: "¿Cuál es la fracción mayor?", opts: ["[[2/7]]", "[[2/3]]", "[[2/9]]", "[[2/5]]"], ans: 1, sec: 4, exp: "Todas tienen numerador 2: la mayor es la de denominador menor, porque sus trozos son los más grandes. [[2/9]] es el error de elegir el denominador mayor." },
+      { q: "¿En qué alternativa las fracciones están ordenadas de menor a mayor?", tall: true, opts: ["[[1/2]], [[3/4]], [[5/8]]", "[[5/8]], [[3/4]], [[1/2]]", "[[1/2]], [[5/8]], [[3/4]]", "[[3/4]], [[5/8]], [[1/2]]"], ans: 2, sec: 4, exp: "En octavos: [[1/2]] = [[4/8]], [[3/4]] = [[6/8]] y [[5/8]]. Queda [[4/8]] &lt; [[5/8]] &lt; [[6/8]], es decir [[1/2]], [[5/8]], [[3/4]]." },
+      { q: "Observa la figura F y su imagen F'. ¿Qué transformación isométrica se aplicó?", fig: { pair: { cols: 10, rows: 6, F: [[1, 1], [2, 1], [1, 2], [1, 3]], Fl: [1, 2], Fp: [[3, 2], [4, 2], [5, 2], [5, 3]], Fpl: [4, 2] } }, tall: true, opts: ISO_OPTS_A, ans: 2, sec: 8, exp: "Es una rotación de 90° en sentido horario: F' quedó acostada. No es traslación, porque cambió la orientación, ni reflexión, porque no quedó en espejo." },
+      { q: "Al aplicar una transformación isométrica a una figura, la figura imagen:", tall: true, opts: ["tiene la misma forma y el mismo tamaño que la original.", "es más grande que la original.", "cambia de forma.", "siempre queda en la misma posición."], ans: 0, sec: 5, exp: "Las transformaciones isométricas conservan la forma y el tamaño; solo cambian la posición o la orientación." },
+      { q: "El punto P(2, 3) se traslada 4 unidades a la derecha y 1 unidad hacia arriba. ¿Cuáles son las coordenadas del punto trasladado P'?", opts: ["(3, 7)", "(6, 4)", "(6, 2)", "(4, 6)"], ans: 1, sec: 5, foco: 5, exp: "(2 + 4 , 3 + 1) = (6, 4). (3, 7) cruza los movimientos, y (4, 6) invierte el orden: primero va la x y después la y." }
+    ],
+    dev: [
+      { t: "D1. Fracciones equivalentes", subs: [
+        { h: "a) Completa para que las fracciones sean equivalentes.", kind: "fill", pts: 1, sec: 2, L: [2, 3], R: [null, 12], ans: 8, exp: "El 3 se multiplicó por 4 para llegar a 12, entonces arriba 2 · 4 = 8: [[2/3]] = [[8/12]]." },
+        { kind: "fill", pts: 1, sec: 2, L: [5, 6], R: [20, null], ans: 24, exp: "El 5 se multiplicó por 4 para llegar a 20, entonces abajo 6 · 4 = 24: [[5/6]] = [[20/24]]." },
+        { h: "b) Simplifica hasta obtener la fracción irreducible. Indica por qué número divides.", kind: "simp", pts: 2, sec: 2, foco: 2, f: [18, 24], ans: [3, 4], exp: "[[18/24]] = [[3/4]] dividiendo por 6 (o por 2 → [[9/12]] y luego por 3 → [[3/4]])." },
+        { kind: "simp", pts: 2, sec: 2, foco: 2, f: [28, 42], ans: [2, 3], exp: "[[28/42]] = [[2/3]] dividiendo por 14 (o por 2 → [[14/21]] y luego por 7 → [[2/3]]). En [[14/21]] el número que divide a los dos es el 7." }] },
+      { t: "D2. Cada rectángulo representa un entero.", fig: { bars: [3, 5, 12] }, subs: [
+        { h: "a) Escribe la fracción impropia que representa la parte pintada.", kind: "fracIn", pts: 1, sec: 3, foco: 1, ans: [12, 5], exp: "Cada entero tiene 5 partes y hay 12 pintadas: [[12/5]]. Si escribiste [[12/15]], juntaste los tres enteros." },
+        { h: "b) Escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 2, 5], exp: "12 : 5 = 2, resto 2 → [[2 2/5]]." },
+        { h: "c) Pinta [[9/4]] en estos rectángulos (toca las partes)…", kind: "paint", pts: 1, sec: 3, wholes: 3, parts: 4, target: 9, exp: "Se pintan los dos primeros rectángulos completos (8 cuartos) y 1 parte del tercero: 9 cuartos." },
+        { h: "…y escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 1, 4], exp: "9 : 4 = 2, resto 1 → [[9/4]] = [[2 1/4]]." }] },
+      { t: "D3. Transforma. Muestra el cálculo.", note: "Con el cálculo bien hecho vale 1 punto; con el resultado correcto pero sin cálculo, medio punto.", subs: [
+        { h: "a) De fracción impropia a número mixto:", kind: "toMix", pts: 1, sec: 3, f: [13, 4] },
+        { kind: "toMix", pts: 1, sec: 3, f: [23, 5] },
+        { kind: "toMix", pts: 1, sec: 3, f: [17, 3] },
+        { h: "b) De número mixto a fracción impropia:", kind: "toImp", pts: 1, sec: 3, foco: 3, m: [2, 3, 8] },
+        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [4, 1, 2] },
+        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [3, 5, 6] }] },
+      { t: "D4. Comparación y orden.", subs: [
+        { h: "a) Elige <, > o = según corresponda.", kind: "cmp", pts: 1, sec: 4, a: [0, 4, 9], b: [0, 7, 9] },
+        { kind: "cmp", pts: 1, sec: 4, a: [0, 3, 5], b: [0, 3, 8] },
+        { kind: "cmp", pts: 1, sec: 4, a: [0, 2, 3], b: [0, 8, 12] },
+        { kind: "cmp", pts: 1, sec: 4, foco: 4, a: [0, 7, 4], b: [1, 5, 8], exp: "[[7/4]] = [[14/8]] y [[1 5/8]] = [[13/8]]. Como 14 &gt; 13, [[7/4]] &gt; [[1 5/8]]." },
+        { h: "b) Ordena de menor a mayor. Primero escribe cada fracción con el mismo denominador; después tócalas en orden.", kind: "order", pts: 2, sec: 4, foco: 4, fr: [[5, 6], [2, 3], [3, 4], [7, 12]], common: 12 }] },
+      { t: "D5. Resuelve el problema.", subs: [
+        { h: "Sofía comió [[3/8]] de una pizza y Tomás comió [[1/4]] de otra pizza del mismo tamaño. ¿Quién comió más pizza? Justifica amplificando.", kind: "story", pts: 3, sec: 4, people: [{ name: "Sofía", f: [3, 8] }, { name: "Tomás", f: [1, 4], amp: true }], den: 8, ask: "¿Quién comió más pizza?" }] },
+      { t: "D6. Transformaciones isométricas.", subs: [
+        { h: "a) Traslada el triángulo ABC 4 cuadrados hacia la derecha y 2 cuadrados hacia arriba. Marca A', B' y C' en el plano y escribe sus coordenadas.", kind: "trans", pts: 5, sec: 5, foco: 5, tri: [[1, 1], [3, 1], [1, 4]], d: [4, 2], lab: { dx: [-12, 12, -12], dy: [16, 16, -2] } },
+        { h: "b) Pinta la reflexión de la figura respecto del eje (línea roja punteada).", kind: "refl", pts: 3, sec: 6, foco: 6, cols: 12, rows: 7, axis: { v: 6 }, O: [[1, 2], [2, 2], [3, 2], [4, 2], [1, 3], [2, 3], [3, 3], [4, 3], [1, 4], [2, 4], [1, 5], [2, 5]], mirror: "x", at: 11 },
+        { h: "c) Observa cada figura F (gris) y su imagen F' (naranja). ¿Qué transformación se aplicó?", kind: "ident", pts: 3, sec: 8, figs: [
+          { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[6, 0], [7, 0], [6, 1], [6, 2]], Fpl: [6, 1] },
+          { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[0, 1], [1, 1], [2, 1], [2, 2]], Fpl: [1, 1] },
+          { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[7, 3], [8, 3], [8, 4], [8, 5]], Fpl: [8, 4] }], ans: ["t", "o", "r"], why: ["Traslación: F' mira hacia el mismo lado que F.", "Rotación de 90° en sentido horario: F' quedó acostada.", "Reflexión: F' quedó en espejo."] }] }
+    ]
+  },
+  B: {
+    name: "Ensayo B", guided: false, minutes: 70,
+    mc: [
+      { q: "¿Cuál de las siguientes fracciones es equivalente a [[2/5]]?", opts: ["[[4/5]]", "[[2/10]]", "[[4/10]]", "[[5/2]]"], ans: 2, sec: 2, exp: "[[2/5]] amplificada por 2 es [[4/10]]. [[4/5]] y [[2/10]] cambian solo un número, y [[5/2]] está dada vuelta." },
+      { q: "Al simplificar [[16/24]] hasta obtener la fracción irreducible, se obtiene:", opts: ["[[8/12]]", "[[2/3]]", "[[4/6]]", "[[3/2]]"], ans: 1, sec: 2, foco: 2, exp: "16 y 24 se dividen los dos por 8: [[2/3]]. [[8/12]] y [[4/6]] son equivalentes, pero todavía se pueden simplificar." },
+      { q: "Si se amplifica [[3/7]] por 4, se obtiene:", opts: ["[[12/28]]", "[[7/11]]", "[[12/7]]", "[[3/28]]"], ans: 0, sec: 2, exp: "[[3·4/7·4]] = [[12/28]]. [[7/11]] es sumar 4 arriba y abajo. [[12/7]] y [[3/28]] multiplican solo un número." },
+      { q: "Cada rectángulo representa un entero. ¿Qué fracción representa la parte pintada?", fig: { bars: [2, 3, 5] }, opts: ["[[5/6]]", "[[3/5]]", "[[2/3]]", "[[5/3]]"], ans: 3, sec: 3, foco: 1, exp: "Cada entero tiene 3 partes y hay 5 pintadas: [[5/3]]. [[5/6]] es juntar los dos enteros: el denominador es el número de partes de UN entero." },
+      { q: "La fracción [[14/3]] escrita como número mixto es:", opts: ["[[3 2/3]]", "[[4 2/3]]", "[[4 1/3]]", "[[2 4/3]]"], ans: 1, sec: 3, exp: "14 : 3 = 4, resto 2 → [[4 2/3]]. [[3 2/3]] y [[4 1/3]] se equivocan en el cociente o en el resto, y [[2 4/3]] no es número mixto." },
+      { q: "El número mixto [[2 3/4]] escrito como fracción impropia es:", opts: ["[[10/4]]", "[[23/4]]", "[[11/4]]", "[[4/11]]"], ans: 2, sec: 3, foco: 3, exp: "2 · 4 + 3 = 11 → [[11/4]]. [[10/4]] sale de intercambiar los números (2 · 3 + 4), y [[23/4]] es juntar las cifras." },
+      { q: "¿Cuál de las siguientes fracciones es menor que 1?", opts: ["[[9/8]]", "[[7/8]]", "[[8/8]]", "[[10/8]]"], ans: 1, sec: 3, exp: "[[7/8]] tiene el numerador menor que el denominador: es propia y vale menos que 1. [[8/8]] vale exactamente 1, no menos." },
+      { q: "¿Cuál es la fracción menor?", opts: ["[[3/4]]", "[[3/5]]", "[[3/10]]", "[[3/7]]"], ans: 2, sec: 4, exp: "Todas tienen numerador 3: la menor es la de denominador mayor, porque sus trozos son los más chicos." },
+      { q: "¿En qué alternativa las fracciones están ordenadas de menor a mayor?", tall: true, opts: ["[[7/12]], [[2/3]], [[5/6]]", "[[2/3]], [[5/6]], [[7/12]]", "[[5/6]], [[2/3]], [[7/12]]", "[[2/3]], [[7/12]], [[5/6]]"], ans: 0, sec: 4, exp: "En doceavos: [[7/12]], [[2/3]] = [[8/12]] y [[5/6]] = [[10/12]]. Queda [[7/12]] &lt; [[8/12]] &lt; [[10/12]]." },
+      { q: "Observa la figura F y su imagen F'. ¿Qué transformación isométrica se aplicó?", fig: { pair: { cols: 10, rows: 6, F: [[2, 2], [3, 2], [2, 3], [2, 4]], Fl: [2, 3], Fp: [[5, 1], [5, 2], [4, 3], [5, 3]], Fpl: [5, 2] } }, tall: true, opts: ISO_OPTS_B, ans: 2, sec: 8, exp: "Es una rotación de 180° (media vuelta): F' quedó «de cabeza». No es reflexión: el brazo de la figura pasó de arriba a la derecha a abajo a la izquierda, y eso un solo espejo no lo hace." },
+      { q: "¿Cuál de las siguientes afirmaciones es correcta?", tall: true, opts: ["En una traslación, la figura queda dada vuelta, como en un espejo.", "En una reflexión, la figura cambia de tamaño.", "En una traslación, la figura cambia de forma.", "En una rotación, la figura gira alrededor de un punto."], ans: 3, sec: 7, exp: "Es la única correcta. La primera describe una reflexión, y las otras dos contradicen la definición: las isometrías no cambian ni la forma ni el tamaño." },
+      { q: "El punto P(5, 2) se traslada 3 unidades a la izquierda y 4 unidades hacia arriba. ¿Cuáles son las coordenadas del punto trasladado P'?", opts: ["(8, 6)", "(2, 6)", "(6, 2)", "(1, 5)"], ans: 1, sec: 5, foco: 5, exp: "(5 − 3 , 2 + 4) = (2, 6). (8, 6) mueve hacia la derecha, (6, 2) invierte el orden y (1, 5) cruza las cantidades." }
+    ],
+    dev: [
+      { t: "D1. Fracciones equivalentes", subs: [
+        { h: "a) Completa para que las fracciones sean equivalentes.", kind: "fill", pts: 1, sec: 2, L: [3, 4], R: [null, 20], ans: 15, exp: "El 4 se multiplicó por 5 para llegar a 20, entonces arriba 3 · 5 = 15: [[3/4]] = [[15/20]]." },
+        { kind: "fill", pts: 1, sec: 2, L: [4, 9], R: [16, null], ans: 36, exp: "El 4 se multiplicó por 4 para llegar a 16, entonces abajo 9 · 4 = 36: [[4/9]] = [[16/36]]." },
+        { h: "b) Simplifica hasta obtener la fracción irreducible. Indica por qué número divides.", kind: "simp", pts: 2, sec: 2, foco: 2, f: [20, 25], ans: [4, 5], exp: "[[20/25]] = [[4/5]] dividiendo por 5." },
+        { kind: "simp", pts: 2, sec: 2, foco: 2, f: [30, 45], ans: [2, 3], exp: "[[30/45]] = [[2/3]] dividiendo por 15 (o por 5 → [[6/9]] y luego por 3 → [[2/3]])." }] },
+      { t: "D2. Cada rectángulo representa un entero.", fig: { bars: [3, 4, 11] }, subs: [
+        { h: "a) Escribe la fracción impropia que representa la parte pintada.", kind: "fracIn", pts: 1, sec: 3, foco: 1, ans: [11, 4], exp: "Cada entero tiene 4 partes y hay 11 pintadas: [[11/4]]. Si escribiste [[11/12]], juntaste los tres enteros." },
+        { h: "b) Escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 3, 4], exp: "11 : 4 = 2, resto 3 → [[2 3/4]]." },
+        { h: "c) Pinta [[7/3]] en estos rectángulos (toca las partes)…", kind: "paint", pts: 1, sec: 3, wholes: 3, parts: 3, target: 7, exp: "Se pintan los dos primeros rectángulos completos (6 tercios) y 1 parte del tercero: 7 tercios." },
+        { h: "…y escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 1, 3], exp: "7 : 3 = 2, resto 1 → [[7/3]] = [[2 1/3]]." }] },
+      { t: "D3. Transforma. Muestra el cálculo.", note: "Con el cálculo bien hecho vale 1 punto; con el resultado correcto pero sin cálculo, medio punto.", subs: [
+        { h: "a) De fracción impropia a número mixto:", kind: "toMix", pts: 1, sec: 3, f: [11, 3] },
+        { kind: "toMix", pts: 1, sec: 3, f: [27, 5] },
+        { kind: "toMix", pts: 1, sec: 3, f: [15, 4] },
+        { h: "b) De número mixto a fracción impropia:", kind: "toImp", pts: 1, sec: 3, foco: 3, m: [3, 2, 5] },
+        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [5, 1, 3] },
+        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [2, 7, 8] }] },
+      { t: "D4. Comparación y orden.", subs: [
+        { h: "a) Elige <, > o = según corresponda.", kind: "cmp", pts: 1, sec: 4, a: [0, 5, 7], b: [0, 2, 7] },
+        { kind: "cmp", pts: 1, sec: 4, a: [0, 4, 9], b: [0, 4, 5] },
+        { kind: "cmp", pts: 1, sec: 4, a: [0, 3, 4], b: [0, 9, 12] },
+        { kind: "cmp", pts: 1, sec: 4, foco: 4, a: [1, 2, 3], b: [0, 11, 6], exp: "[[1 2/3]] = [[5/3]] = [[10/6]]. Como 10 &lt; 11, [[1 2/3]] &lt; [[11/6]]." },
+        { h: "b) Ordena de menor a mayor. Primero escribe cada fracción con el mismo denominador; después tócalas en orden.", kind: "order", pts: 2, sec: 4, foco: 4, fr: [[3, 4], [5, 8], [1, 2], [7, 8]], common: 8 }] },
+      { t: "D5. Resuelve el problema.", subs: [
+        { h: "Martín leyó [[2/3]] de un libro y Catalina leyó [[5/6]] del mismo libro. ¿Quién leyó más? Justifica amplificando.", kind: "story", pts: 3, sec: 4, people: [{ name: "Martín", f: [2, 3], amp: true }, { name: "Catalina", f: [5, 6] }], den: 6, ask: "¿Quién leyó más?" }] },
+      { t: "D6. Transformaciones isométricas.", subs: [
+        { h: "a) Traslada el triángulo ABC 5 cuadrados hacia la derecha y 1 cuadrado hacia abajo. Marca A', B' y C' en el plano y escribe sus coordenadas.", kind: "trans", pts: 5, sec: 5, foco: 5, tri: [[1, 2], [4, 2], [4, 5]], d: [5, -1], lab: { dx: [-12, 12, 14], dy: [16, 16, 2] } },
+        { h: "b) Pinta la reflexión de la figura respecto del eje (línea roja punteada).", kind: "refl", pts: 3, sec: 6, foco: 6, cols: 9, rows: 10, axis: { h: 5 }, O: [[2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [2, 2], [3, 2], [2, 3], [3, 3]], mirror: "y", at: 9 },
+        { h: "c) Observa cada figura F (gris) y su imagen F' (naranja). ¿Qué transformación se aplicó?", kind: "ident", pts: 3, sec: 8, figs: [
+          { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[5, 3], [6, 3], [6, 4], [6, 5]], Fpl: [6, 4] },
+          { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[7, 2], [8, 2], [7, 3], [7, 4]], Fpl: [7, 3] },
+          { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[4, 0], [4, 1], [3, 2], [4, 2]], Fpl: [4, 1] }], ans: ["r", "t", "o"], why: ["Reflexión: F' quedó en espejo.", "Traslación: F' mira hacia el mismo lado que F.", "Rotación de 180°: F' quedó de cabeza."] }] }
+    ]
+  }
+};
+
+/* ============ componentes del desarrollo: render · mount · grade ============ */
+const fracVal = a => (a[0] * a[2] + a[1]) / a[2];            // [entero, num, den]
+const showNum = a => a[0] ? M(a[0], a[1], a[2]) : F(a[1], a[2]);
+const signTxt = s => s === "<" ? "&lt;" : s === ">" ? "&gt;" : "=";
+const cmpSign = (x, y) => Math.abs(x - y) < 1e-9 ? "=" : x < y ? "<" : ">";
+const r = (pts, max, msg) => ({ pts, max, msg });
+function seg(id, opts, cur, cls = "") { return `<span class="seg ${cls}" id="${id}">${opts.map(([k, t]) => `<button type="button" data-v="${k}" class="${cur === k ? "sel" : ""}">${t}</button>`).join("")}</span>`; }
+function bindSeg(el, id, st, key, after) { const box = $("#" + CSS.escape(id), el); if (!box) return; $$("button", box).forEach(b => b.onclick = () => { if (el.closest(".locked")) return; st[key] = b.dataset.v; $$("button", box).forEach(x => x.classList.toggle("sel", x === b)); saveT(); after && after(); }); }
+const isVal = v => v !== null;
+
+const WIDGETS = {
+  fill: {
+    render: (s, id) => `<div class="line"><span class="big">${F(s.L[0], s.L[1])}</span> = <span class="fin">${s.R[0] == null ? nin(id + "-x") : `<b style="font-size:1.1em">${s.R[0]}</b>`}<span class="bar"></span>${s.R[1] == null ? nin(id + "-x") : `<b style="font-size:1.1em">${s.R[1]}</b>`}</span></div>`,
+    grade: (s, id) => { const v = val(id + "-x"), ok = v === s.ans; mark(id + "-x", ok); return r(ok ? 1 : 0, 1, fx(s.exp)); }
+  },
+  simp: {
+    render: (s, id) => `<div class="line"><span class="big">${F(s.f[0], s.f[1])}</span>
+      <span class="calc">÷ ${nin(id + "-k1", "w")} →</span> ${finp(id + "-s1")}
+      <span class="calc">÷ ${nin(id + "-k2", "w")} →</span> ${finp(id + "-s2")}</div><div class="small muted">Si con un paso llegas a la irreducible, deja el segundo paso en blanco.</div>`,
+    grade: (s, id) => {
+      const steps = [1, 2].map(i => ({ k: val(`${id}-k${i}`), n: val(`${id}-s${i}-n`), d: val(`${id}-s${i}-d`) })).filter(t => isVal(t.n) && isVal(t.d));
+      if (!steps.length) return r(0, 2, "No escribiste el resultado. " + fx(s.exp));
+      let pn = s.f[0], pd = s.f[1], divOk = true;
+      for (const t of steps) { if (!isVal(t.k) || t.k <= 1 || pn / t.k !== t.n || pd / t.k !== t.d) divOk = false; pn = t.n; pd = t.d; }
+      const last = steps[steps.length - 1], eq = last.n * s.f[1] === last.d * s.f[0] && last.d > 0, irr = eq && gcd(last.n, last.d) === 1;
+      [1, 2].forEach(i => { const n = val(`${id}-s${i}-n`); if (isVal(n)) { mark(`${id}-s${i}-n`, eq); mark(`${id}-s${i}-d`, eq); } });
+      if (irr && divOk) return r(2, 2, "¡Bien! " + fx(s.exp));
+      if (irr) return r(1, 2, "Llegaste a la irreducible, pero falta indicar bien por qué número dividiste. " + fx(s.exp));
+      if (eq && last.d < s.f[1]) return r(1, 2, `Simplificaste bien, pero te detuviste antes: ${F(last.n, last.d)} todavía se puede simplificar. ` + fx(s.exp));
+      return r(0, 2, "El resultado no es equivalente a la fracción original. " + fx(s.exp));
+    }
+  },
+  fracIn: {
+    render: (s, id) => `<div class="line">${finp(id)}</div>`,
+    grade: (s, id) => { const n = val(id + "-n"), d = val(id + "-d"), ok = n === s.ans[0] && d === s.ans[1]; mark(id + "-n", ok); mark(id + "-d", ok); return r(ok ? 1 : 0, 1, fx(s.exp)); }
+  },
+  mixIn: {
+    render: (s, id) => `<div class="line">${minp(id)}</div>`,
+    grade: (s, id) => { const a = [val(id + "-w"), val(id + "-n"), val(id + "-d")], ok = a.every((v, i) => v === s.ans[i]); ["w", "n", "d"].forEach(k => mark(`${id}-${k}`, ok)); return r(ok ? 1 : 0, 1, fx(s.exp)); }
+  },
+  paint: {
+    render: (s, id) => `<div class="gridwrap" id="${id}-p"></div><div class="small muted" id="${id}-c"></div>`,
+    mount: (s, id, st, el) => {
+      st.cells = st.cells || [];
+      const draw = () => {
+        const set = new Set(st.cells); $("#" + id + "-p").innerHTML = bars(s.wholes, s.parts, set, { w: 190, h: 64, click: true });
+        $("#" + id + "-c").textContent = `Partes pintadas: ${set.size}`;
+        $$(`#${id}-p rect[data-i]`).forEach(rc => rc.onclick = () => { if (el.closest(".locked")) return; const i = +rc.dataset.i; st.cells = set.has(i) ? st.cells.filter(x => x !== i) : [...st.cells, i]; saveT(); draw(); });
+      };
+      draw();
+    },
+    grade: (s, id, st) => {
+      const set = new Set(st.cells || []), full = Array.from({ length: s.wholes }, (_, k) => [...Array(s.parts).keys()].every(i => set.has(k * s.parts + i))).filter(Boolean).length;
+      const ok = set.size === s.target && full === Math.floor(s.target / s.parts);
+      const why = ok ? "" : set.size === s.target ? `Pintaste ${set.size} partes, pero hay que completar ${Math.floor(s.target / s.parts)} enteros antes de empezar el siguiente. ` : `Pintaste ${set.size} partes y había que pintar ${s.target}. `;
+      return r(ok ? 1 : 0, 1, why + fx(s.exp));
+    }
+  },
+  toMix: {
+    render: (s, id) => `<div class="line"><span class="big">${F(s.f[0], s.f[1])}</span> = ${minp(id)} <span class="calc">cálculo: ${s.f[0]} : ${s.f[1]} = ${nin(id + "-q", "w")} resto ${nin(id + "-r", "w")}</span></div>`,
+    grade: (s, id) => {
+      const w = Math.floor(s.f[0] / s.f[1]), n = s.f[0] % s.f[1], d = s.f[1];
+      const ok = val(id + "-w") === w && val(id + "-n") === n && val(id + "-d") === d, calc = val(id + "-q") === w && val(id + "-r") === n;
+      ["w", "n", "d"].forEach(k => mark(`${id}-${k}`, ok)); mark(id + "-q", val(id + "-q") === w); mark(id + "-r", val(id + "-r") === n);
+      const how = `${s.f[0]} : ${d} = ${w}, resto ${n} → ${M(w, n, d)}.`;
+      if (ok && calc) return r(1, 1, how);
+      if (ok) return r(0.5, 1, "El resultado está bien, pero falta el cálculo (o tiene un error). " + how);
+      return r(0, 1, how);
+    }
+  },
+  toImp: {
+    render: (s, id) => `<div class="line"><span class="big">${M(s.m[0], s.m[1], s.m[2])}</span> = ${finp(id)} <span class="calc">cálculo: ${nin(id + "-a", "w")} · ${nin(id + "-b", "w")} + ${nin(id + "-c", "w")} = ${nin(id + "-e", "w")}</span></div>`,
+    grade: (s, id) => {
+      const [w, n, d] = s.m, N = w * d + n, a = val(id + "-a"), b = val(id + "-b"), c = val(id + "-c"), e = val(id + "-e");
+      const ok = val(id + "-n") === N && val(id + "-d") === d, calc = ((a === w && b === d) || (a === d && b === w)) && c === n && e === N;
+      mark(id + "-n", ok); mark(id + "-d", ok); ["a", "b", "c", "e"].forEach(k => mark(`${id}-${k}`, calc));
+      const how = `${w} · ${d} + ${n} = ${w * d} + ${n} = ${N} → ${F(N, d)}. Primero se multiplica y después se suma.`;
+      if (ok && calc) return r(1, 1, how);
+      if (ok) return r(0.5, 1, "El resultado está bien, pero falta el cálculo (o tiene un error). " + how);
+      return r(0, 1, how);
+    }
+  },
+  cmp: {
+    render: (s, id, st) => `<div class="line"><span class="big">${showNum(s.a)}</span> ${seg(id + "-s", [["<", "&lt;"], [">", "&gt;"], ["=", "="]], st.v)} <span class="big">${showNum(s.b)}</span></div>`,
+    mount: (s, id, st, el) => bindSeg(el, id + "-s", st, "v"),
+    grade: (s, id, st) => {
+      const x = fracVal(s.a), y = fracVal(s.b), ans = cmpSign(x, y), ok = st.v === ans;
+      const box = $("#" + CSS.escape(id + "-s")); box.classList.remove("ok", "bad"); box.classList.add(ok ? "ok" : "bad");
+      let why = s.exp;
+      if (!why) {
+        if (s.a[2] === s.b[2]) why = "Mismo denominador: gana el numerador mayor.";
+        else if (s.a[1] === s.b[1] && !s.a[0] && !s.b[0]) why = "Mismo numerador: gana el denominador menor, porque sus trozos son más grandes.";
+        else { const m = lcm(s.a[2], s.b[2]); why = `Con denominador ${m}: ${showNum(s.a)} = ${F((s.a[0] * s.a[2] + s.a[1]) * m / s.a[2], m)} y ${showNum(s.b)} = ${F((s.b[0] * s.b[2] + s.b[1]) * m / s.b[2], m)}.`; }
+      }
+      return r(ok ? 1 : 0, 1, `${fx(why)} Entonces ${showNum(s.a)} <b>${signTxt(ans)}</b> ${showNum(s.b)}.`);
+    }
+  },
+  order: {
+    render: (s, id) => `<div class="line" style="gap:1.1em">${s.fr.map((f, i) => `<span style="white-space:nowrap"><span class="big">${F(f[0], f[1])}</span> = ${finp(`${id}-c${i}`)}</span>`).join("")}</div>
+      <div class="small muted" style="margin-top:6px">Toca las fracciones en orden, de la menor a la mayor. Si te equivocas, toca un casillero para vaciarlo.</div>
+      <div class="chips" id="${id}-chips"></div><div class="slots" id="${id}-slots"></div>`,
+    mount: (s, id, st, el) => {
+      st.order = st.order || [];
+      const draw = () => {
+        $("#" + id + "-chips").innerHTML = s.fr.map((f, i) => `<button type="button" class="chip ${st.order.includes(i) ? "used" : ""}" data-i="${i}">${F(f[0], f[1])}</button>`).join("");
+        $("#" + id + "-slots").innerHTML = s.fr.map((_, k) => { const i = st.order[k]; return (k ? `<span class="muted">&lt;</span>` : "") + `<span class="slot ${i != null ? "filled" : ""}" data-k="${k}">${i != null ? F(s.fr[i][0], s.fr[i][1]) : ""}</span>`; }).join("");
+        $$(`#${id}-chips .chip`).forEach(c => c.onclick = () => { if (el.closest(".locked")) return; const i = +c.dataset.i; if (st.order.includes(i) || st.order.length >= s.fr.length) return; st.order.push(i); saveT(); draw(); });
+        $$(`#${id}-slots .slot`).forEach(c => c.onclick = () => { if (el.closest(".locked")) return; const k = +c.dataset.k; if (st.order[k] == null) return; st.order.splice(k, 1); saveT(); draw(); });
+      };
+      draw();
+    },
+    grade: (s, id, st) => {
+      const right = s.fr.map((f, i) => i).sort((a, b) => s.fr[a][0] / s.fr[a][1] - s.fr[b][0] / s.fr[b][1]);
+      const o = st.order || [], wrong = right.filter((x, k) => o[k] !== x).length, orderOk = o.length === right.length && wrong === 0;
+      const conv = s.fr.map((f, i) => [val(`${id}-c${i}-n`), val(`${id}-c${i}-d`)]);
+      const den = conv[0][1], convOk = conv.every(([n, d], i) => isVal(n) && isVal(d) && d === den && n * s.fr[i][1] === d * s.fr[i][0]);
+      conv.forEach(([n, d], i) => { const ok = isVal(n) && isVal(d) && n * s.fr[i][1] === d * s.fr[i][0] && d === den; mark(`${id}-c${i}-n`, ok); mark(`${id}-c${i}-d`, ok); });
+      const m = s.common, how = `Con denominador ${m}: ${s.fr.map(f => `${F(f[0], f[1])} = ${F(f[0] * m / f[1], m)}`).join(", ")}. Orden: ${right.map(i => F(s.fr[i][0], s.fr[i][1])).join(" &lt; ")}.`;
+      if (orderOk && convOk) return r(2, 2, "¡Bien! " + how);
+      if (orderOk) return r(1, 2, "El orden está bien, pero falta mostrar la conversión al mismo denominador. " + how);
+      if (convOk && o.length === right.length && wrong <= 2) return r(1, 2, "Convertiste bien, pero ubicaste mal una fracción. " + how);
+      return r(0, 2, how);
+    }
+  },
+  story: {
+    render: (s, id, st) => {
+      const p = s.people, ai = p.findIndex(x => x.amp), A = p[ai];
+      return `<div class="line">1) Amplifico la fracción de ${A.name}: <span class="big">${F(A.f[0], A.f[1])}</span> = ${finp(id + "-a")}</div>
+        <div class="line">2) Comparo: <span class="big" id="${id}-L"></span> ${seg(id + "-s", [["<", "&lt;"], [">", "&gt;"], ["=", "="]], st.v)} <span class="big" id="${id}-R"></span></div>
+        <div class="line">3) ${s.ask} ${seg(id + "-w", p.map(x => [x.name, x.name]), st.who)}</div>`;
+    },
+    mount: (s, id, st, el) => {
+      const p = s.people, ai = p.findIndex(x => x.amp);
+      const show = () => { const n = val(id + "-a-n"), d = val(id + "-a-d"); const amp = isVal(n) && isVal(d) ? F(n, d) : `<span class="muted">?</span>`; [0, 1].forEach(i => { $("#" + id + (i ? "-R" : "-L")).innerHTML = i === ai ? amp : F(p[i].f[0], p[i].f[1]); }); };
+      ["-a-n", "-a-d"].forEach(k => $("#" + id + k).addEventListener("input", show)); show();
+      bindSeg(el, id + "-s", st, "v"); bindSeg(el, id + "-w", st, "who");
+    },
+    grade: (s, id, st) => {
+      const p = s.people, ai = p.findIndex(x => x.amp), A = p[ai], n = val(id + "-a-n"), d = val(id + "-a-d");
+      const k = s.den / A.f[1], p1 = n === A.f[0] * k && d === s.den, ans = cmpSign(p[0].f[0] / p[0].f[1], p[1].f[0] / p[1].f[1]);
+      const p2 = st.v === ans, win = ans === ">" ? p[0].name : p[1].name, p3 = st.who === win;
+      mark(id + "-a-n", p1); mark(id + "-a-d", p1);
+      [["-s", p2], ["-w", p3]].forEach(([k2, ok]) => { const b = $("#" + CSS.escape(id + k2)); b.classList.remove("ok", "bad"); b.classList.add(ok ? "ok" : "bad"); });
+      const other = p[1 - ai], ampF = F(A.f[0] * k, s.den);
+      const L = ai === 0 ? ampF : F(other.f[0], other.f[1]), R = ai === 0 ? F(other.f[0], other.f[1]) : ampF;
+      return r((p1 ? 1 : 0) + (p2 ? 1 : 0) + (p3 ? 1 : 0), 3, `${F(A.f[0], A.f[1])} = ${ampF} (amplifiqué por ${k}). ${L} <b>${signTxt(ans)}</b> ${R}. Respuesta: <b>${win}</b>.`);
+    }
+  },
+  trans: {
+    render: (s, id) => `<div class="tools" id="${id}-t">${["A'", "B'", "C'"].map((t, i) => `<button type="button" data-i="${i}">Marcar ${t}</button>`).join("")}<button type="button" data-i="x">Borrar puntos</button></div>
+      <div class="gridwrap" id="${id}-g"></div>
+      <div class="line">${["A'", "B'", "C'"].map((t, i) => `<span style="white-space:nowrap;margin-right:1em">${t} = ( ${nin(`${id}-x${i}`, "w")} , ${nin(`${id}-y${i}`, "w")} )</span>`).join("")}</div>`,
+    mount: (s, id, st, el) => {
+      st.p = st.p || {}; if (st.sel == null) st.sel = 0;
+      const lab = ["A'", "B'", "C'"];
+      const draw = () => {
+        const p = plane(10, 8, 46, api => {
+          let g = tri(api, s.tri, C.blue, ["A", "B", "C"], s.lab);
+          const P = [0, 1, 2].map(i => st.p[i]).filter(Boolean);
+          if (P.length === 3) g += tri(api, [st.p[0], st.p[1], st.p[2]], C.orange, null, { op: 0.6 });
+          [0, 1, 2].forEach(i => { const q = st.p[i]; if (q) g += `<circle cx="${api.px(q[0])}" cy="${api.py(q[1])}" r="8" fill="${C.orange}" stroke="#222" stroke-width="2"/><text x="${api.px(q[0]) + 12}" y="${api.py(q[1]) - 9}" font-size="15" font-weight="800">${lab[i]}</text>`; });
+          if (s.show) s.show.forEach(q => g += `<circle cx="${api.px(q[0])}" cy="${api.py(q[1])}" r="11" fill="none" stroke="${C.green}" stroke-width="3"/>`);
+          for (let x = 0; x <= 10; x++) for (let y = 0; y <= 8; y++) g += `<circle cx="${api.px(x)}" cy="${api.py(y)}" r="19" fill="transparent" data-p="${x},${y}" style="cursor:pointer"/>`;
+          return g;
+        });
+        $("#" + id + "-g").innerHTML = p.svg;
+        $$(`#${id}-t button`).forEach(b => b.classList.toggle("sel", b.dataset.i == st.sel));
+        $$(`#${id}-g [data-p]`).forEach(c => c.onclick = () => { if (el.closest(".locked")) return; st.p[st.sel] = c.dataset.p.split(",").map(Number); if (st.sel < 2 && !st.p[st.sel + 1]) st.sel++; saveT(); draw(); });
+      };
+      $$(`#${id}-t button`).forEach(b => b.onclick = () => { if (el.closest(".locked")) return; if (b.dataset.i === "x") { st.p = {}; st.sel = 0; } else st.sel = +b.dataset.i; saveT(); draw(); });
+      draw();
+      el._redraw = draw;
+    },
+    grade: (s, id, st, el) => {
+      const E = s.tri.map(([x, y]) => [x + s.d[0], y + s.d[1]]), P = [0, 1, 2].map(i => (st.p || {})[i]);
+      const good = P.filter((q, i) => q && q[0] === E[i][0] && q[1] === E[i][1]).length;
+      const allP = P.every(Boolean), shift = allP && P.every((q, i) => q[0] - s.tri[i][0] === P[0][0] - s.tri[0][0] && q[1] - s.tri[i][1] === P[0][1] - s.tri[0][1]);
+      const dib = good === 3 ? 2 : (good === 2 || shift) ? 1 : 0;
+      let co = 0, swapped = false;
+      E.forEach(([x, y], i) => { const a = val(`${id}-x${i}`), b = val(`${id}-y${i}`), ok = a === x && b === y; if (ok) co++; if (a === y && b === x && x !== y) swapped = true; mark(`${id}-x${i}`, a === x); mark(`${id}-y${i}`, b === y); });
+      s.show = E; el._redraw && el._redraw(); delete s.show;
+      const mv = `${s.d[0]} a la derecha y ${Math.abs(s.d[1])} ${s.d[1] > 0 ? "hacia arriba (se suma a la y)" : "hacia abajo (se resta a la y)"}`;
+      return r(dib + co, 5, `Dibujo: ${dib} de 2 · Coordenadas: ${co} de 3. Se mueve ${mv}: A'(${E[0].join(", ")}), B'(${E[1].join(", ")}), C'(${E[2].join(", ")}). Los círculos verdes marcan dónde van.${swapped ? " Ojo: en algún punto invertiste el orden; primero va la x." : ""}`);
+    }
+  },
+  refl: {
+    render: (s, id) => `<div id="${id}-g"></div><div class="small muted">Toca los cuadros para pintar el reflejo; vuelve a tocar para borrar.</div>`,
+    mount: (s, id, st, el) => {
+      st.cells = st.cells || [];
+      el._pg = paintGrid($("#" + id + "-g"), { cols: s.cols, rows: s.rows, cs: s.cols > 10 ? 42 : 44, O: s.O, axis: s.axis, start: st.cells, locked: !!el.closest(".locked") }, cells => { st.cells = cells; saveT(); });
+    },
+    grade: (s, id, st, el) => {
+      const E = s.O.map(([x, y]) => s.mirror === "x" ? [s.at - x, y] : [x, s.at - y]);
+      const g = gradeReflection(st.cells || [], E, s.O);
+      if (el._pg) el._pg.lock(E);
+      return r(g.pts, 3, g.msg + " El contorno verde muestra la solución.");
+    }
+  },
+  ident: {
+    render: (s, id, st) => `<div class="fig3">${s.figs.map((f, i) => `<div class="cell">${pairFig({ ...f, cs: 26 })}<div style="margin-top:8px">Figura ${i + 1}: ${seg(`${id}-f${i}`, [["t", "Traslación"], ["r", "Reflexión"], ["o", "Rotación"]], (st.v || [])[i], "small")}</div></div>`).join("")}</div>`,
+    mount: (s, id, st, el) => { st.v = st.v || []; s.figs.forEach((_, i) => { const box = $("#" + CSS.escape(`${id}-f${i}`), el); $$("button", box).forEach(b => b.onclick = () => { if (el.closest(".locked")) return; st.v[i] = b.dataset.v; $$("button", box).forEach(x => x.classList.toggle("sel", x === b)); saveT(); }); }); },
+    grade: (s, id, st) => {
+      let p = 0; s.ans.forEach((a, i) => { const ok = (st.v || [])[i] === a; if (ok) p++; const b = $("#" + CSS.escape(`${id}-f${i}`)); b.classList.remove("ok", "bad"); b.classList.add(ok ? "ok" : "bad"); });
+      return r(p, 3, s.why.map((w, i) => `Figura ${i + 1}: ${w}`).join(" "));
+    }
+  }
+};
+
+/* ============ motor de los ensayos ============ */
+let CUR = null, TIMER = null;
+const LET = "ABCD";
+const T = L => (DB.tests[L] = DB.tests[L] || { mc: {}, inp: {}, w: {}, blk: {}, start: null, done: false });
+const wst = (L, id) => (T(L).w[id] = T(L).w[id] || {});
+const subId = (L, bi, si) => `${L}-d${bi}-${si}`;
+const nota = p => Math.round((p < 36 ? 1 + 3 * p / 36 : 4 + 3 * (p - 36) / 24) * 10 + 1e-9) / 10;
+const coma = n => String(n).replace(".", ",");
+const notaTxt = n => n.toFixed(1).replace(".", ",");
+const FOCO_SEC = [3, 2, 3, 4, 5, 6];
+function saveT() { save(); updateProgress(); }
+function fmtDate(iso) { const d = new Date(iso), p = x => String(x).padStart(2, "0"); return `${p(d.getDate())}-${p(d.getMonth() + 1)}-${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`; }
+function review(sec) { return `<a href="#aprender-${sec}">Repasar esto →</a>`; }
+function fbHTML(res, sec) { const cls = res.pts >= res.max ? "ok" : res.pts > 0 ? "part" : "bad"; return `<div class="fb ${cls}"><span class="score-chip ${cls}">${coma(res.pts)} / ${res.max}</span> ${res.msg} ${res.pts < res.max ? review(sec) : ""}</div>`; }
+
+function mcCard(L, q, i) {
+  const fig = q.fig ? `<div class="fig">${q.fig.bars ? bars(q.fig.bars[0], q.fig.bars[1], q.fig.bars[2], { w: 170, h: 58 }) : pairFig({ ...q.fig.pair, cs: 34 })}</div>` : "";
+  return `<div class="card q" id="${L}-mc-${i}"><div class="q-head"><div class="q-num">${i + 1}</div><div class="q-text">${fx(q.q)}</div><div class="q-pts">2 pts</div></div>${fig}
+    <div class="opts ${q.tall ? "tall" : ""}">${q.opts.map((o, k) => `<button type="button" class="opt" data-k="${k}"><span class="l">${LET[k]}</span><span>${fx(o)}</span></button>`).join("")}</div><div class="fbx"></div></div>`;
+}
+function devCard(L, b, bi) {
+  const max = b.subs.reduce((a, s) => a + s.pts, 0), t = TESTS[L];
+  const fig = b.fig ? `<div class="fig">${bars(b.fig.bars[0], b.fig.bars[1], b.fig.bars[2], { w: 170, h: 58 })}</div>` : "";
+  return `<div class="card q" id="${L}-blk-${bi}"><div class="q-head"><div class="q-num">D${bi + 1}</div><div class="q-text"><b>${b.t.replace(/^D\d\.\s*/, "")}</b>${b.note ? `<div class="small muted">${b.note}</div>` : ""}</div><div class="q-pts">${max} pts</div></div>${fig}
+    ${b.subs.map((s, si) => { const id = subId(L, bi, si); return `<div class="sub" id="${id}">${s.h ? `<div class="sub-h">${fx(s.h)}</div>` : ""}${WIDGETS[s.kind].render(s, id, wst(L, id))}<div class="fbx"></div></div>`; }).join("")}
+    ${t.guided ? `<div class="q-actions"><button type="button" class="btn blue" data-chk="${bi}">Comprobar D${bi + 1}</button><span class="score-chip hide" id="${L}-blkscore-${bi}"></span></div>` : ""}</div>`;
+}
+
+function renderTest(L) {
+  CUR = L; clearInterval(TIMER);
+  const t = TESTS[L], st = T(L), root = $("#v-ensayo" + L);
+  if (!t.guided && !st.start && !st.done) {
+    root.innerHTML = `<div class="card hero"><p class="muted small" style="margin:0 0 6px">Paso 3 · simulacro</p><h1>${t.name}: como si fuera la prueba</h1>
+      <p>Tienes <b>${t.minutes} minutos</b>. Mientras respondes no vas a ver si está bien o mal: la nota y la corrección aparecen cuando entregas. Ten a mano papel y lápiz para los cálculos.</p>
+      <p class="muted small">Si se acaba el tiempo, igual puedes terminar, pero el reloj te va a avisar.</p><button class="btn blue" id="startB">Comenzar el simulacro</button></div>`;
+    $("#startB").onclick = () => { st.start = Date.now(); save(); renderTest(L); };
+    return;
+  }
+  let h = `<div class="testbar"><b>${t.name} · ${t.guided ? "práctica guiada" : "simulacro"}</b><div class="progress"><i id="pbar"></i></div><span class="small" id="pcount"></span>${!t.guided && !st.done ? `<span class="timer" id="timer"></span>` : ""}${st.done ? "" : `<button type="button" class="btn small blue" data-fin="1">${t.guided ? "Ver mi puntaje" : "Entregar"}</button>`}</div>`;
+  if (st.done) h += resultCard(L);
+  else h += `<div class="card"><div class="box tip" style="margin:0"><h4>Recuerda antes de empezar</h4>En un dibujo con varios enteros, el denominador es el número de partes de un entero. Para amplificar o simplificar, multiplica o divide arriba y abajo por el mismo número. Impropia → mixto: se divide. Mixto → impropia: entero · denominador + numerador. Para comparar, iguala los denominadores. En el plano cartesiano: primero x, después y.</div>${t.guided ? `<p class="small muted" style="margin:10px 0 0">En este ensayo cuenta tu <b>primera</b> respuesta. Después de responder vas a ver la explicación.</p>` : ""}</div>`;
+  h += `<h2 class="part-h">Parte I · Selección múltiple <span class="muted small">12 preguntas · 2 puntos cada una</span></h2>` + t.mc.map((q, i) => mcCard(L, q, i)).join("");
+  h += `<h2 class="part-h">Parte II · Desarrollo <span class="muted small">36 puntos</span></h2>` + t.dev.map((b, bi) => devCard(L, b, bi)).join("");
+  h += `<div class="row" style="justify-content:space-between;margin-top:10px">${st.done ? (L === "A" ? `<button class="btn blue" data-go="ensayoB">Ir al Ensayo B →</button>` : `<button class="btn blue" data-go="resultados">Ver mis resultados →</button>`) : `<button type="button" class="btn blue" data-fin="1">${t.guided ? "Ver mi puntaje" : "Entregar la prueba"}</button>`}<button type="button" class="btn ghost small" id="reset${L}">Borrar respuestas y empezar de nuevo</button></div>`;
+  root.innerHTML = h;
+
+  $$("input.inp", root).forEach(inp => { if (st.inp[inp.id] != null) inp.value = st.inp[inp.id]; inp.addEventListener("input", () => { st.inp[inp.id] = inp.value; saveT(); }); });
+  t.dev.forEach((b, bi) => b.subs.forEach((s, si) => { const id = subId(L, bi, si), W = WIDGETS[s.kind]; if (W.mount) W.mount(s, id, wst(L, id), $("#" + id)); }));
+  t.mc.forEach((q, i) => {
+    const card = $(`#${L}-mc-${i}`);
+    $$(".opt", card).forEach(b => b.onclick = () => {
+      if (card.classList.contains("locked")) return;
+      st.mc[i] = +b.dataset.k; save();
+      if (t.guided) showMC(L, i); else { $$(".opt", card).forEach(x => x.classList.toggle("sel", x === b)); updateProgress(); }
+    });
+    if (st.mc[i] != null) { if (t.guided || st.done) showMC(L, i); else $(`.opt[data-k="${st.mc[i]}"]`, card).classList.add("sel"); }
+  });
+  $$("[data-chk]", root).forEach(b => b.onclick = () => { const bi = +b.dataset.chk; checkBlock(L, bi); save(); updateProgress(); });
+  t.dev.forEach((b, bi) => { if (st.done || (t.guided && st.blk[bi])) checkBlock(L, bi); });
+  $$("[data-fin]", root).forEach(b => b.onclick = () => finish(L));
+  $("#reset" + L).onclick = () => { if (confirm(`¿Borrar las respuestas del ${t.name} y empezar de nuevo? Los resultados anteriores quedan guardados en «Mis resultados».`)) { delete DB.tests[L]; save(); renderTest(L); window.scrollTo(0, 0); } };
+  if (!t.guided && !st.done) { tick(L); TIMER = setInterval(() => tick(L), 1000); }
+  updateProgress();
+}
+
+function showMC(L, i) {
+  const q = TESTS[L].mc[i], st = T(L), card = $(`#${L}-mc-${i}`), a = st.mc[i], ok = a === q.ans;
+  card.classList.add("locked");
+  $$(".opt", card).forEach(x => { const k = +x.dataset.k; x.classList.remove("sel"); if (k === q.ans) x.classList.add("ok"); else if (k === a) x.classList.add("bad"); });
+  $(".fbx", card).innerHTML = `<div class="fb ${ok ? "ok" : "bad"}"><span class="score-chip ${ok ? "ok" : "bad"}">${ok ? 2 : 0} / 2</span> ${a == null ? "No respondiste. " : ok ? "<b>¡Bien!</b> " : `La respuesta correcta es la <b>${LET[q.ans]}</b>. `}${fx(q.exp)} ${ok ? "" : review(q.sec)}</div>`;
+}
+function checkBlock(L, bi) {
+  const b = TESTS[L].dev[bi], st = T(L), card = $(`#${L}-blk-${bi}`), res = [];
+  card.classList.add("locked"); $$("input", card).forEach(x => x.disabled = true);
+  b.subs.forEach((s, si) => { const id = subId(L, bi, si), el = $("#" + id), g = WIDGETS[s.kind].grade(s, id, wst(L, id), el); res.push(g.pts); $(".fbx", el).innerHTML = fbHTML(g, s.sec); });
+  if (!st.blk[bi]) st.blk[bi] = { subs: res };
+  const got = st.blk[bi].subs.reduce((a, x) => a + x, 0), max = b.subs.reduce((a, s) => a + s.pts, 0);
+  const chip = $(`#${L}-blkscore-${bi}`); if (chip) { chip.classList.remove("hide"); chip.textContent = `D${bi + 1}: ${coma(got)} de ${max} puntos`; }
+  const btn = $(`[data-chk="${bi}"]`, card); if (btn) btn.remove();
+}
+function score(L) {
+  const t = TESTS[L], st = T(L), foc = FOCOS.map(() => ({ p: 0, m: 0 })); let p1 = 0, p2 = 0;
+  t.mc.forEach((q, i) => { const p = st.mc[i] === q.ans ? 2 : 0; p1 += p; if (q.foco) { foc[q.foco - 1].p += p; foc[q.foco - 1].m += 2; } });
+  t.dev.forEach((b, bi) => b.subs.forEach((s, si) => { const p = st.blk[bi] ? st.blk[bi].subs[si] : 0; p2 += p; if (s.foco) { foc[s.foco - 1].p += p; foc[s.foco - 1].m += s.pts; } }));
+  const pts = p1 + p2; return { pts, p1, p2, nota: nota(pts), foc };
+}
+function unanswered(L) {
+  const t = TESTS[L], st = T(L); let n = t.mc.filter((_, i) => st.mc[i] == null).length;
+  t.dev.forEach((b, bi) => b.subs.forEach((s, si) => { if (!subAnswered(L, bi, si)) n++; }));
+  return n;
+}
+function subAnswered(L, bi, si) {
+  const id = subId(L, bi, si), el = $("#" + id), w = T(L).w[id] || {};
+  if (el && $$("input", el).some(i => i.value.trim() !== "")) return true;
+  return Object.values(w).some(v => Array.isArray(v) ? v.filter(x => x != null).length : (v && typeof v === "object") ? Object.keys(v).length : v != null && v !== "" && typeof v !== "number");
+}
+function updateProgress() {
+  if (!CUR || !$("#pbar")) return;
+  const t = TESTS[CUR], total = t.mc.length + t.dev.reduce((a, b) => a + b.subs.length, 0), left = unanswered(CUR);
+  $("#pbar").style.width = (100 * (total - left) / total) + "%"; $("#pcount").textContent = `${total - left} de ${total} respondidas`;
+}
+function tick(L) {
+  const st = T(L), el = $("#timer"); if (!el || !st.start) return;
+  const left = Math.round((st.start + TESTS[L].minutes * 60000 - Date.now()) / 1000), a = Math.abs(left);
+  el.textContent = (left < 0 ? "+" : "") + `${Math.floor(a / 60)}:${String(a % 60).padStart(2, "0")}`;
+  el.classList.toggle("late", left < 0); el.title = left < 0 ? "Se acabó el tiempo: entrega cuando termines" : "Tiempo restante";
+}
+function finish(L) {
+  const t = TESTS[L], st = T(L), left = unanswered(L);
+  if (left && !confirm(`Te ${left === 1 ? "falta 1 pregunta" : `faltan ${left} preguntas`} por responder. ¿${t.guided ? "Ver el puntaje" : "Entregar"} igual?`)) return;
+  clearInterval(TIMER);
+  t.dev.forEach((b, bi) => { if (!st.blk[bi]) checkBlock(L, bi); });
+  st.done = true; st.end = Date.now();
+  const sc = score(L);
+  DB.history.push({ t: L, date: new Date().toISOString(), pts: sc.pts, nota: sc.nota, foc: sc.foc.map(f => [f.p, f.m]), min: st.start ? Math.round((st.end - st.start) / 60000) : null });
+  save(); renderTest(L); window.scrollTo(0, 0); renderHome();
+  if (sc.nota >= 6) confetti();
+}
+function focoRows(foc) {
+  return `<div class="focos">${foc.map((f, i) => { const pct = f.m ? f.p / f.m : 1, col = pct >= 0.8 ? C.green : pct >= 0.5 ? "#E9B325" : C.red; return `<div class="foco"><span>${FOCOS[i]} ${pct < 0.8 ? `· <a href="#aprender-${FOCO_SEC[i]}">repasar</a>` : ""}</span><div class="meter"><i style="width:${Math.max(4, pct * 100)}%;background:${col}"></i></div><b>${coma(f.p)}/${f.m}</b></div>`; }).join("")}</div>`;
+}
+function resultCard(L) {
+  const sc = score(L), st = T(L), n = sc.nota;
+  const msg = n >= 6 ? "¡Excelente! Estás muy bien preparada." : n >= 5 ? "¡Muy bien! Revisa abajo lo que quedó marcado." : n >= 4 ? "Aprobado. Repasa los temas en rojo antes de la prueba." : "Todavía falta. Repasa las lecciones de los temas en rojo y vuelve a intentarlo.";
+  const mins = st.start && st.end ? Math.round((st.end - st.start) / 60000) : null;
+  return `<div class="card"><div class="result-top"><div><div class="small muted">Nota</div><div class="nota ${n >= 4 ? "ok" : "bad"}">${notaTxt(n)}</div></div>
+    <div style="flex:1;min-width:220px"><div><b>${coma(sc.pts)} de 60 puntos</b> · Parte I: ${sc.p1}/24 · Parte II: ${coma(sc.p2)}/36${mins != null && !TESTS[L].guided ? ` · ${mins} min` : ""}</div>
+    <div class="meter" style="margin:8px 0"><i style="width:${sc.pts / 60 * 100}%;background:${n >= 4 ? C.green : C.red}"></i></div><p class="small" style="margin:0">${msg}</p></div></div>
+    <h3 style="margin-top:18px">En qué fijarse</h3>${focoRows(sc.foc)}<p class="small muted" style="margin:12px 0 0">Escala: 60% = 4,0. Abajo está la corrección de cada pregunta.</p></div>`;
+}
+
+/* ============ mis resultados ============ */
+function renderResults() {
+  const root = $("#v-resultados"), H = DB.history;
+  if (!H.length) { root.innerHTML = `<div class="card"><h2>Mis resultados</h2><p>Todavía no hay resultados. Cuando termines un ensayo, tu nota queda guardada aquí.</p><button class="btn blue" data-go="ensayoA">Ir al Ensayo A</button></div>`; return; }
+  let h = `<div class="card"><h2>Mis resultados</h2><div class="tablewrap"><table class="t hist"><tr><th>Fecha</th><th>Ensayo</th><th>Puntos</th><th>Nota</th></tr>${H.slice().reverse().map(x => `<tr><td>${fmtDate(x.date)}</td><td>${TESTS[x.t].name}</td><td>${coma(x.pts)} / 60</td><td><b style="color:${x.nota >= 4 ? "var(--green)" : "var(--red)"}">${notaTxt(x.nota)}</b></td></tr>`).join("")}</table></div></div>`;
+  ["A", "B"].forEach(L => { const x = H.filter(y => y.t === L).slice(-1)[0]; if (x) h += `<div class="card"><h3>${TESTS[L].name} · último intento (${fmtDate(x.date)}): nota ${notaTxt(x.nota)}</h3>${focoRows(x.foc.map(([p, m]) => ({ p, m })))}</div>`; });
+  root.innerHTML = h;
+}
+
+/* ============ arranque ============ */
+function setHdr() { document.documentElement.style.setProperty("--hdr", $("header.top").offsetHeight + "px"); }
+window.addEventListener("resize", setHdr);
+function init() {
+  setHdr();
+  fxAll(document);
+  buildLessons(); buildChecks();
+  lab1(); fig2(); lab2amp(); lab2simp(); lab3(); lab3conv(); fig4(); lab4();
+  lab5(); fig5(); lab5pt(); lab6(); lab6p(); lab7(); lab8();
+  buildChecklist();
+  go(location.hash.slice(1) || "inicio", false);
+}
+init();
+</script>
+</body></html>
