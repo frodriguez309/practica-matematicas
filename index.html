@@ -802,7 +802,7 @@ function renderHome() {
   $("#st-aprender").innerHTML = done ? `<span style="color:var(--green)">${done} de 9 lecciones listas</span>` : `<span class="muted">Sin empezar</span>`;
   ["A", "B"].forEach(L => {
     const h = DB.history.filter(x => x.t === L).slice(-1)[0], cur = DB.tests[L];
-    $("#st-ensayo" + L).innerHTML = h ? `<span style="color:${h.nota >= 4 ? "var(--green)" : "var(--red)"}">Último intento: ${h.pts} pts · nota ${h.nota.toFixed(1).replace(".", ",")}</span>` : cur && Object.keys(cur.ans || {}).length ? `<span style="color:var(--orange-ink)">En curso</span>` : `<span class="muted">Sin empezar</span>`;
+    $("#st-ensayo" + L).innerHTML = h ? `<span style="color:${h.nota >= 4 ? "var(--green)" : "var(--red)"}">Último intento: ${h.pts} pts · nota ${h.nota.toFixed(1).replace(".", ",")}</span>` : cur && !cur.done && (cur.start || [cur.mc, cur.inp, cur.w].some(o => Object.keys(o || {}).length)) ? `<span style="color:var(--orange-ink)">En curso</span>` : `<span class="muted">Sin empezar</span>`;
   });
 }
 
