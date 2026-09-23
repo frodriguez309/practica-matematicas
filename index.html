@@ -85,6 +85,7 @@ main{max-width:960px;margin:0 auto;padding:20px 16px 80px}
 .lesson-nav button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 .lesson-nav button.done::after{content:" ✓";color:var(--green)}
 .lesson-nav button.on.done::after{color:#fff}
+.book{display:inline-block;font-size:.85rem;font-weight:700;color:var(--blue-ink);background:var(--blue-soft);border-radius:999px;padding:3px 12px;margin-bottom:10px}
 .sec-num{display:inline-block;background:var(--blue-soft);color:var(--blue-ink);font-weight:800;border-radius:8px;padding:1px 9px;margin-right:6px}
 .box{border-radius:12px;padding:12px 16px;margin:12px 0}
 .box.tip{background:var(--blue-soft)}
@@ -205,16 +206,16 @@ ul.clean{list-style:none;padding:0;margin:0}
   <div class="card hero">
     <p class="muted small" style="margin:0 0 6px">Prueba N°2 · jueves 24-09-2026</p>
     <h1>Hola, Amparo. Vamos a preparar la prueba de <span>fracciones y transformaciones</span>.</h1>
-    <p>Son tres pasos. Primero repasas cada tema con dibujos que puedes mover. Después haces el Ensayo A con ayuda: cada vez que respondes te digo si está bien y por qué. Al final haces el Ensayo B como si fuera la prueba de verdad, con tiempo y sin ayuda.</p>
+    <p>Son tres pasos. Primero repasas cada tema con dibujos que puedes mover, en el mismo orden de tu libro. Después haces el Ensayo A con ayuda: cada vez que respondes te digo si está bien y por qué. Al final haces el Ensayo B como si fuera la prueba de verdad, con tiempo y sin ayuda.</p>
     <div class="paths">
-      <div class="path"><div class="step">Paso 1</div><h3>Aprender</h3><p>Nueve lecciones cortas, cada una con una pregunta para ver si quedó claro.</p><div class="state" id="st-aprender"></div><button class="btn blue" data-go="aprender">Empezar a repasar</button></div>
+      <div class="path"><div class="step">Paso 1</div><h3>Aprender</h3><p>Doce lecciones cortas, cada una con la página de tu libro y preguntas para ver si quedó claro.</p><div class="state" id="st-aprender"></div><button class="btn blue" data-go="aprender">Empezar a repasar</button></div>
       <div class="path"><div class="step">Paso 2</div><h3>Ensayo A · práctica</h3><p>60 puntos. Compruebas cada pregunta y ves la explicación.</p><div class="state" id="st-ensayoA"></div><button class="btn" data-go="ensayoA">Ir al Ensayo A</button></div>
       <div class="path"><div class="step">Paso 3</div><h3>Ensayo B · simulacro</h3><p>60 puntos, 70 minutos. La nota sale al entregar.</p><div class="state" id="st-ensayoB"></div><button class="btn" data-go="ensayoB">Ir al Ensayo B</button></div>
     </div>
   </div>
   <div class="card">
     <h3>Lo que entra en la prueba</h3>
-    <p style="margin:0">Fracciones equivalentes (amplificar y simplificar) · fracciones propias, impropias y número mixto · comparar y ordenar fracciones · transformaciones isométricas: traslación, reflexión y rotación.</p>
+    <p style="margin:0"><b>Fracciones</b> (Tomo 2, Unidad 3): propias y equivalentes a la unidad · impropias y números mixtos · amplificar y simplificar · comparar y ordenar. <b>Geometría</b> (Tomo 1, Unidad 2): figuras en el plano cartesiano · traslación, rotación y reflexión · figuras congruentes.</p>
   </div>
 </section>
 
@@ -223,51 +224,46 @@ ul.clean{list-style:none;padding:0;margin:0}
   <div class="lesson-nav" id="lessonNav"></div>
 
   <!-- 1 -->
-  <div class="card lesson" data-sec="1" data-title="Qué es una fracción">
-    <h2><span class="sec-num">1</span>Primero, ¿qué es una fracción?</h2>
-    <p>Una fracción representa <b>partes iguales de un entero</b>. En la fracción <span class="big">[[3/4]]</span>:</p>
-    <p>El <b>denominador</b> (abajo, el 4) dice en cuántas partes iguales se dividió el entero. El <b>numerador</b> (arriba, el 3) dice cuántas de esas partes tomamos.</p>
+  <div class="card lesson" data-sec="1" data-title="Propias y unidad">
+    <div class="book">📘 En tu libro: Tomo 2, páginas 214 a 217</div>
+    <h2><span class="sec-num">1</span>Fracciones propias y equivalentes a la unidad</h2>
+    <p>Una <b>fracción</b> es un número que indica cuántas <b>partes iguales</b> de un entero (o de un todo) estamos considerando. Se escribe con dos números separados por una línea, la <b>línea fraccionaria</b>:</p>
+    <div class="box tip"><div class="row" style="gap:18px;align-items:center"><span class="big" style="font-size:2.4em">[[3/4]]</span><div>
+      <b>Numerador</b> (arriba): cuántas partes iguales consideramos. Aquí, 3.<br>
+      <b>Denominador</b> (abajo): en cuántas partes iguales se dividió el entero. Aquí, 4.</div></div></div>
     <p>Si una pizza se corta en 4 trozos iguales y te comes 3, te comiste <span class="big">[[3/4]]</span> de la pizza.</p>
     <div class="lab"><div class="lab-title">Pruébalo · arma tu fracción</div><div id="lab1"></div></div>
+
+    <h3>Cómo se lee una fracción</h3>
+    <p>Primero se nombra el <b>numerador</b> y después el <b>denominador</b>. El nombre del denominador depende de qué número sea:</p>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Si el denominador es…</th><th>se lee…</th><th>Ejemplo</th></tr>
+      <tr><td>del 2 al 9</td><td>medios, tercios, cuartos, quintos, sextos, séptimos, octavos, novenos</td><td><span class="big">[[2/5]]</span> dos quintos</td></tr>
+      <tr><td>10, 100 o 1.000</td><td>décimos, centésimos, milésimos</td><td><span class="big">[[7/100]]</span> siete centésimos</td></tr>
+      <tr><td>cualquier otro</td><td>el número y se agrega <b>«avos»</b></td><td><span class="big">[[5/12]]</span> cinco doceavos</td></tr>
+    </table></div>
+    <p class="small muted">Cuando el numerador es 1 se dice en singular: <span class="big">[[1/2]]</span> un medio, <span class="big">[[1/4]]</span> un cuarto, <span class="big">[[1/16]]</span> un dieciseisavo.</p>
+    <div class="lab"><div class="lab-title">Practica · ¿cómo se lee?</div><div id="labRead"></div></div>
+
+    <h3>Propias y equivalentes a la unidad</h3>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Tipo</th><th>¿Cómo es?</th><th>¿Cuánto vale?</th><th>Ejemplo</th></tr>
+      <tr><td><b>Propia</b></td><td>el numerador es <b>menor</b> que el denominador</td><td>menos que 1 entero</td><td class="big">[[5/12]]</td></tr>
+      <tr><td><b>Equivalente a la unidad</b></td><td>el numerador es <b>igual</b> al denominador</td><td>exactamente 1 entero</td><td class="big">[[9/9]] = 1</td></tr>
+    </table></div>
+    <p><span class="big">[[5/12]]</span> es propia porque 5 &lt; 12: tomamos menos partes de las que tiene el entero. <span class="big">[[9/9]]</span> es equivalente a la unidad porque 9 = 9: tomamos el entero completo.</p>
     <div class="check" data-check="c1"></div>
   </div>
 
   <!-- 2 -->
-  <div class="card lesson" data-sec="2" data-title="Equivalentes">
-    <h2><span class="sec-num">2</span>Fracciones equivalentes: amplificar y simplificar</h2>
-    <p>Dos fracciones son <b>equivalentes</b> cuando representan la misma cantidad, aunque se escriban con números distintos. Mira: la parte pintada es igual en las tres barras.</p>
-    <div class="fig" id="fig2eq"></div>
-    <p>Por eso <span class="big">[[1/2]] = [[2/4]] = [[4/8]]</span>. Hay dos formas de obtener fracciones equivalentes.</p>
-
-    <h3>Amplificar: multiplicar arriba y abajo por el mismo número</h3>
-    <p>Es como cortar cada trozo en trozos más pequeños: hay más trozos, pero la cantidad de pizza es la misma.</p>
-    <div class="lab"><div class="lab-title">Pruébalo · amplifica <span>[[2/3]]</span></div><div id="lab2amp"></div></div>
-
-    <h3>Simplificar: dividir arriba y abajo por el mismo número</h3>
-    <p>Simplificar <span class="big">[[12/18]]</span>. Ambos son pares, divido por 2: <span class="big">[[12/18]] = [[6/9]]</span>. Ambos son múltiplos de 3, divido por 3: <span class="big">[[6/9]] = [[2/3]]</span>.</p>
-    <p>Cuando ya no hay ningún número (distinto de 1) que divida al numerador y al denominador, la fracción es <b>irreducible</b>. <span class="big">[[2/3]]</span> es irreducible; <span class="big">[[6/9]]</span> todavía no lo es.</p>
-    <p><b>Atajo:</b> si encuentras el divisor común más grande, simplificas de una vez. 12 y 18 se pueden dividir los dos por 6: <span class="big">[[12/18]] = [[2/3]]</span>.</p>
-    <div class="box tip"><h4>¿Por qué número divido? Usa los criterios de divisibilidad</h4>
-      <b>Por 2:</b> el número es par. &nbsp; <b>Por 3:</b> la suma de sus cifras es múltiplo de 3. &nbsp; <b>Por 5:</b> termina en 0 o en 5. &nbsp; <b>Por 10:</b> termina en 0.<br>
-      Ejemplo: <span class="big">[[15/20]]</span>: los dos terminan en 0 o 5, divido por 5 → <span class="big">[[3/4]]</span>.</div>
-    <div class="lab"><div class="lab-title">Pruébalo · la máquina de simplificar</div><div id="lab2simp"></div></div>
-
-    <h3>Completar una fracción equivalente</h3>
-    <p><span class="big">[[3/5]] = [[□/20]]</span>. Pregúntate: ¿por cuánto multipliqué el 5 para llegar a 20? Por 4. Entonces hago lo mismo arriba: 3 · 4 = 12. Resultado: <span class="big">[[3/5]] = [[12/20]]</span>.</p>
-    <p><span class="big">[[4/6]] = [[2/□]]</span>. Aquí el 4 pasó a 2: se dividió por 2. Hago lo mismo abajo: 6 : 2 = 3. Resultado: <span class="big">[[4/6]] = [[2/3]]</span>.</p>
-    <div class="box warn"><h4>Cuidado</h4>Sumar o restar el mismo número <b>NO</b> da una fracción equivalente. Si a <span class="big">[[1/2]]</span> le sumo 1 arriba y abajo obtengo <span class="big">[[2/3]]</span>, que es otra cantidad. Solo sirve <b>multiplicar o dividir</b>.
-      <div class="fig" id="fig2warn"></div></div>
-    <div class="check" data-check="c2"></div>
-  </div>
-
-  <!-- 3 -->
-  <div class="card lesson" data-sec="3" data-title="Impropias y mixtos">
-    <h2><span class="sec-num">3</span>Fracciones propias, impropias y número mixto</h2>
-    <p>Según cómo es el numerador comparado con el denominador, las fracciones se clasifican así:</p>
+  <div class="card lesson" data-sec="2" data-title="Impropias y mixtos">
+    <div class="book">📘 En tu libro: Tomo 2, páginas 218 a 221</div>
+    <h2><span class="sec-num">2</span>Fracciones impropias y números mixtos</h2>
+    <p>Una fracción es <b>impropia</b> cuando el numerador es <b>mayor</b> que el denominador. Vale <b>más que 1 entero</b>, así que para dibujarla necesitas más de un entero.</p>
     <div class="tablewrap"><table class="t">
       <tr><th>Tipo</th><th>¿Cómo es?</th><th>¿Cuánto vale?</th><th>Ejemplo</th></tr>
       <tr><td><b>Propia</b></td><td>numerador menor que el denominador</td><td>menos que 1 entero</td><td class="big">[[3/5]]</td></tr>
-      <tr><td><b>Igual a la unidad</b></td><td>numerador igual al denominador</td><td>exactamente 1 entero</td><td class="big">[[5/5]] = 1</td></tr>
+      <tr><td><b>Equivalente a la unidad</b></td><td>numerador igual al denominador</td><td>exactamente 1 entero</td><td class="big">[[5/5]] = 1</td></tr>
       <tr><td><b>Impropia</b></td><td>numerador mayor que el denominador</td><td>más que 1 entero</td><td class="big">[[7/4]]</td></tr>
     </table></div>
 
@@ -276,11 +272,14 @@ ul.clean{list-style:none;padding:0;margin:0}
     <div class="lab"><div class="lab-title">Pruébalo · pinta partes y mira qué pasa</div><div id="lab3"></div></div>
     <div class="box warn"><h4>El error más común</h4>Contar todas las partes de los rectángulos juntas y ponerlas abajo. Si hay 2 enteros de 4 partes y 7 pintadas, <b>no</b> es <span class="big">[[7/8]]</span>: es <span class="big">[[7/4]]</span>. El denominador dice en cuántas partes se divide <b>UN</b> entero, no los dos juntos. Otro ejemplo: cada entero tiene 3 partes y hay 5 pintadas. Es <span class="big">[[5/3]]</span>, no <span class="big">[[5/6]]</span>.</div>
 
-    <h3>El número mixto</h3>
-    <p>Un número mixto tiene una parte entera y una fracción propia: <span class="big">[[1 3/4]]</span> se lee «un entero tres cuartos». Toda fracción impropia se puede escribir como número mixto (o como número natural si la división es exacta). En la recta numérica, <span class="big">[[7/4]]</span> y <span class="big">[[1 3/4]]</span> están en el mismo punto: son el mismo número escrito de dos formas.</p>
+    <h3>El número mixto: enteros más una fracción</h3>
+    <p>Una fracción impropia también se puede escribir como <b>número mixto</b>, que tiene una <b>parte entera</b> y una <b>parte fraccionaria</b> (una fracción propia). Para encontrarlo, junta los enteros completos y suma lo que sobra:</p>
+    <div class="box green">Si tienes 2 galletas enteras y la mitad de otra (cada galleta partida en 4), tienes <span class="big">1 + 1 + [[2/4]] = [[2 2/4]]</span>. Se lee «dos enteros dos cuartos».<br>
+      Y al revés: una barra completa de 10 partes más 5 partes de otra son <span class="big">[[10/10]] + [[5/10]] = [[15/10]]</span>, que es <span class="big">[[1 5/10]]</span>.</div>
+    <p>En la recta numérica, <span class="big">[[7/4]]</span> y <span class="big">[[1 3/4]]</span> están en el mismo punto: son el mismo número escrito de dos formas.</p>
 
     <div class="box gold"><h4>De impropia a número mixto: se DIVIDE</h4>
-      Se divide el numerador por el denominador. El <b>cociente</b> son los enteros; el <b>resto</b> es el nuevo numerador; el denominador se mantiene.
+      Se divide el numerador por el denominador. El <b>cociente</b> son los enteros; el <b>resto</b> (lo que sobra) es el nuevo numerador; el denominador se mantiene.
       <div class="eq">[[11/4]] <span class="small muted">&nbsp;11 : 4 = 2, resto 3&nbsp;</span> → [[2 3/4]]</div>
       <div class="eq">[[17/5]] <span class="small muted">&nbsp;17 : 5 = 3, resto 2&nbsp;</span> → [[3 2/5]]</div>
       Si el resto es 0, la fracción es un número natural: <span class="big">[[8/4]]</span> = 2, porque 8 : 4 = 2, resto 0.</div>
@@ -289,47 +288,113 @@ ul.clean{list-style:none;padding:0;margin:0}
       <div class="eq">[[3 2/5]] <span class="small muted">&nbsp;3 · 5 + 2 = 15 + 2 = 17&nbsp;</span> → [[17/5]]</div>
       ¿Por qué? Cada entero tiene 5 quintos, así que 3 enteros son 15 quintos; más los 2 quintos, son 17 quintos. Para comprobar, haz el camino de vuelta: 17 : 5 = 3, resto 2 → <span class="big">[[3 2/5]]</span> ✓</div>
     <div class="lab"><div class="lab-title">Practica · convierte</div><div id="lab3conv"></div></div>
+    <div class="check" data-check="c2"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card lesson" data-sec="3" data-title="Amplificar">
+    <div class="book">📘 En tu libro: Tomo 2, páginas 222 a 225</div>
+    <h2><span class="sec-num">3</span>Amplificación de fracciones</h2>
+    <p>Dos fracciones son <b>equivalentes</b> cuando representan la misma parte del entero, aunque se escriban con números distintos. Mira: la parte pintada es igual en las tres barras.</p>
+    <div class="fig" id="fig2eq"></div>
+    <p>Por eso <span class="big">[[1/2]] = [[2/4]] = [[4/8]]</span>.</p>
+    <div class="box tip"><h4>Amplificar</h4><b>Amplificar</b> una fracción es <b>multiplicar</b> el numerador y el denominador por un mismo número (distinto de cero). Así se obtiene una fracción <b>equivalente</b>.
+      <div class="eq">[[2/3]] = [[2·3/3·3]] = [[6/9]] <span class="small muted">(amplifiqué por 3)</span></div></div>
+    <p>Es como cortar cada trozo en trozos más pequeños: hay más trozos, pero la cantidad de pizza es la misma.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · amplifica <span>[[2/3]]</span></div><div id="lab2amp"></div></div>
+    <h3>Completar una fracción equivalente</h3>
+    <p><span class="big">[[3/5]] = [[□/20]]</span>. Pregúntate: ¿por cuánto multipliqué el 5 para llegar a 20? Por 4. Entonces hago lo mismo arriba: 3 · 4 = 12. Resultado: <span class="big">[[3/5]] = [[12/20]]</span>.</p>
+    <p>También puedes buscar <b>por cuánto se amplificó</b>: de <span class="big">[[9/24]]</span> a <span class="big">[[18/48]]</span>, el 9 pasó a 18 y el 24 a 48. Los dos se multiplicaron por 2.</p>
+    <div class="lab"><div class="lab-title">Practica · completa la tabla</div><div id="labAmpT"></div></div>
+    <div class="box warn"><h4>Cuidado</h4>Sumar o restar el mismo número <b>NO</b> da una fracción equivalente. Si a <span class="big">[[1/2]]</span> le sumo 1 arriba y abajo obtengo <span class="big">[[2/3]]</span>, que es otra cantidad. Solo sirve <b>multiplicar o dividir</b>.
+      <div class="fig" id="fig2warn"></div></div>
     <div class="check" data-check="c3"></div>
   </div>
 
   <!-- 4 -->
-  <div class="card lesson" data-sec="4" data-title="Comparar y ordenar">
-    <h2><span class="sec-num">4</span>Comparación y orden de fracciones</h2>
-    <p>Los signos: <b>&lt;</b> se lee «es menor que» y <b>&gt;</b> se lee «es mayor que». La punta siempre apunta al número más pequeño.</p>
-    <h3>Caso 1 · mismo denominador → gana el numerador mayor</h3>
-    <p><span class="big">[[3/8]] &lt; [[5/8]]</span>. Los trozos son del mismo tamaño; tener 5 trozos es más que tener 3.</p>
-    <div class="fig" id="fig4a"></div>
-    <h3>Caso 2 · mismo numerador → gana el denominador menor</h3>
-    <p><span class="big">[[2/3]] &gt; [[2/7]]</span>. Si una pizza se corta en 3 trozos y otra igual en 7, los trozos de la primera son más grandes. Dos trozos grandes son más que dos trozos chicos.</p>
-    <div class="fig" id="fig4b"></div>
-    <h3>Caso 3 · comparar con el 1</h3>
-    <p>Toda fracción propia es menor que 1 y toda impropia es mayor que 1. Por eso <span class="big">[[4/5]] &lt; [[6/5]]</span> y también <span class="big">[[9/10]] &lt; [[8/7]]</span>, sin hacer cálculos.</p>
-    <h3>Caso 4 · todo distinto → igualar denominadores</h3>
-    <p>Para comparar <span class="big">[[2/3]]</span> y <span class="big">[[3/4]]</span> se amplifican las dos hasta tener el mismo denominador. Un número que es múltiplo de 3 y de 4 es 12:</p>
-    <div class="eq">[[2/3]] = [[8/12]] <span class="small muted">(amplifiqué por 4)</span> &nbsp;&nbsp; [[3/4]] = [[9/12]] <span class="small muted">(amplifiqué por 3)</span></div>
-    <p>Como <span class="big">[[8/12]] &lt; [[9/12]]</span>, entonces <span class="big">[[2/3]] &lt; [[3/4]]</span>.</p>
-    <div class="box tip"><h4>¿Cómo encuentro el denominador común?</h4>Escribo los múltiplos del denominador mayor (4, 8, 12, …) hasta encontrar uno que también sea múltiplo del otro. Si no se me ocurre, multiplico los dos denominadores: 3 · 4 = 12.</div>
-    <h3>Caso 5 · números mixtos</h3>
-    <p>Primero se comparan los enteros: <span class="big">[[2 1/5]] &gt; [[1 4/5]]</span>, porque 2 enteros es más que 1 entero (no importa la fracción). Si los enteros son iguales, se comparan las fracciones: <span class="big">[[3 1/4]] &lt; [[3 3/4]]</span>.</p>
-    <p>Si hay que comparar una impropia con un número mixto, conviene escribir los dos de la misma forma. Ejemplo: <span class="big">[[7/4]]</span> y <span class="big">[[1 5/8]]</span>. Paso <span class="big">[[1 5/8]]</span> a impropia: 1 · 8 + 5 = 13 → <span class="big">[[13/8]]</span>. Amplifico <span class="big">[[7/4]] = [[14/8]]</span>. Como <span class="big">[[14/8]] &gt; [[13/8]]</span>, entonces <span class="big">[[7/4]] &gt; [[1 5/8]]</span>.</p>
-    <div class="lab"><div class="lab-title">Pruébalo · el comparador</div><div id="lab4"></div></div>
-    <h3>Ordenar varias fracciones</h3>
-    <p>Se llevan todas al mismo denominador y se ordenan según el numerador. Ordenar de menor a mayor <span class="big">[[1/2]]</span>, <span class="big">[[3/4]]</span> y <span class="big">[[5/8]]</span>:</p>
-    <div class="eq">[[1/2]] = [[4/8]] &nbsp; [[3/4]] = [[6/8]] &nbsp; [[5/8]] = [[5/8]] &nbsp; → &nbsp; [[1/2]] &lt; [[5/8]] &lt; [[3/4]]</div>
-    <p>«De menor a mayor» se llama <b>orden creciente</b>; «de mayor a menor» se llama <b>orden decreciente</b>.</p>
+  <div class="card lesson" data-sec="4" data-title="Simplificar">
+    <div class="book">📘 En tu libro: Tomo 2, páginas 226 a 229</div>
+    <h2><span class="sec-num">4</span>Simplificación de fracciones</h2>
+    <div class="box tip"><h4>Simplificar</h4><b>Simplificar</b> una fracción es <b>dividir de manera exacta</b> el numerador y el denominador por un mismo número mayor que 1. También se obtiene una fracción <b>equivalente</b>, escrita con números más chicos.
+      <div class="eq">[[4/12]] = [[4:4/12:4]] = [[1/3]] <span class="small muted">(simplifiqué por 4)</span></div></div>
+    <p>Cuando ya no hay ningún número (mayor que 1) que divida exacto al numerador y al denominador, la fracción es <b>irreducible</b>: no se puede seguir simplificando. <span class="big">[[1/3]]</span> es irreducible.</p>
+    <p>Simplificar es la operación <b>inversa</b> de amplificar: si amplificas <span class="big">[[1/3]]</span> por 4 obtienes <span class="big">[[4/12]]</span>, y si simplificas <span class="big">[[4/12]]</span> por 4 vuelves a <span class="big">[[1/3]]</span>.</p>
+    <h3>Paso a paso, hasta la irreducible</h3>
+    <p>Simplificar <span class="big">[[12/18]]</span>. Ambos son pares, divido por 2: <span class="big">[[12/18]] = [[6/9]]</span>. Ambos son múltiplos de 3, divido por 3: <span class="big">[[6/9]] = [[2/3]]</span>. <span class="big">[[2/3]]</span> ya es irreducible.</p>
+    <p><b>Atajo:</b> si encuentras el divisor común más grande, simplificas de una vez. 12 y 18 se pueden dividir los dos por 6: <span class="big">[[12/18]] = [[2/3]]</span>.</p>
+    <div class="box tip"><h4>¿Por qué número divido? Usa los criterios de divisibilidad</h4>
+      <b>Por 2:</b> el número es par. &nbsp; <b>Por 3:</b> la suma de sus cifras es múltiplo de 3. &nbsp; <b>Por 5:</b> termina en 0 o en 5. &nbsp; <b>Por 10:</b> termina en 0.<br>
+      Ejemplo: <span class="big">[[15/20]]</span>: los dos terminan en 0 o 5, divido por 5 → <span class="big">[[3/4]]</span>.</div>
+    <p><span class="big">[[4/6]] = [[2/□]]</span>. Aquí el 4 pasó a 2: se dividió por 2. Hago lo mismo abajo: 6 : 2 = 3. Resultado: <span class="big">[[4/6]] = [[2/3]]</span>.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · la máquina de simplificar</div><div id="lab2simp"></div></div>
+    <div class="lab"><div class="lab-title">Practica · simplifica por el número que te dan</div><div id="labSimpT"></div></div>
     <div class="check" data-check="c4"></div>
   </div>
 
   <!-- 5 -->
-  <div class="card lesson" data-sec="5" data-title="Traslación">
-    <h2><span class="sec-num">5</span>Transformaciones isométricas · la traslación</h2>
-    <p>Una <b>transformación isométrica</b> mueve una figura <b>sin cambiar su forma ni su tamaño</b>. Solo cambia su posición o su orientación. La figura original se llama <b>F</b> y la que se obtiene, <b>F'</b> (se lee «F prima»). Las dos son congruentes: si las recortas, calzan perfectamente una sobre la otra.</p>
-    <p>Hay tres transformaciones isométricas: <b>traslación</b>, <b>reflexión</b> y <b>rotación</b>.</p>
+  <div class="card lesson" data-sec="5" data-title="Comparar naturales">
+    <div class="book">📘 En tu libro: Tomo 1, páginas 28 a 31 (repaso)</div>
+    <h2><span class="sec-num">5</span>Repaso: comparar y ordenar números naturales</h2>
+    <p>Antes de comparar fracciones, recordemos cómo se comparan los números de siempre. Los signos: <b>&gt;</b> se lee «es mayor que», <b>&lt;</b> se lee «es menor que» y <b>=</b> se lee «es igual a». La punta siempre apunta al número más pequeño.</p>
+    <div class="box tip"><h4>La regla</h4>
+      <b>1.</b> Si los números tienen <b>distinta cantidad de cifras</b>, es mayor el que tiene <b>más cifras</b>: 124.500 &lt; 1.345.500.<br>
+      <b>2.</b> Si tienen la <b>misma cantidad de cifras</b>, se comparan las cifras de <b>izquierda a derecha</b> en la tabla de valor posicional. La primera cifra distinta decide: en 15.853 y 17.846 los dos tienen 1 en la DM, pero en la UM hay 5 y 7, y 5 &lt; 7. Entonces 15.853 &lt; 17.846.</div>
+    <div class="lab"><div class="lab-title">Pruébalo · la tabla de valor posicional</div><div id="labNat"></div></div>
+    <p class="small muted">UMi: unidad de millón · CM: centena de mil · DM: decena de mil · UM: unidad de mil · C: centena · D: decena · U: unidad.</p>
+    <div class="lab"><div class="lab-title">Practica · ¿mayor, menor o igual?</div><div id="labNatP"></div></div>
+    <div class="check" data-check="c5"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card lesson" data-sec="6" data-title="Comparar fracciones">
+    <div class="book">📘 En tu libro: Tomo 2, páginas 230 a 234</div>
+    <h2><span class="sec-num">6</span>Comparación y orden de fracciones</h2>
+    <h3>Con igual denominador → gana el numerador mayor</h3>
+    <p>Si dos fracciones tienen el <b>mismo denominador</b>, es mayor la que tiene el <b>numerador mayor</b>: considera más partes del entero. <span class="big">[[4/6]] &gt; [[2/6]]</span>, porque 4 &gt; 2.</p>
+    <div class="fig" id="fig4a"></div>
+    <h3>Con distinto denominador → primero se igualan los denominadores</h3>
+    <p>Se <b>amplifica o simplifica</b> para que todas tengan el <b>mismo denominador</b> y después se comparan solo los numeradores. Para comparar <span class="big">[[2/3]]</span> y <span class="big">[[3/4]]</span>, un número que es múltiplo de 3 y de 4 es 12:</p>
+    <div class="eq">[[2/3]] = [[8/12]] <span class="small muted">(amplifiqué por 4)</span> &nbsp;&nbsp; [[3/4]] = [[9/12]] <span class="small muted">(amplifiqué por 3)</span></div>
+    <p>Como <span class="big">[[8/12]] &lt; [[9/12]]</span>, entonces <span class="big">[[2/3]] &lt; [[3/4]]</span>.</p>
+    <div class="box tip"><h4>¿Cómo encuentro el denominador común?</h4>Escribo los múltiplos del denominador mayor (4, 8, 12, …) hasta encontrar uno que también sea múltiplo del otro. Si no se me ocurre, multiplico los dos denominadores: 3 · 4 = 12. A veces basta con amplificar una sola: para comparar <span class="big">[[3/4]]</span> y <span class="big">[[2/8]]</span>, amplifico <span class="big">[[3/4]]</span> por 2 y queda <span class="big">[[6/8]]</span>.</div>
+    <h3>Ordenar varias fracciones</h3>
+    <p>Se llevan todas al mismo denominador y se ordenan según el numerador. Ordenar de menor a mayor <span class="big">[[1/2]]</span>, <span class="big">[[3/4]]</span> y <span class="big">[[5/8]]</span>:</p>
+    <div class="eq">[[1/2]] = [[4/8]] &nbsp; [[3/4]] = [[6/8]] &nbsp; [[5/8]] = [[5/8]] &nbsp; → &nbsp; [[1/2]] &lt; [[5/8]] &lt; [[3/4]]</div>
+    <p>«De menor a mayor» se llama <b>orden creciente</b>; «de mayor a menor», <b>orden decreciente</b>.</p>
+    <div class="lab"><div class="lab-title">Pruébalo · el comparador</div><div id="lab4"></div></div>
+    <h3>Atajos que te ahorran cálculos</h3>
+    <p><b>Mismo numerador → gana el denominador menor.</b> <span class="big">[[2/3]] &gt; [[2/7]]</span>: si una pizza se corta en 3 trozos y otra igual en 7, los trozos de la primera son más grandes.</p>
+    <div class="fig" id="fig4b"></div>
+    <p><b>Comparar con el 1.</b> Toda fracción propia es menor que 1 y toda impropia es mayor que 1. Por eso <span class="big">[[9/10]] &lt; [[8/7]]</span>, sin calcular.</p>
+    <p><b>Números mixtos.</b> Primero se comparan los enteros: <span class="big">[[2 1/5]] &gt; [[1 4/5]]</span>. Si los enteros son iguales, se comparan las fracciones. Para comparar una impropia con un mixto, escribe los dos de la misma forma: <span class="big">[[1 5/8]] = [[13/8]]</span> y <span class="big">[[7/4]] = [[14/8]]</span>, así que <span class="big">[[7/4]] &gt; [[1 5/8]]</span>.</p>
+    <div class="check" data-check="c6"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card lesson" data-sec="7" data-title="Plano cartesiano">
+    <div class="book">📘 En tu libro: Tomo 1, páginas 140 a 143</div>
+    <h2><span class="sec-num">7</span>Figuras geométricas en el plano cartesiano</h2>
+    <p>El <b>plano cartesiano</b> tiene dos rectas numéricas que se cruzan: el <b>eje X</b> (horizontal) y el <b>eje Y</b> (vertical). Se cruzan en el <b>origen O</b>, que es el punto (0, 0).</p>
+    <div class="box tip"><h4>Cómo se escribe un punto</h4>Un punto se escribe <b>(x, y)</b>: primero cuántos pasos a la <b>derecha</b> (eje X, se llama <b>abscisa</b>) y después cuántos hacia <b>arriba</b> (eje Y, se llama <b>ordenada</b>). El punto D(4, 2) está 4 a la derecha y 2 hacia arriba. <b>¡El orden importa!</b> (4, 2) y (2, 4) son puntos distintos.</div>
+    <div class="lab"><div class="lab-title">Pruébalo · toca un punto del plano</div><div id="labPlano"></div></div>
+    <h3>Figuras en el plano</h3>
+    <p>Para ubicar una figura basta con saber dónde están sus <b>vértices</b>. Se marcan los puntos, se unen en orden y aparece la figura. Por ejemplo, A(1, 1), B(1, 3), C(4, 3) y D(4, 1) forman un <b>rectángulo</b>.</p>
+    <p>También se pueden encontrar vértices que faltan. Si un rectángulo tiene A(1, 2), B(1, 8) y C(3, 8), el cuarto vértice D tiene la x de C y la y de A: <b>D(3, 2)</b>. Y si el ángulo recto de un triángulo está en D(4, 2) y el vértice F está 3 unidades más arriba, entonces F = (4, 2 + 3) = <b>F(4, 5)</b>.</p>
+    <div class="lab"><div class="lab-title">Practica · coordenadas y figuras</div><div id="labPlanoP"></div></div>
+    <div class="check" data-check="c7"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card lesson" data-sec="8" data-title="Traslación">
+    <div class="book">📘 En tu libro: Tomo 1, páginas 144 a 147</div>
+    <h2><span class="sec-num">8</span>Transformaciones isométricas · la traslación</h2>
+    <p>Una <b>transformación isométrica</b> es un movimiento que se le hace a una figura plana <b>sin cambiar su forma ni su tamaño</b>. La figura con que partimos es la <b>figura original</b> y la que resulta es la <b>figura imagen</b>. Si el vértice original se llama A, su imagen se llama <b>A'</b> (se lee «A prima»).</p>
+    <p>Hay tres transformaciones isométricas: <b>traslación</b>, <b>rotación</b> y <b>reflexión</b>.</p>
     <h3>Traslación: deslizar</h3>
-    <p>La figura se desliza en línea recta, <b>sin girar y sin darse vuelta</b>. Para describirla se dice hacia dónde se mueve y cuántos cuadrados (por ejemplo, 6 a la derecha y 2 hacia arriba). Para dibujarla, mueves cada vértice (esquina) la misma cantidad de cuadrados en la misma dirección y después unes los vértices nuevos.</p>
+    <p>La figura se desliza en línea recta, <b>sin girar y sin darse vuelta</b>. Una traslación se describe con <b>segmentos orientados</b> (flechas): cada flecha tiene una <b>distancia</b> (cuántas unidades) y una <b>dirección</b> (hacia dónde). Por ejemplo: 3 unidades hacia arriba y 9 hacia la derecha.</p>
+    <p>Para dibujarla, mueves <b>cada vértice</b> la misma cantidad en la misma dirección y después unes los vértices nuevos.</p>
     <div class="lab"><div class="lab-title">Pruébalo · desliza F'</div><div id="lab5"></div></div>
     <h3>Traslación en el plano cartesiano</h3>
-    <p>Un punto se escribe <b>(x, y)</b>: primero lo horizontal, después lo vertical. Al trasladar:</p>
     <div class="tablewrap"><table class="t">
       <tr><th>Movimiento</th><th>¿Qué cambia?</th></tr>
       <tr><td>hacia la derecha</td><td>se <b>suma</b> a la x</td></tr>
@@ -345,62 +410,96 @@ ul.clean{list-style:none;padding:0;margin:0}
       <tr><td>B (3, 1)</td><td>(3 + 5 , 1 + 3)</td><td><b>B' (8, 4)</b></td></tr>
       <tr><td>C (1, 3)</td><td>(1 + 5 , 3 + 3)</td><td><b>C' (6, 6)</b></td></tr>
     </table></div>
+    <p>Si una figura se traslada varias veces con la misma flecha, avanza siempre lo mismo: si un punto pasa de 1 a 10 y después a 19, avanza 9 unidades cada vez.</p>
     <div class="lab"><div class="lab-title">Practica · traslada el punto</div><div id="lab5pt"></div></div>
-    <div class="check" data-check="c5"></div>
+    <div class="lab"><div class="lab-title">Practica · describe la traslación</div><div id="labDescribe"></div></div>
+    <div class="check" data-check="c8"></div>
   </div>
 
-  <!-- 6 -->
-  <div class="card lesson" data-sec="6" data-title="Reflexión">
-    <h2><span class="sec-num">6</span>Reflexión: el espejo</h2>
-    <p>La figura se refleja como en un espejo respecto de una recta llamada <b>eje de reflexión</b> (o eje de simetría). Cada punto de F' queda <b>a la misma distancia del eje</b> que el punto original, pero al otro lado. La figura queda «dada vuelta».</p>
-    <p>El eje puede ser vertical (la figura se refleja hacia el lado) u horizontal (se refleja hacia abajo o hacia arriba).</p>
-    <div class="box tip"><h4>Cómo dibujarla</h4>Cuenta cuántos cuadrados hay desde cada vértice hasta el eje y cuenta la misma cantidad al otro lado. Después une los puntos. Lo que estaba más cerca del eje queda más cerca del eje; lo que estaba lejos queda lejos.</div>
-    <div class="lab"><div class="lab-title">Pruébalo · mira cómo se refleja</div><div id="lab6"></div></div>
-    <div class="lab"><div class="lab-title">Practica · pinta el reflejo</div><div id="lab6p"></div></div>
-    <div class="check" data-check="c6"></div>
-  </div>
-
-  <!-- 7 -->
-  <div class="card lesson" data-sec="7" data-title="Rotación">
-    <h2><span class="sec-num">7</span>Rotación: girar</h2>
-    <p>La figura gira alrededor de un punto fijo llamado <b>centro de rotación</b>. Para describir una rotación se indica:</p>
-    <p><b>el centro</b> (el punto que no se mueve), <b>el ángulo</b> (90° es un cuarto de vuelta, 180° es media vuelta, 360° es una vuelta completa y la figura vuelve a su lugar) y <b>el sentido</b> (horario, como las manecillas del reloj, o antihorario, al revés).</p>
+  <!-- 9 -->
+  <div class="card lesson" data-sec="9" data-title="Rotación">
+    <div class="book">📘 En tu libro: Tomo 1, páginas 148 y 149</div>
+    <h2><span class="sec-num">9</span>Rotación: girar</h2>
+    <p>Una <b>rotación</b> es el movimiento de girar una figura en torno a un punto llamado <b>centro de rotación</b>. Como la traslación, no cambia la forma ni el tamaño de la figura. Para describirla se indican tres cosas:</p>
+    <div class="box tip"><b>El centro</b> (el punto que no se mueve, por ejemplo P) · <b>el ángulo</b> (90° es un cuarto de vuelta, 180° es media vuelta, 360° es una vuelta completa) · <b>el sentido</b>: <b>horario</b>, como las manecillas del reloj, o <b>antihorario</b>, al revés.</div>
     <div class="lab"><div class="lab-title">Pruébalo · gira la figura</div><div id="lab7"></div></div>
-    <div class="box gold"><h4>Truco</h4>Calca la figura en un papel transparente, pon la punta del lápiz sobre el centro y gira el papel.</div>
-    <div class="check" data-check="c7"></div>
+    <h3>Cómo dibujar una rotación, vértice por vértice</h3>
+    <p><b>1.</b> Mira cada vértice desde el centro P: cuenta cuántos cuadros está a la derecha o izquierda, y cuántos arriba o abajo.<br>
+      <b>2.</b> Gira esa posición según el ángulo y el sentido (usa la tabla).<br>
+      <b>3.</b> Marca el vértice nuevo y, cuando tengas todos, únelos.</p>
+    <div class="tablewrap"><table class="t">
+      <tr><th>Lo que estaba…</th><th>90° horario ↻</th><th>90° antihorario ↺</th><th>180°</th></tr>
+      <tr><td>a la derecha de P</td><td>queda abajo</td><td>queda arriba</td><td>queda a la izquierda</td></tr>
+      <tr><td>arriba de P</td><td>queda a la derecha</td><td>queda a la izquierda</td><td>queda abajo</td></tr>
+      <tr><td>a la izquierda de P</td><td>queda arriba</td><td>queda abajo</td><td>queda a la derecha</td></tr>
+      <tr><td>abajo de P</td><td>queda a la izquierda</td><td>queda a la derecha</td><td>queda arriba</td></tr>
+    </table></div>
+    <p>Ejemplo: P(4, 5) y el vértice B(9, 4), que está <b>5 a la derecha y 1 abajo</b> de P. Con 90° antihorario, lo de la derecha queda arriba y lo de abajo queda a la derecha: B' está <b>5 arriba y 1 a la derecha</b> de P, o sea B'(5, 10). La misma cantidad de cuadros, girada.</p>
+    <div class="box gold"><h4>Truco</h4>Calca la figura en un papel transparente, pon la punta del lápiz sobre el centro y gira el papel. Un cuarto de vuelta es 90°.</div>
+    <div class="lab"><div class="lab-title">Practica · dibuja la rotación</div><div id="labRotC"></div></div>
+    <div class="check" data-check="c9"></div>
   </div>
 
-  <!-- 8 -->
-  <div class="card lesson" data-sec="8" data-title="¿Cuál es?">
-    <h2><span class="sec-num">8</span>¿Cómo sé cuál transformación es?</h2>
+  <!-- 10 -->
+  <div class="card lesson" data-sec="10" data-title="Reflexión">
+    <div class="book">📘 En tu libro: Tomo 1, páginas 150 y 151</div>
+    <h2><span class="sec-num">10</span>Reflexión o simetría: el espejo</h2>
+    <p>Una <b>reflexión</b> (o <b>simetría axial</b>) refleja la figura como en un espejo, respecto de una recta llamada <b>eje de reflexión</b> o <b>eje de simetría</b>. A cada punto A de la figura original le corresponde un punto A' de la figura imagen, y se cumplen dos cosas:</p>
+    <div class="box tip"><b>1. Misma distancia:</b> A y A' están a la misma distancia del eje, cada uno a un lado.<br>
+      <b>2. Perpendicular:</b> el segmento que une A con A' es <b>perpendicular</b> al eje (lo cruza formando un ángulo recto, ⊥).<br>
+      Por eso la figura queda «dada vuelta»: lo que estaba cerca del eje queda cerca, y lo que estaba lejos queda lejos.</div>
+    <div class="box gold"><h4>Cómo dibujarla</h4><b>1.</b> Desde cada vértice traza un segmento perpendicular al eje. <b>2.</b> Cuenta la distancia hasta el eje y marca el vértice imagen a la misma distancia, al otro lado. <b>3.</b> Une los vértices imagen.</div>
+    <div class="lab"><div class="lab-title">Pruébalo · mira cómo se refleja</div><div id="lab6"></div></div>
+    <h3>El eje puede ser vertical, horizontal o diagonal</h3>
+    <p>Con un eje <b>diagonal</b> se hace lo mismo: el segmento de cada punto a su imagen cruza el eje en ángulo recto y los dos quedan a la misma distancia. Mira las líneas punteadas:</p>
+    <div class="fig" id="figDiag"></div>
+    <p class="small">En el plano cartesiano: con el eje vertical x = 5, el punto (3, 2) queda en (7, 2), porque está 2 a la izquierda del eje y su imagen queda 2 a la derecha. Con el eje diagonal que pasa por (0, 0), (1, 1), (2, 2)…, el punto y su imagen <b>intercambian</b> sus coordenadas: (2, 6) → (6, 2).</p>
+    <div class="lab"><div class="lab-title">Practica · pinta el reflejo</div><div id="lab6p"></div></div>
+    <div class="lab"><div class="lab-title">Practica · refleja en el plano cartesiano</div><div id="labRefC"></div></div>
+    <div class="check" data-check="c10"></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card lesson" data-sec="11" data-title="Congruencia">
+    <div class="book">📘 En tu cuaderno de clases: Transformación isométrica</div>
+    <h2><span class="sec-num">11</span>Figuras congruentes y ¿cuál transformación es?</h2>
+    <p>Dos figuras son <b>congruentes</b> (se escribe <b>≅</b>) cuando una es la imagen de la otra por una transformación isométrica: tienen la <b>misma forma y el mismo tamaño</b>. Sus <b>lados correspondientes</b> miden lo mismo y sus <b>ángulos correspondientes</b> también.</p>
+    <div class="fig" id="figCong"></div>
+    <p>El triángulo ABC se rotó en 180° y quedó A'B'C'. Entonces <b>AB ≅ A'B'</b>, <b>BC ≅ B'C'</b>, <b>CA ≅ C'A'</b>, y el ángulo ∢ABC mide lo mismo que ∢A'B'C'. Lo mismo pasa con una traslación o una reflexión.</p>
+    <h3>¿Cómo sé cuál transformación es?</h3>
     <div class="tablewrap"><table class="t">
       <tr><th>Transformación</th><th>Pista para reconocerla</th></tr>
-      <tr><td><b>Traslación</b></td><td>F' mira hacia el mismo lado que F. Solo cambió de lugar.</td></tr>
-      <tr><td><b>Reflexión</b></td><td>F' está «en espejo»: lo que estaba a la derecha ahora está a la izquierda (o lo de arriba, abajo). Hay un eje entre las dos.</td></tr>
-      <tr><td><b>Rotación</b></td><td>F' está girada (acostada o de cabeza), pero NO en espejo.</td></tr>
+      <tr><td><b>Traslación</b></td><td>La imagen mira hacia el mismo lado que la original. Solo cambió de lugar.</td></tr>
+      <tr><td><b>Reflexión</b></td><td>La imagen está «en espejo»: lo que estaba a la derecha ahora está a la izquierda (o lo de arriba, abajo). Hay un eje entre las dos.</td></tr>
+      <tr><td><b>Rotación</b></td><td>La imagen está girada (acostada o de cabeza), pero NO en espejo.</td></tr>
     </table></div>
     <div class="box tip"><h4>Una forma segura de decidir</h4>
       <b>1.</b> ¿La figura quedó <b>acostada</b>? (Lo que era alto ahora es ancho.) Entonces es una <b>rotación de 90°</b>.<br>
-      <b>2.</b> Si sigue parada igual que F, mira dónde quedó el «brazo» (la parte que sobresale):<br>
+      <b>2.</b> Si sigue parada igual que la original, mira dónde quedó el «brazo» (la parte que sobresale):<br>
       &nbsp;&nbsp;· en el mismo lugar (por ejemplo, arriba a la derecha) → <b>traslación</b>;<br>
       &nbsp;&nbsp;· cambió <b>solo</b> de lado (derecha ↔ izquierda) o <b>solo</b> de altura (arriba ↔ abajo) → <b>reflexión</b>;<br>
       &nbsp;&nbsp;· cambió <b>las dos cosas</b> (de arriba a la derecha pasó a abajo a la izquierda) → <b>rotación de 180°</b>, media vuelta.</div>
     <div class="lab"><div class="lab-title">Juego · adivina la transformación</div><div id="lab8"></div></div>
+    <div class="check" data-check="c11"></div>
   </div>
 
-  <!-- 9 -->
-  <div class="card lesson" data-sec="9" data-title="Resumen">
-    <h2><span class="sec-num">9</span>Cuadro resumen</h2>
+  <!-- 12 -->
+  <div class="card lesson" data-sec="12" data-title="Resumen">
+    <h2><span class="sec-num">12</span>Cuadro resumen</h2>
     <div class="tablewrap"><table class="t">
       <tr><th>Tema</th><th>Lo que hay que recordar</th><th>Ejemplo</th></tr>
-      <tr><td>Amplificar</td><td>multiplicar numerador y denominador por el mismo número</td><td class="big">[[2/3]] = [[8/12]]</td></tr>
-      <tr><td>Simplificar</td><td>dividir numerador y denominador por el mismo número hasta llegar a la irreducible</td><td class="big">[[12/18]] = [[2/3]]</td></tr>
+      <tr><td>Leer fracciones</td><td>numerador y después denominador: medios… novenos, décimos, centésimos, milésimos, «avos»</td><td class="big">[[5/12]] <span class="small">cinco doceavos</span></td></tr>
+      <tr><td>Propia · equivalente a la unidad · impropia</td><td>numerador menor · igual · mayor que el denominador</td><td class="big">[[3/5]] · [[5/5]] · [[7/4]]</td></tr>
       <tr><td>Impropia → mixto</td><td>dividir: cociente = enteros, resto = numerador</td><td class="big">[[11/4]] = [[2 3/4]]</td></tr>
       <tr><td>Mixto → impropia</td><td>entero · denominador + numerador</td><td class="big">[[3 2/5]] = [[17/5]]</td></tr>
+      <tr><td>Amplificar</td><td>multiplicar numerador y denominador por el mismo número</td><td class="big">[[2/3]] = [[8/12]]</td></tr>
+      <tr><td>Simplificar</td><td>dividir exacto numerador y denominador por el mismo número, hasta la irreducible</td><td class="big">[[12/18]] = [[2/3]]</td></tr>
       <tr><td>Comparar</td><td>igualar denominadores y comparar numeradores</td><td class="big">[[2/3]] &lt; [[3/4]]</td></tr>
-      <tr><td>Traslación</td><td>deslizar sin girar ni dar vuelta</td><td>(1, 1) → (6, 4)</td></tr>
-      <tr><td>Reflexión</td><td>espejo respecto de un eje; misma distancia al eje</td><td>F queda dada vuelta</td></tr>
+      <tr><td>Plano cartesiano</td><td>(x, y): primero lo horizontal, después lo vertical</td><td>D(4, 2)</td></tr>
+      <tr><td>Traslación</td><td>deslizar con una distancia y una dirección</td><td>(1, 1) → (6, 4)</td></tr>
       <tr><td>Rotación</td><td>girar con centro, ángulo y sentido</td><td>90° horario, 180°</td></tr>
+      <tr><td>Reflexión</td><td>espejo: misma distancia al eje y AA' perpendicular</td><td>(3, 2) → (7, 2) con eje x = 5</td></tr>
+      <tr><td>Congruencia</td><td>misma forma y tamaño; lados y ángulos correspondientes iguales</td><td>AB ≅ A'B'</td></tr>
     </table></div>
     <h3 style="margin-top:18px">Antes de la prueba, revisa que…</h3>
     <ul class="clean" id="checklist"></ul>
@@ -433,13 +532,13 @@ const num = v => { const s = String(v ?? "").trim().replace(",", "."); if (s ===
 function F(n, d) { return `<span class="fr"><span class="n">${n}</span><span class="d">${d}</span></span>`; }
 function M(w, n, d) { return `<span class="mx"><span class="w">${w}</span>${F(n, d)}</span>`; }
 /* [[3/4]] → fracción · [[1 3/4]] → número mixto */
-function fx(s) { return String(s).replace(/\[\[(?:(\d+) )?([\d□·]+)\/([\d□·]+)\]\]/g, (m, w, n, d) => (w ? M(w, n, d) : F(n, d))); }
+function fx(s) { return String(s).replace(/\[\[(?:(\d+) )?([\d□·:]+)\/([\d□·:]+)\]\]/g, (m, w, n, d) => (w ? M(w, n, d) : F(n, d))); }
 function fxAll(root) { $$(".lesson, #v-inicio", root).forEach(el => { el.innerHTML = fx(el.innerHTML); }); }
 
 /* ============ guardado local ============ */
 const STORE = "amparo-fracciones-transformaciones-v1";
 let DB = (() => { try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch (e) { return {}; } })();
-DB.seen = DB.seen || {}; DB.checks = DB.checks || {}; DB.tests = DB.tests || {}; DB.history = DB.history || []; DB.list = DB.list || {};
+DB.seen = DB.seen || {}; DB.checks = DB.checks || {}; DB.tests = DB.tests || {}; DB.history = DB.history || []; DB.list = DB.list || {}; DB.done = DB.done || {};
 function save() { try { localStorage.setItem(STORE, JSON.stringify(DB)); } catch (e) { } }
 
 /* ============ SVG ============ */
@@ -591,7 +690,7 @@ function go(v, push = true) {
   VIEWS.forEach(x => $("#v-" + x).classList.toggle("hide", x !== v));
   $$("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.go === v));
   if (v === "inicio") renderHome();
-  if (v === "aprender") showSec(sec || DB.lastSec || 1);
+  if (v === "aprender") showSec(sec || DB.cur || 1);
   if (v === "ensayoA") renderTest("A");
   if (v === "ensayoB") renderTest("B");
   if (v === "resultados") renderResults();
@@ -618,42 +717,64 @@ function buildLessons() {
   SECS = $$(".lesson").map(el => ({ n: +el.dataset.sec, t: el.dataset.title, el }));
   $("#lessonNav").innerHTML = SECS.map(s => `<button data-sec="${s.n}">${s.n} · ${s.t}</button>`).join("");
   $$("#lessonNav button").forEach(b => b.onclick = () => { showSec(+b.dataset.sec); history.pushState(null, "", "#aprender-" + b.dataset.sec); });
-  $("#prevSec").onclick = () => { showSec(DB.lastSec - 1); history.pushState(null, "", "#aprender-" + DB.lastSec); };
-  $("#nextSec").onclick = () => { if (DB.lastSec >= SECS.length) go("ensayoA"); else { showSec(DB.lastSec + 1); history.pushState(null, "", "#aprender-" + DB.lastSec); } };
+  $("#prevSec").onclick = () => { showSec(DB.cur - 1); history.pushState(null, "", "#aprender-" + DB.cur); };
+  $("#nextSec").onclick = () => { if (DB.cur >= SECS.length) go("ensayoA"); else { showSec(DB.cur + 1); history.pushState(null, "", "#aprender-" + DB.cur); } };
 }
 function showSec(n) {
   n = Math.max(1, Math.min(SECS.length, n));
   SECS.forEach(s => s.el.classList.toggle("hide", s.n !== n));
-  DB.lastSec = n; DB.seen[n] = true; if (n === 9) DB.checks[9] = true; save();
-  $$("#lessonNav button").forEach(b => { const k = +b.dataset.sec; b.classList.toggle("on", k === n); b.classList.toggle("done", !!DB.checks[k]); });
+  DB.cur = n; if (n === SECS.length) DB.done[n] = true; save();
+  $$("#lessonNav button").forEach(b => { const k = +b.dataset.sec; b.classList.toggle("on", k === n); b.classList.toggle("done", !!DB.done[k]); });
   $("#prevSec").disabled = n === 1;
   $("#nextSec").textContent = n === SECS.length ? "Ir al Ensayo A →" : "Siguiente →";
   window.scrollTo(0, 0);
 }
-function sectionDone(n) { DB.checks[n] = true; save(); $$("#lessonNav button").forEach(b => { if (+b.dataset.sec === n) b.classList.add("done"); }); }
+function sectionDone(n) { DB.done[n] = true; save(); $$("#lessonNav button").forEach(b => { if (+b.dataset.sec === n) b.classList.add("done"); }); }
 
 /* ============ preguntas de control ============ */
 const CHECKS = {
-  c1: [{ q: "Una barra se divide en 6 partes iguales y se pintan 5. ¿Qué fracción está pintada?", opts: ["[[5/6]]", "[[6/5]]", "[[1/6]]", "[[5/11]]"], ans: 0, exp: "Abajo va el 6, porque la barra se dividió en 6 partes iguales. Arriba va el 5, porque se pintaron 5.", hint: "Abajo va en cuántas partes se dividió; arriba, cuántas se pintaron." }],
+  c1: [
+    { q: "Una barra se divide en 6 partes iguales y se pintan 5. ¿Qué fracción está pintada?", opts: ["[[5/6]]", "[[6/5]]", "[[1/6]]", "[[5/11]]"], ans: 0, exp: "Abajo va el 6, porque la barra se dividió en 6 partes iguales. Arriba va el 5, porque se pintaron 5.", hint: "Abajo va en cuántas partes se dividió; arriba, cuántas se pintaron." },
+    { q: "¿Cómo se lee [[7/10]]?", tall: true, opts: ["siete décimos", "siete diez", "diez séptimos", "siete deceavos"], ans: 0, exp: "Con denominador 10 se dice «décimos», y primero va el numerador: siete décimos.", hint: "Con denominador 10, 100 o 1.000 se usan décimos, centésimos o milésimos." },
+    { q: "¿Qué fracción es «cuatro quinceavos»?", opts: ["[[4/15]]", "[[15/4]]", "[[4/5]]", "[[14/5]]"], ans: 0, exp: "«Cuatro» es el numerador y «quinceavos» dice que el denominador es 15: [[4/15]].", hint: "Lo que se nombra primero va arriba." },
+    { q: "¿Cuál de estas fracciones es equivalente a la unidad?", opts: ["[[8/8]]", "[[1/8]]", "[[8/1]]", "[[7/8]]"], ans: 0, exp: "En [[8/8]] el numerador es igual al denominador: se toma el entero completo, así que vale 1.", hint: "Busca la que tenga el numerador igual al denominador." }],
   c2: [
-    { q: "¿Cuál de estas fracciones NO es equivalente a [[2/3]]?", opts: ["[[4/6]]", "[[6/9]]", "[[3/4]]", "[[8/12]]"], ans: 2, exp: "[[3/4]] no se obtiene multiplicando el 2 y el 3 por el mismo número. Las otras sí: por 2, por 3 y por 4.", hint: "Revisa por cuánto se multiplicó arriba y abajo en cada una." },
-    { q: "Simplifica [[10/14]] hasta la fracción irreducible.", opts: ["[[5/7]]", "[[10/7]]", "[[20/28]]", "[[2/7]]"], ans: 0, exp: "10 y 14 son pares: divido por 2 → [[5/7]]. El 5 y el 7 ya no tienen un divisor común, así que es irreducible.", hint: "Busca un número que divida al 10 y al 14 a la vez, y divide los dos." },
-    { q: "[[4/5]] = [[□/15]]. ¿Qué número va en el cuadrado?", opts: ["12", "14", "9", "4"], ans: 0, exp: "El 5 se multiplicó por 3 para llegar a 15. Arriba se hace lo mismo: 4 · 3 = 12.", hint: "¿Por cuánto se multiplicó el 5 para llegar a 15? Haz lo mismo arriba (¡multiplicar, no sumar!)." }],
-  c3: [
     { q: "Cada entero está dividido en 6 partes iguales y hay 8 partes pintadas en total. ¿Qué fracción es?", opts: ["[[8/6]]", "[[8/12]]", "[[6/8]]", "[[2/6]]"], ans: 0, exp: "El denominador es 6, las partes de UN entero. Hay 8 pintadas: [[8/6]].", hint: "El denominador no es el total de partes de todos los enteros: es el de uno solo." },
     { q: "[[19/6]] escrita como número mixto es:", opts: ["[[3 1/6]]", "[[1 3/6]]", "[[2 7/6]]", "[[6 1/3]]"], ans: 0, exp: "19 : 6 = 3, resto 1. El cociente (3) son los enteros, el resto (1) va arriba y el denominador (6) se mantiene: [[3 1/6]].", hint: "Divide 19 por 6: el cociente son los enteros y el resto va arriba." },
     { q: "[[4 2/3]] escrito como fracción impropia es:", opts: ["[[14/3]]", "[[11/3]]", "[[42/3]]", "[[9/3]]"], ans: 0, exp: "4 · 3 + 2 = 12 + 2 = 14 → [[14/3]]. Primero se multiplica y después se suma.", hint: "Multiplica el entero por el denominador y después suma el numerador." }],
+  c3: [
+    { q: "¿Cuál de estas fracciones NO es equivalente a [[2/3]]?", opts: ["[[4/6]]", "[[6/9]]", "[[3/4]]", "[[8/12]]"], ans: 2, exp: "[[3/4]] no se obtiene multiplicando el 2 y el 3 por el mismo número. Las otras sí: por 2, por 3 y por 4.", hint: "Revisa por cuánto se multiplicó arriba y abajo en cada una." },
+    { q: "Al amplificar [[5/9]] por 3, resulta:", opts: ["[[15/27]]", "[[8/12]]", "[[15/9]]", "[[5/27]]"], ans: 0, exp: "5 · 3 = 15 y 9 · 3 = 27: [[15/27]]. [[8/12]] es sumar 3, y sumar no amplifica.", hint: "Multiplica el numerador y el denominador por 3." },
+    { q: "[[4/5]] = [[□/15]]. ¿Qué número va en el cuadrado?", opts: ["12", "14", "9", "4"], ans: 0, exp: "El 5 se multiplicó por 3 para llegar a 15. Arriba se hace lo mismo: 4 · 3 = 12.", hint: "¿Por cuánto se multiplicó el 5 para llegar a 15? Haz lo mismo arriba (¡multiplicar, no sumar!)." }],
   c4: [
+    { q: "Simplifica [[10/14]] hasta la fracción irreducible.", opts: ["[[5/7]]", "[[10/7]]", "[[20/28]]", "[[2/7]]"], ans: 0, exp: "10 y 14 son pares: divido por 2 → [[5/7]]. El 5 y el 7 ya no tienen un divisor común, así que es irreducible.", hint: "Busca un número que divida al 10 y al 14 a la vez, y divide los dos." },
+    { q: "Al simplificar [[18/30]] por 6, resulta:", opts: ["[[3/5]]", "[[12/24]]", "[[3/30]]", "[[18/5]]"], ans: 0, exp: "18 : 6 = 3 y 30 : 6 = 5: [[3/5]]. [[12/24]] es restar 6, y restar no simplifica.", hint: "Divide el numerador y el denominador por 6." },
+    { q: "¿Cuál de estas fracciones es irreducible?", opts: ["[[5/8]]", "[[6/8]]", "[[10/15]]", "[[4/12]]"], ans: 0, exp: "5 y 8 no tienen ningún divisor común mayor que 1. Las otras se pueden simplificar: por 2, por 5 y por 4.", hint: "Busca la que ya no se pueda dividir exacto arriba y abajo por el mismo número." }],
+  c5: [
+    { q: "¿Qué signo va entre 57.080 y 57.800?", opts: ["&lt;", "&gt;", "="], ans: 0, exp: "Los dos tienen 5 cifras. De izquierda a derecha: 5 = 5, 7 = 7, y en la centena 0 &lt; 8. Entonces 57.080 &lt; 57.800.", hint: "Misma cantidad de cifras: compara de izquierda a derecha hasta encontrar una distinta." },
+    { q: "¿Cuál es el número mayor?", opts: ["999.800", "1.100.500", "990.999", "998.000"], ans: 1, exp: "1.100.500 tiene 7 cifras y los otros tienen 6: el que tiene más cifras es mayor.", hint: "Cuenta las cifras de cada número." }],
+  c6: [
     { q: "¿Cuál es la fracción mayor?", opts: ["[[5/12]]", "[[5/9]]", "[[5/11]]", "[[5/10]]"], ans: 1, exp: "Todas tienen numerador 5, así que gana la de denominador menor: sus trozos son los más grandes.", hint: "Si el numerador es igual, piensa en el tamaño de los trozos." },
     { q: "¿Qué signo va entre [[3/4]] y [[5/6]]?", opts: ["&lt;", "&gt;", "="], ans: 0, exp: "En doceavos: [[3/4]] = [[9/12]] y [[5/6]] = [[10/12]]. Como 9 es menor que 10, [[3/4]] &lt; [[5/6]].", hint: "Amplifica las dos a denominador 12 y compara los numeradores." },
     { q: "¿Qué alternativa ordena de menor a mayor [[2/3]], [[1/2]] y [[5/6]]?", tall: true, opts: ["[[1/2]], [[2/3]], [[5/6]]", "[[2/3]], [[1/2]], [[5/6]]", "[[5/6]], [[2/3]], [[1/2]]", "[[1/2]], [[5/6]], [[2/3]]"], ans: 0, exp: "En sextos: [[1/2]] = [[3/6]], [[2/3]] = [[4/6]] y [[5/6]]. Queda [[3/6]] &lt; [[4/6]] &lt; [[5/6]].", hint: "Lleva las tres a sextos y ordena por el numerador." }],
-  c5: [
+  c7: [
+    { q: "¿Qué punto está 3 unidades a la derecha y 5 hacia arriba del origen?", opts: ["(3, 5)", "(5, 3)", "(3, 0)", "(8, 0)"], ans: 0, exp: "Primero la x (derecha): 3; después la y (arriba): 5. El punto es (3, 5).", hint: "Primero va lo horizontal y después lo vertical." },
+    { q: "Un rectángulo tiene los vértices A(1, 3), B(1, 6) y C(5, 6). ¿Cuál es el cuarto vértice D?", opts: ["D(5, 3)", "D(3, 5)", "D(6, 1)", "D(5, 6)"], ans: 0, exp: "D está debajo de C (misma x = 5) y a la altura de A (misma y = 3): D(5, 3).", hint: "Dibújalo: D queda en la misma columna que C y en la misma fila que A." },
+    { q: "Los puntos (1, 1), (1, 4), (4, 4) y (4, 1) se unen en orden. ¿Qué figura forman?", opts: ["un cuadrado", "un triángulo", "un pentágono", "un trapecio"], ans: 0, exp: "Son 4 vértices, los cuatro lados miden 3 y los ángulos son rectos: es un cuadrado.", hint: "Cuenta los vértices y mide los lados en cuadros." }],
+  c8: [
     { q: "El punto (4, 5) se traslada 2 unidades a la izquierda y 3 unidades hacia abajo. ¿Dónde queda?", opts: ["(2, 2)", "(6, 8)", "(6, 2)", "(2, 8)"], ans: 0, exp: "Izquierda resta a la x: 4 − 2 = 2. Abajo resta a la y: 5 − 3 = 2. Queda en (2, 2).", hint: "Izquierda y abajo restan; derecha y arriba suman." },
     { q: "En una traslación, la figura…", tall: true, opts: ["se desliza sin girar y sin darse vuelta", "queda como en un espejo", "cambia de tamaño", "gira alrededor de un punto"], ans: 0, exp: "Trasladar es deslizar: la figura cambia de lugar, pero sigue mirando hacia el mismo lado.", hint: "Piensa en empujar un libro sobre la mesa, sin girarlo." }],
-  c6: [{ q: "Un vértice está 2 cuadrados a la izquierda de un eje vertical. ¿Dónde queda su reflejo?", tall: true, opts: ["2 cuadrados a la derecha del eje", "2 cuadrados a la izquierda del eje", "4 cuadrados a la derecha del eje", "justo sobre el eje"], ans: 0, exp: "El reflejo queda a la misma distancia del eje, pero al otro lado.", hint: "En un espejo, lo que está cerca queda cerca y lo que está lejos queda lejos." }],
-  c7: [
+  c9: [
     { q: "¿Cuántos grados tiene media vuelta?", opts: ["90°", "180°", "360°", "45°"], ans: 1, exp: "Media vuelta son 180°. Un cuarto de vuelta son 90° y una vuelta completa, 360°.", hint: "Una vuelta completa son 360°. ¿Cuánto es la mitad?" },
-    { q: "¿Qué hay que indicar para describir una rotación?", tall: true, opts: ["el centro, el ángulo y el sentido", "hacia dónde se mueve y cuántos cuadrados", "solo el eje de reflexión", "el nuevo tamaño de la figura"], ans: 0, exp: "Centro (el punto que no se mueve), ángulo (90°, 180°…) y sentido (horario o antihorario).", hint: "Mira la lista de tres cosas que aparece arriba." }]
+    { q: "¿Qué hay que indicar para describir una rotación?", tall: true, opts: ["el centro, el ángulo y el sentido", "hacia dónde se mueve y cuántos cuadrados", "solo el eje de reflexión", "el nuevo tamaño de la figura"], ans: 0, exp: "Centro (el punto que no se mueve), ángulo (90°, 180°…) y sentido (horario o antihorario).", hint: "Son tres cosas; mira el recuadro azul de arriba." },
+    { q: "Un vértice está 2 cuadros a la derecha del centro P. Si se rota 90° en sentido antihorario, ¿dónde queda?", tall: true, opts: ["2 cuadros arriba de P", "2 cuadros abajo de P", "2 cuadros a la izquierda de P", "4 cuadros a la derecha de P"], ans: 0, exp: "Al revés del reloj, lo que estaba a la derecha sube: queda 2 cuadros arriba de P, a la misma distancia.", hint: "Mira la tabla: fila «a la derecha de P», columna «90° antihorario»." }],
+  c10: [
+    { q: "Un vértice está 2 cuadrados a la izquierda de un eje vertical. ¿Dónde queda su reflejo?", tall: true, opts: ["2 cuadrados a la derecha del eje", "2 cuadrados a la izquierda del eje", "4 cuadrados a la derecha del eje", "justo sobre el eje"], ans: 0, exp: "El reflejo queda a la misma distancia del eje, pero al otro lado.", hint: "En un espejo, lo que está cerca queda cerca y lo que está lejos queda lejos." },
+    { q: "En una reflexión, el segmento que une un punto A con su imagen A' es…", tall: true, opts: ["perpendicular al eje", "paralelo al eje", "igual al eje", "más largo que el eje"], ans: 0, exp: "Siempre cruza el eje formando un ángulo recto: es perpendicular (⊥).", hint: "Mira las líneas punteadas del dibujo con el eje diagonal." },
+    { q: "El eje de reflexión es la recta vertical x = 4. ¿Dónde queda el reflejo del punto (1, 3)?", opts: ["(7, 3)", "(4, 3)", "(1, 5)", "(3, 1)"], ans: 0, exp: "(1, 3) está 3 unidades a la izquierda del eje x = 4, así que su reflejo queda 3 unidades a la derecha: x = 4 + 3 = 7. La y no cambia: (7, 3).", hint: "Cuenta cuántas unidades hay del punto al eje y cuenta lo mismo al otro lado." }],
+  c11: [
+    { q: "El triángulo ABC se trasladó y quedó A'B'C'. ¿Qué afirmación es correcta?", tall: true, opts: ["AB ≅ A'B', porque la traslación no cambia el tamaño", "A'B' es más largo que AB", "los triángulos tienen distinta forma", "solo serían congruentes si se rotaran"], ans: 0, exp: "Toda transformación isométrica mantiene la forma y el tamaño, así que los lados correspondientes son congruentes.", hint: "¿Una traslación cambia el tamaño de la figura?" },
+    { q: "¿Qué lado del triángulo A'B'C' corresponde al lado BC?", opts: ["B'C'", "A'B'", "A'C'", "BC'"], ans: 0, exp: "A cada vértice le corresponde el de la misma letra con prima: B → B' y C → C'. El lado BC corresponde a B'C'.", hint: "Busca las mismas letras, con prima." }]
 };
 function buildChecks() {
   $$(".check[data-check]").forEach(box => {
@@ -675,7 +796,7 @@ function lab1() {
   const upd = () => {
     $("#l1pz").innerHTML = pizza(d, n, 62);
     $("#l1bar").innerHTML = bars(1, d, n, { w: 420, h: 46 });
-    $("#l1tx").innerHTML = `<div class="big" style="font-size:2.2em">${F(n, d)}</div><div class="small">El entero se cortó en <b>${d}</b> partes iguales y tomamos <b>${n}</b>.</div>`;
+    $("#l1tx").innerHTML = `<div class="big" style="font-size:2.2em">${F(n, d)}</div><div class="small">El entero se cortó en <b>${d}</b> partes iguales y tomamos <b>${n}</b>.<br>Se lee: <b>${n ? fracName(n, d) : "cero " + denName(d, 2)}</b></div>`;
   };
   const sd = stepper("l1dv", d, () => 2, () => 12, v => { d = v; if (n > d) sn.set(d); upd(); });
   const sn = stepper("l1nv", n, () => 0, () => d, v => { n = v; upd(); });
@@ -767,7 +888,7 @@ function lab3conv() {
 
 /* ============ lección 4 ============ */
 function fig4() {
-  $("#fig4a").innerHTML = barRow(F(3, 8), bars(1, 8, 3, { w: 400, h: 36 })) + barRow(F(5, 8), bars(1, 8, 5, { w: 400, h: 36 }));
+  $("#fig4a").innerHTML = barRow(F(4, 6), bars(1, 6, 4, { w: 400, h: 36 })) + barRow(F(2, 6), bars(1, 6, 2, { w: 400, h: 36 }));
   $("#fig4b").innerHTML = barRow(F(2, 3), bars(1, 3, 2, { w: 400, h: 36 })) + barRow(F(2, 7), bars(1, 7, 2, { w: 400, h: 36 }));
 }
 function lab4() {
@@ -792,14 +913,14 @@ function lab4() {
 }
 
 /* ============ checklist e inicio ============ */
-const LIST = ["En un dibujo con varios enteros, el denominador es el número de partes de UN entero.", "Al simplificar, sigo hasta que la fracción sea irreducible.", "Al pasar de mixto a impropia, primero multiplico y después sumo.", "Para comparar fracciones con distinto denominador, primero las amplifico.", "En el plano cartesiano escribo primero la x y después la y.", "En la reflexión, cada vértice queda a la misma distancia del eje."];
+const LIST = ["En un dibujo con varios enteros, el denominador es el número de partes de UN entero.", "Al simplificar, sigo hasta que la fracción sea irreducible.", "Al pasar de mixto a impropia, primero multiplico y después sumo.", "Para comparar fracciones con distinto denominador, primero las amplifico.", "En el plano cartesiano escribo primero la x y después la y.", "En la reflexión, cada vértice queda a la misma distancia del eje.", "Para leer una fracción nombro primero el numerador y después el denominador (medios… décimos… «avos»).", "Al rotar, cuento desde el centro P cuántos cuadros hay hasta cada vértice y giro esa posición.", "En la reflexión, el segmento que une A con A' es perpendicular al eje."];
 function buildChecklist() {
   $("#checklist").innerHTML = LIST.map((t, i) => `<li><label class="tick"><input type="checkbox" data-i="${i}" ${DB.list[i] ? "checked" : ""}><span>${t}</span></label></li>`).join("");
   $$("#checklist input").forEach(c => c.onchange = () => { DB.list[c.dataset.i] = c.checked; save(); });
 }
 function renderHome() {
-  const done = Object.keys(DB.checks).filter(k => DB.checks[k]).length;
-  $("#st-aprender").innerHTML = done ? `<span style="color:var(--green)">${done} de 9 lecciones listas</span>` : `<span class="muted">Sin empezar</span>`;
+  const done = Object.keys(DB.done).filter(k => DB.done[k]).length;
+  $("#st-aprender").innerHTML = done ? `<span style="color:var(--green)">${done} de 12 lecciones listas</span>` : `<span class="muted">Sin empezar</span>`;
   ["A", "B"].forEach(L => {
     const h = DB.history.filter(x => x.t === L).slice(-1)[0], cur = DB.tests[L];
     $("#st-ensayo" + L).innerHTML = h ? `<span style="color:${h.nota >= 4 ? "var(--green)" : "var(--red)"}">Último intento: ${h.pts} pts · nota ${h.nota.toFixed(1).replace(".", ",")}</span>` : cur && !cur.done && (cur.start || [cur.mc, cur.inp, cur.w].some(o => Object.keys(o || {}).length)) ? `<span style="color:var(--orange-ink)">En curso</span>` : `<span class="muted">Sin empezar</span>`;
@@ -977,13 +1098,341 @@ function lab8() {
     $$("#g8b button").forEach(b => b.onclick = () => {
       if ($("#g8b").dataset.done) return; $("#g8b").dataset.done = 1;
       const ok = b.dataset.k === kind; b.classList.add("sel"); $("#g8b").classList.add(ok ? "ok" : "bad");
-      if (ok) { right++; streak++; DB.game8 = right; save(); if (right >= 5) sectionDone(8); } else streak = 0;
+      if (ok) { right++; streak++; DB.game8 = right; save(); if (right >= 5) sectionDone(11); } else streak = 0;
       const why = { t: "F' mira hacia el mismo lado que F: solo cambió de lugar.", r: "F' quedó en espejo: el «brazo» apunta al lado contrario.", o: "F' quedó girada (acostada o de cabeza), pero no en espejo." }[kind];
       $("#g8fb").innerHTML = `<div class="fb ${ok ? "ok" : "bad"}"><b class="tag">${ok ? "¡Bien!" : "Era " + names[kind].toLowerCase() + "."}</b>${why} <button class="btn small" id="g8n" style="margin-left:8px">Siguiente</button></div>`;
       $("#g8n").onclick = nuevo;
     });
   };
   nuevo();
+}
+
+/* ============ cómo se leen las fracciones ============ */
+const NUMW = ["cero", "un", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte"];
+const DEN = { 2: "medio", 3: "tercio", 4: "cuarto", 5: "quinto", 6: "sexto", 7: "séptimo", 8: "octavo", 9: "noveno", 10: "décimo", 100: "centésimo", 1000: "milésimo" };
+const AVO = { 11: "onceavo", 12: "doceavo", 13: "treceavo", 14: "catorceavo", 15: "quinceavo", 16: "dieciseisavo", 17: "diecisieteavo", 18: "dieciochoavo", 19: "diecinueveavo", 20: "veinteavo" };
+const numWord = n => NUMW[n] ?? String(n);
+function denName(d, n) { const s = DEN[d] || AVO[d] || (d + "avo"); return n === 1 ? s : s + "s"; }
+function fracName(n, d) { return `${numWord(n)} ${denName(d, n)}`; }
+const fmtN = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+const fbox = (ok, html, cls) => `<div class="fb ${cls || (ok ? "ok" : "bad")}">${html}</div>`;
+
+/* pregunta de alternativas para prácticas generadas */
+function labMC(el, qHtml, opts, ans, exp, next) {
+  el.innerHTML = `<div class="q-text" style="margin-bottom:8px">${qHtml}</div><div class="opts ${opts.some(o => o.length > 60) ? "tall" : ""}">${opts.map((o, i) => `<button class="opt" data-i="${i}"><span class="l">${"ABCD"[i]}</span><span>${o}</span></button>`).join("")}</div><div class="fbx"></div>`;
+  let done = false;
+  $$(".opt", el).forEach(b => b.onclick = () => {
+    if (done) return; done = true;
+    const i = +b.dataset.i, ok = i === ans;
+    b.classList.add(ok ? "ok" : "bad"); if (!ok) $(`.opt[data-i="${ans}"]`, el).classList.add("ok");
+    $(".fbx", el).innerHTML = fbox(ok, `<b class="tag">${ok ? "¡Bien!" : "No era esa."}</b>${exp} <button class="btn small" style="margin-left:8px">Otra</button>`);
+    $(".fbx button", el).onclick = next;
+  });
+}
+
+function labRead() {
+  const el = $("#labRead"), POOL = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 16, 20, 100, 1000, 11, 14];
+  const nuevo = () => {
+    const d = pick(POOL), n = rnd(1, d <= 10 ? 12 : 19), mode = Math.random() < 0.5 ? 0 : 1;
+    const others = new Map([[n + "/" + d, [n, d]]]);
+    const add = (a, b) => { if (a >= 1 && b >= 2 && others.size < 4 && !others.has(a + "/" + b)) others.set(a + "/" + b, [a, b]); };
+    if (d <= 20 && n >= 2) add(d, n);
+    add(n, pick(POOL.filter(x => x !== d))); add(n + 1, d); add(n, pick(POOL.filter(x => x !== d))); add(Math.max(1, n - 1), d);
+    const list = shuffle([...others.values()]), ans = list.findIndex(([a, b]) => a === n && b === d);
+    if (mode === 0) {
+      let opts = list.map(([a, b]) => fracName(a, b));
+      if (d >= 10 && d <= 20) opts[(ans + 1) % 4] = `${numWord(n)} ${numWord(d)}`;
+      labMC(el, `¿Cómo se lee <span class="big">${F(n, d)}</span>?`, opts, ans, `${F(n, d)} se lee <b>${fracName(n, d)}</b>: primero el numerador (${n}) y después el denominador (${d} → ${denName(d, 2)}).`, nuevo);
+    } else {
+      labMC(el, `¿Qué fracción es <b>«${fracName(n, d)}»</b>?`, list.map(([a, b]) => `<span class="big">${F(a, b)}</span>`), ans, `«${numWord(n)}» es el numerador y «${denName(d, n)}» dice que el denominador es ${d}: ${F(n, d)}.`, nuevo);
+    }
+  };
+  nuevo();
+}
+
+/* tablas de amplificar y simplificar */
+function tableLab(el, kind) {
+  const amp = kind === "amp", P = amp ? "ta" : "ts";
+  const nuevo = () => {
+    let a, b, k;
+    if (amp) { b = rnd(2, 9); a = rnd(1, b + 2); k = rnd(2, 6); }
+    else { do { b = rnd(2, 9); a = rnd(1, b - 1); } while (gcd(a, b) !== 1); k = rnd(2, 9); }
+    const big = [a * k, b * k], small = [a, b], orig = amp ? small : big, res = amp ? big : small, blank = rnd(0, 2);
+    const cell = (i, f) => blank === i ? finp(P + i) : `<span class="big">${F(f[0], f[1])}</span>`;
+    el.innerHTML = `<div class="tablewrap"><table class="t" style="text-align:center"><tr><th>Fracción</th><th>${amp ? "Amplificada" : "Simplificada"} por</th><th>Resultado</th></tr>
+      <tr><td>${cell(0, orig)}</td><td>${blank === 1 ? nin(P + "1-k") : `<b style="font-size:1.2em">${k}</b>`}</td><td>${cell(2, res)}</td></tr></table></div>
+      <div class="row"><button class="btn small blue" id="tbok">Comprobar</button><button class="btn small ghost" id="tbnew">Otra</button></div><div id="tbfb"></div>`;
+    $("#tbnew", el).onclick = nuevo;
+    $("#tbok", el).onclick = () => {
+      let ok;
+      if (blank === 1) { ok = val(P + "1-k") === k; mark(P + "1-k", ok); }
+      else { const f = blank === 0 ? orig : res; ok = val(`${P}${blank}-n`) === f[0] && val(`${P}${blank}-d`) === f[1]; mark(`${P}${blank}-n`, ok); mark(`${P}${blank}-d`, ok); }
+      const op = amp ? `${F(`${a} · ${k}`, `${b} · ${k}`)} = ${F(a * k, b * k)}` : `${F(`${a * k} : ${k}`, `${b * k} : ${k}`)} = ${F(a, b)}`;
+      $("#tbfb", el).innerHTML = fbox(ok, `<b class="tag">${ok ? "¡Bien!" : "Revisa:"}</b>${op}. ${amp ? "Se multiplican los dos números por " + k : "Se dividen los dos números por " + k}.`);
+    };
+  };
+  nuevo();
+}
+function labAmpT() { tableLab($("#labAmpT"), "amp"); }
+function labSimpT() { tableLab($("#labSimpT"), "simp"); }
+
+/* ============ números naturales ============ */
+const PV = ["UMi", "CM", "DM", "UM", "C", "D", "U"];
+function pvTable(a, b, hi) {
+  const row = n => { const s = String(n).padStart(7, " "); return [...s].map((c, i) => `<td style="text-align:center;${i === hi ? "background:var(--gold-soft);font-weight:800" : ""}">${c === " " ? "" : c}</td>`).join(""); };
+  return `<div class="tablewrap"><table class="t" style="max-width:520px"><tr><th></th>${PV.map((p, i) => `<th style="text-align:center;${i === hi ? "background:var(--gold)" : ""}">${p}</th>`).join("")}</tr>
+    <tr><td><b>${fmtN(a)}</b></td>${row(a)}</tr><tr><td><b>${fmtN(b)}</b></td>${row(b)}</tr></table></div>`;
+}
+function natCompare(a, b) {
+  const sa = String(a), sb = String(b), s = a === b ? "=" : a < b ? "<" : ">";
+  if (sa.length !== sb.length) return { s, hi: 7 - Math.max(sa.length, sb.length), why: `${fmtN(sa.length > sb.length ? a : b)} tiene más cifras (${Math.max(sa.length, sb.length)} contra ${Math.min(sa.length, sb.length)}), así que es mayor.` };
+  if (a === b) return { s, hi: -1, why: "Todas las cifras son iguales: los números son iguales." };
+  let i = 0; while (sa[i] === sb[i]) i++;
+  const col = 7 - sa.length + i;
+  return { s, hi: col, why: `Tienen la misma cantidad de cifras. De izquierda a derecha, la primera cifra distinta está en la ${PV[col]}: ${sa[i]} ${sa[i] < sb[i] ? "&lt;" : "&gt;"} ${sb[i]}.` };
+}
+function labNat() {
+  const el = $("#labNat");
+  el.innerHTML = `<div class="line"><input class="inp wide" id="nA" inputmode="numeric" value="15.853" style="width:8em"> <b id="nS" class="big" style="min-width:1.4em;text-align:center">?</b> <input class="inp wide" id="nB" inputmode="numeric" value="17.846" style="width:8em"></div><div id="nT"></div><div id="nW" class="small"></div>`;
+  const upd = () => {
+    const a = num(($("#nA").value || "").replace(/\./g, "")), b = num(($("#nB").value || "").replace(/\./g, ""));
+    if (![a, b].every(x => Number.isInteger(x) && x >= 0 && x < 1e7)) { $("#nS").textContent = "?"; $("#nT").innerHTML = ""; $("#nW").textContent = "Escribe dos números enteros menores que 10.000.000."; return; }
+    const c = natCompare(a, b); $("#nS").textContent = c.s; $("#nT").innerHTML = pvTable(a, b, c.hi); $("#nW").innerHTML = c.why;
+  };
+  $("#nA").oninput = upd; $("#nB").oninput = upd; upd();
+}
+function labNatP() {
+  const el = $("#labNatP");
+  const rndLen = L => rnd(10 ** (L - 1), 10 ** L - 1);
+  const nuevo = () => {
+    const L = rnd(4, 7), a = rndLen(L), t = Math.random(); let b;
+    if (t < 0.15) b = a;
+    else if (t < 0.4) b = rndLen(Math.max(4, Math.min(7, L + pick([-1, 1]))));
+    else { const s = [...String(a)], p = rnd(0, L - 1); let dgt; do { dgt = rnd(p === 0 ? 1 : 0, 9); } while (String(dgt) === s[p]); s[p] = String(dgt); for (let i = p + 1; i < L; i++) s[i] = String(rnd(0, 9)); b = +s.join(""); }
+    const c = natCompare(a, b);
+    el.innerHTML = `<div class="line" style="font-size:1.25em"><b>${fmtN(a)}</b> <span class="seg" id="npS"><button data-v="<">&lt;</button><button data-v=">">&gt;</button><button data-v="=">=</button></span> <b>${fmtN(b)}</b></div><div id="npF"></div>`;
+    $$("#npS button", el).forEach(btn => btn.onclick = () => {
+      if ($("#npS", el).dataset.done) return; $("#npS", el).dataset.done = 1;
+      const ok = btn.dataset.v === c.s; btn.classList.add("sel"); $("#npS", el).classList.add(ok ? "ok" : "bad");
+      $("#npF", el).innerHTML = pvTable(a, b, c.hi) + fbox(ok, `<b class="tag">${ok ? "¡Bien!" : "Era " + c.s.replace("<", "&lt;").replace(">", "&gt;") + "."}</b>${c.why} <button class="btn small" style="margin-left:8px">Otro</button>`);
+      $("#npF button", el).onclick = nuevo;
+    });
+  };
+  nuevo();
+}
+
+/* ============ geometría en el plano cartesiano ============ */
+function offs(pts) {
+  const cx = pts.reduce((a, p) => a + p[0], 0) / pts.length, cy = pts.reduce((a, p) => a + p[1], 0) / pts.length;
+  const dx = [], dy = [];
+  pts.forEach(([x, y]) => { const vx = x - cx, vy = y - cy, L = Math.hypot(vx, vy) || 1; dx.push(vx / L * 16); dy.push(-vy / L * 16 + 5); });
+  return { dx, dy };
+}
+const dot = (api, [x, y], col, lab, r = 7) => `<circle cx="${api.px(x)}" cy="${api.py(y)}" r="${r}" fill="${col}" stroke="#222" stroke-width="1.8"/>` + (lab ? `<text x="${api.px(x) + 11}" y="${api.py(y) - 9}" font-size="15" font-weight="800">${lab}</text>` : "");
+const lineSeg = (api, a, b, col, dash = "6 5", w = 2) => `<line x1="${api.px(a[0])}" y1="${api.py(a[1])}" x2="${api.px(b[0])}" y2="${api.py(b[1])}" stroke="${col}" stroke-width="${w}" ${dash ? `stroke-dasharray="${dash}"` : ""}/>`;
+const ring = (api, [x, y]) => `<circle cx="${api.px(x)}" cy="${api.py(y)}" r="12" fill="none" stroke="${C.green}" stroke-width="3"/>`;
+const ptxt = ([x, y]) => `(${x}, ${y})`;
+const collinear = ([a, b, c]) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]) === 0;
+function posDesc([dx, dy]) {
+  const p = [];
+  if (dx) p.push(`${Math.abs(dx)} ${dx > 0 ? "a la derecha" : "a la izquierda"}`);
+  if (dy) p.push(`${Math.abs(dy)} ${dy > 0 ? "arriba" : "abajo"}`);
+  return p.join(" y ") || "justo en";
+}
+
+/* plano donde se marcan puntos tocando */
+function pickPlane(el, o) {
+  const st = { p: {}, sel: 0, show: null, extra: null, locked: false }, labs = o.labels;
+  const draw = () => {
+    const pl = plane(o.xmax, o.ymax, o.u, api => {
+      let g = o.base(api);
+      const P = labs.map((_, i) => st.p[i]);
+      if (labs.length >= 3 && P.every(Boolean)) g += tri(api, P, C.orange, null, { op: 0.5 });
+      if (st.extra) g += st.extra(api);
+      P.forEach((q, i) => { if (q) g += dot(api, q, C.orange, labs[i], 8); });
+      if (st.show) st.show.forEach(q => g += ring(api, q));
+      if (!st.locked) for (let x = 0; x <= o.xmax; x++) for (let y = 0; y <= o.ymax; y++) g += `<circle cx="${api.px(x)}" cy="${api.py(y)}" r="${o.u * 0.46}" fill="transparent" data-p="${x},${y}" style="cursor:pointer"/>`;
+      return g;
+    });
+    el.innerHTML = (labs.length > 1 && !st.locked ? `<div class="tools">${labs.map((t, i) => `<button type="button" data-i="${i}" class="${i === st.sel ? "sel" : ""}">Marcar ${t}</button>`).join("")}<button type="button" data-i="x">Borrar</button></div>` : "") + `<div class="gridwrap">${pl.svg}</div>`;
+    $$(".tools button", el).forEach(b => b.onclick = () => { if (b.dataset.i === "x") { st.p = {}; st.sel = 0; } else st.sel = +b.dataset.i; draw(); });
+    $$("[data-p]", el).forEach(c => c.onclick = () => { st.p[st.sel] = c.dataset.p.split(",").map(Number); if (st.sel < labs.length - 1 && !st.p[st.sel + 1]) st.sel++; draw(); o.onChange && o.onChange(); });
+  };
+  draw();
+  return { get: () => labs.map((_, i) => st.p[i] || null), reveal(sol, extra) { st.show = sol; st.extra = extra || null; st.locked = true; draw(); } };
+}
+function inTri(p, [a, b, c]) { const s = (u, v, w) => (u[0] - w[0]) * (v[1] - w[1]) - (v[0] - w[0]) * (u[1] - w[1]); const d1 = s(p, a, b), d2 = s(p, b, c), d3 = s(p, c, a); return !((d1 < 0 || d2 < 0 || d3 < 0) && (d1 > 0 || d2 > 0 || d3 > 0)); }
+const outline = (api, pts) => `<polygon points="${pts.map(q => api.px(q[0]) + "," + api.py(q[1])).join(" ")}" fill="${C.green}" fill-opacity=".12" stroke="${C.green}" stroke-width="2.5" stroke-dasharray="7 5"/>`;
+const same = (a, b) => a && b && a[0] === b[0] && a[1] === b[1];
+
+/* lección 7: toca un punto */
+function labPlano() {
+  const el = $("#labPlano"); let q = null;
+  const draw = () => {
+    const pl = plane(10, 8, 40, api => {
+      let g = `<text x="${api.px(0) - 14}" y="${api.py(0) + 20}" font-size="14" font-weight="800">O</text>`;
+      if (q) g += lineSeg(api, [q[0], 0], q, C.blue) + lineSeg(api, [0, q[1]], q, C.blue) + dot(api, q, C.orange, ptxt(q), 8);
+      for (let x = 0; x <= 10; x++) for (let y = 0; y <= 8; y++) g += `<circle cx="${api.px(x)}" cy="${api.py(y)}" r="18" fill="transparent" data-p="${x},${y}" style="cursor:pointer"/>`;
+      return g;
+    });
+    let t = "Toca cualquier cruce de líneas.";
+    if (q) t = q[0] === 0 && q[1] === 0 ? "Ese es el <b>origen O(0, 0)</b>, donde se cruzan los ejes." : q[1] === 0 ? `El punto <b>${ptxt(q)}</b> está sobre el eje X: ${q[0]} a la derecha y 0 hacia arriba.` : q[0] === 0 ? `El punto <b>${ptxt(q)}</b> está sobre el eje Y: 0 a la derecha y ${q[1]} hacia arriba.` : `El punto <b>${ptxt(q)}</b>: ${q[0]} pasos a la derecha (abscisa) y ${q[1]} hacia arriba (ordenada).`;
+    el.innerHTML = `<div class="gridwrap">${pl.svg}</div><div class="small" style="margin-top:6px">${t}</div>`;
+    $$("[data-p]", el).forEach(c => c.onclick = () => { q = c.dataset.p.split(",").map(Number); draw(); });
+  };
+  draw();
+}
+
+/* lección 7: práctica variada */
+function polyGen() {
+  const kind = pick(["triángulo", "cuadrado", "rectángulo", "trapecio", "pentágono"]); let P;
+  const x0 = rnd(0, 3), y0 = rnd(0, 2);
+  if (kind === "cuadrado") { const s = rnd(2, 4); P = [[0, 0], [0, s], [s, s], [s, 0]]; }
+  else if (kind === "rectángulo") { let w, h; do { w = rnd(2, 6); h = rnd(2, 5); } while (w === h); P = [[0, 0], [0, h], [w, h], [w, 0]]; }
+  else if (kind === "triángulo") P = pick([[[0, 0], [4, 0], [0, 3]], [[0, 0], [6, 0], [3, 4]], [[0, 0], [5, 0], [5, 4]]]);
+  else if (kind === "trapecio") P = pick([[[0, 0], [6, 0], [4, 3], [2, 3]], [[0, 0], [5, 0], [5, 3], [2, 3]], [[1, 0], [5, 0], [6, 3], [0, 3]]]);
+  else P = pick([[[1, 0], [4, 0], [5, 3], [2.5, 5], [0, 3]].map(([x, y]) => [x * 2 / 2, y]), [[1, 0], [5, 0], [6, 3], [3, 5], [0, 3]]]).map(([x, y]) => [Math.round(x), y]);
+  return { kind, P: P.map(([x, y]) => [x + x0, y + y0]) };
+}
+function labPlanoP() {
+  const el = $("#labPlanoP"), L = "ABCDE";
+  const nuevo = () => {
+    const t = rnd(0, 3); let x = rnd(1, 9), y = rnd(1, 7);
+    if (t === 0) {
+      el.innerHTML = `<p>Toca el punto <b>P${ptxt([x, y])}</b>.</p><div id="ppg"></div><div class="row"><button class="btn small blue" id="ppok">Comprobar</button><button class="btn small ghost" id="ppnew">Otro ejercicio</button></div><div id="ppf"></div>`;
+      const pp = pickPlane($("#ppg", el), { xmax: 10, ymax: 8, u: 40, labels: ["P"], base: () => "" });
+      $("#ppok", el).onclick = () => { const g = pp.get()[0], ok = same(g, [x, y]), sw = same(g, [y, x]); pp.reveal([[x, y]]); $("#ppf", el).innerHTML = fbox(ok, ok ? "<b>¡Bien!</b> Primero " + x + " a la derecha y después " + y + " hacia arriba." : sw ? "<b>Casi:</b> invertiste el orden. Primero va la x (horizontal), después la y (vertical). El círculo verde marca P." : "El círculo verde marca P" + ptxt([x, y]) + ": " + x + " a la derecha y " + y + " hacia arriba."); };
+    } else if (t === 1) {
+      const pl = plane(10, 8, 40, api => dot(api, [x, y], C.orange, "P", 8));
+      el.innerHTML = `<p>¿Cuáles son las coordenadas del punto P?</p><div class="gridwrap">${pl.svg}</div><div class="line">P = ( ${nin("ppx", "w")} , ${nin("ppy", "w")} )</div><div class="row"><button class="btn small blue" id="ppok">Comprobar</button><button class="btn small ghost" id="ppnew">Otro ejercicio</button></div><div id="ppf"></div>`;
+      $("#ppok", el).onclick = () => { const a = val("ppx"), b = val("ppy"), ok = a === x && b === y; mark("ppx", a === x); mark("ppy", b === y); $("#ppf", el).innerHTML = fbox(ok, (ok ? "<b>¡Bien!</b> " : a === y && b === x ? "<b>Casi:</b> invertiste el orden. " : "") + `P está ${x} a la derecha y ${y} hacia arriba: P${ptxt([x, y])}.`); };
+    } else if (t === 2) {
+      const g = polyGen(), names = ["un triángulo", "un cuadrado", "un rectángulo", "un trapecio", "un pentágono"], right = "un " + g.kind;
+      const opts = shuffle([right, ...shuffle(names.filter(n => n !== right)).slice(0, 3)]);
+      const pl = plane(10, 8, 40, api => `<polygon points="${g.P.map(p => api.px(p[0]) + "," + api.py(p[1])).join(" ")}" fill="${C.blue}" fill-opacity=".35" stroke="#2B3036" stroke-width="2.5"/>` + g.P.map((p, i) => dot(api, p, C.blue, L[i], 5)).join(""));
+      const why = { "triángulo": "tiene 3 vértices y 3 lados.", "cuadrado": "tiene 4 lados iguales y 4 ángulos rectos.", "rectángulo": "tiene 4 ángulos rectos y lados de dos medidas distintas.", "trapecio": "tiene 4 lados y solo un par de lados paralelos.", "pentágono": "tiene 5 vértices y 5 lados." }[g.kind];
+      el.innerHTML = `<div class="gridwrap">${pl.svg}</div><div id="ppm"></div><div class="row" style="margin-top:6px"><button class="btn small ghost" id="ppnew">Otro ejercicio</button></div>`;
+      labMC($("#ppm", el), `Los puntos ${g.P.map((p, i) => L[i] + ptxt(p)).join(", ")} se unieron en orden. ¿Qué figura forman?`, opts, opts.indexOf(right), `Es ${right}: ${why}`, nuevo);
+    } else {
+      let x2, y2; do { x2 = rnd(1, 9); y2 = rnd(1, 7); } while (Math.abs(x2 - x) < 2 || Math.abs(y2 - y) < 2);
+      const A = [x, y], B = [x, y2], Cc = [x2, y2], D = [x2, y];
+      const pl = plane(10, 8, 40, api => dot(api, A, C.blue, "A") + dot(api, B, C.blue, "B") + dot(api, Cc, C.blue, "C") + lineSeg(api, A, B, C.blue, null, 2.5) + lineSeg(api, B, Cc, C.blue, null, 2.5));
+      el.innerHTML = `<p>Un rectángulo ABCD tiene los vértices A${ptxt(A)}, B${ptxt(B)} y C${ptxt(Cc)}. ¿Cuál es el vértice D?</p><div class="gridwrap" id="ppd">${pl.svg}</div><div class="line">D = ( ${nin("ppx", "w")} , ${nin("ppy", "w")} )</div><div class="row"><button class="btn small blue" id="ppok">Comprobar</button><button class="btn small ghost" id="ppnew">Otro ejercicio</button></div><div id="ppf"></div>`;
+      $("#ppok", el).onclick = () => {
+        const a = val("ppx"), b = val("ppy"), ok = a === D[0] && b === D[1]; mark("ppx", a === D[0]); mark("ppy", b === D[1]);
+        $("#ppd", el).innerHTML = plane(10, 8, 40, api => `<polygon points="${[A, B, Cc, D].map(p => api.px(p[0]) + "," + api.py(p[1])).join(" ")}" fill="${C.blue}" fill-opacity=".25" stroke="#2B3036" stroke-width="2.5"/>` + dot(api, A, C.blue, "A") + dot(api, B, C.blue, "B") + dot(api, Cc, C.blue, "C") + dot(api, D, C.orange, "D", 8)).svg;
+        $("#ppf", el).innerHTML = fbox(ok, (ok ? "<b>¡Bien!</b> " : "") + `D queda en la misma columna que C (x = ${D[0]}) y a la misma altura que A (y = ${D[1]}): D${ptxt(D)}.`);
+      };
+    }
+    $("#ppnew", el).onclick = nuevo;
+  };
+  nuevo();
+}
+
+/* lección 8: describe la traslación */
+function labDescribe() {
+  const el = $("#labDescribe");
+  const nuevo = () => {
+    let T, dx, dy;
+    do { const a = [rnd(0, 8), rnd(0, 6)]; T = [a, [a[0] + rnd(1, 3), a[1]], [a[0] + rnd(0, 2), a[1] + rnd(1, 2)]]; dx = rnd(-6, 6); dy = rnd(-5, 5); }
+    while (!dx || !dy || collinear(T) || T.some(([x, y]) => x > 10 || y > 8 || x + dx < 0 || x + dx > 10 || y + dy < 0 || y + dy > 8));
+    const I = T.map(([x, y]) => [x + dx, y + dy]), o1 = offs(T);
+    const pl = plane(10, 8, 40, api => tri(api, T, C.blue, ["A", "B", "C"], o1) + tri(api, I, C.orange, ["A'", "B'", "C'"], o1) + lineSeg(api, T[0], I[0], C.red, "5 4", 2));
+    el.innerHTML = `<p>El triángulo ABC se trasladó y quedó en A'B'C'. ¿Cómo fue la traslación?</p><div class="gridwrap">${pl.svg}</div>
+      <div class="line">${nin("dsx", "w")} unidades hacia <span class="seg" id="dsh"><button data-v="1">la derecha</button><button data-v="-1">la izquierda</button></span></div>
+      <div class="line">y ${nin("dsy", "w")} unidades hacia <span class="seg" id="dsv"><button data-v="1">arriba</button><button data-v="-1">abajo</button></span></div>
+      <div class="row"><button class="btn small blue" id="dsok">Comprobar</button><button class="btn small ghost" id="dsnew">Otra</button></div><div id="dsf"></div>`;
+    const ch = { h: null, v: null };
+    [["dsh", "h"], ["dsv", "v"]].forEach(([id, k]) => $$(`#${id} button`, el).forEach(b => b.onclick = () => { ch[k] = +b.dataset.v; $$(`#${id} button`, el).forEach(x => x.classList.toggle("sel", x === b)); }));
+    $("#dsnew", el).onclick = nuevo;
+    $("#dsok", el).onclick = () => {
+      const okx = val("dsx") === Math.abs(dx) && ch.h === Math.sign(dx), oky = val("dsy") === Math.abs(dy) && ch.v === Math.sign(dy);
+      mark("dsx", okx); mark("dsy", oky);
+      $("#dsf", el).innerHTML = fbox(okx && oky, `<b class="tag">${okx && oky ? "¡Bien!" : "Revisa:"}</b>A${ptxt(T[0])} pasó a A'${ptxt(I[0])}. La x cambió de ${T[0][0]} a ${I[0][0]}: ${Math.abs(dx)} ${dx > 0 ? "a la derecha" : "a la izquierda"}. La y cambió de ${T[0][1]} a ${I[0][1]}: ${Math.abs(dy)} ${dy > 0 ? "hacia arriba" : "hacia abajo"}. Todos los vértices se movieron lo mismo.`);
+    };
+  };
+  nuevo();
+}
+
+/* lección 9: construir una rotación */
+const ROT = { h: { t: "90° en sentido horario", f: ([x, y]) => [y, -x] }, a: { t: "90° en sentido antihorario", f: ([x, y]) => [-y, x] }, m: { t: "180°", f: ([x, y]) => [-x, -y] } };
+function labRotC() {
+  const el = $("#labRotC");
+  const nuevo = () => {
+    let P, T, I, k;
+    do {
+      P = [rnd(3, 7), rnd(3, 7)]; k = pick(["h", "a", "m"]);
+      const v = [[rnd(-3, 3), rnd(-3, 3)], [rnd(-3, 3), rnd(-3, 3)], [rnd(-3, 3), rnd(-3, 3)]];
+      T = v.map(([a, b]) => [P[0] + a, P[1] + b]); I = v.map(d => { const r = ROT[k].f(d); return [P[0] + r[0], P[1] + r[1]]; });
+    } while (collinear(T) || inTri(P, T) || new Set(T.map(String)).size < 3 || [...T, ...I].some(([x, y]) => x < 0 || x > 10 || y < 0 || y > 10));
+    const o1 = offs(T), base = api => tri(api, T, C.blue, ["A", "B", "C"], o1) + dot(api, P, C.red, "P", 6);
+    el.innerHTML = `<p>Rota el triángulo ABC en <b>${ROT[k].t}</b> con centro <b>P${ptxt(P)}</b>. Marca A', B' y C' tocando el plano.</p><div id="rcg"></div>
+      <div class="row"><button class="btn small blue" id="rcok">Comprobar</button><button class="btn small ghost" id="rcnew">Otra</button></div><div id="rcf"></div>`;
+    const pp = pickPlane($("#rcg", el), { xmax: 10, ymax: 10, u: 38, labels: ["A'", "B'", "C'"], base });
+    $("#rcnew", el).onclick = nuevo;
+    $("#rcok", el).onclick = () => {
+      const g = pp.get(), good = I.filter((q, i) => same(g[i], q)).length;
+      pp.reveal(I, api => outline(api, I) + T.map((t, i) => lineSeg(api, P, t, C.blue, "4 4", 1.6) + lineSeg(api, P, I[i], C.green, "4 4", 1.6)).join(""));
+      const lines = "ABC".split("").map((L, i) => { const d = [T[i][0] - P[0], T[i][1] - P[1]], r = ROT[k].f(d); return `${L} está ${posDesc(d)} de P → ${L}' queda ${posDesc(r)} de P: <b>${L}'${ptxt(I[i])}</b>.`; }).join("<br>");
+      $("#rcf", el).innerHTML = fbox(good === 3, `<b class="tag">${good === 3 ? "¡Perfecto!" : `Tienes ${good} de 3 vértices bien.`}</b><br>${lines}<br><span class="small">Los círculos verdes marcan dónde van.</span>`, good === 3 ? "ok" : good ? "part" : "bad");
+    };
+  };
+  nuevo();
+}
+
+/* lección 10: reflejar con coordenadas */
+function labRefC() {
+  const el = $("#labRefC");
+  const nuevo = () => {
+    const ax = pick(["v", "h", "d"]); let k = rnd(4, 6), T, I;
+    const f = ([x, y]) => ax === "v" ? [2 * k - x, y] : ax === "h" ? [x, 2 * k - y] : [y, x];
+    do {
+      if (ax === "v") T = [0, 1, 2].map(() => [k - rnd(1, 4), rnd(1, 9)]);
+      else if (ax === "h") T = [0, 1, 2].map(() => [rnd(1, 9), k - rnd(1, 4)]);
+      else T = [0, 1, 2].map(() => { const x = rnd(0, 6); return [x, x + rnd(1, 4)]; });
+      I = T.map(f);
+    } while (collinear(T) || new Set(T.map(String)).size < 3 || [...T, ...I].some(([x, y]) => x < 0 || x > 10 || y < 0 || y > 10));
+    const o1 = offs(T);
+    const axisSvg = api => (ax === "v" ? lineSeg(api, [k, 0], [k, 10], C.red, "9 6", 3) : ax === "h" ? lineSeg(api, [0, k], [10, k], C.red, "9 6", 3) : lineSeg(api, [0, 0], [10, 10], C.red, "9 6", 3)) + `<text x="${api.px(ax === "v" ? k : 10) + 6}" y="${api.py(ax === "h" ? k : 10) - 6}" font-size="15" font-weight="800" fill="${C.red}">L</text>`;
+    const desc = ax === "v" ? `la recta vertical que pasa por x = ${k}` : ax === "h" ? `la recta horizontal que pasa por y = ${k}` : "la recta diagonal que pasa por (0, 0), (1, 1), (2, 2)…";
+    el.innerHTML = `<p>Refleja el triángulo ABC respecto del eje L, que es <b>${desc}</b>. Marca A', B' y C'.</p><div id="rfg"></div>
+      <div class="row"><button class="btn small blue" id="rfok">Comprobar</button><button class="btn small ghost" id="rfnew">Otra</button></div><div id="rff"></div>`;
+    const pp = pickPlane($("#rfg", el), { xmax: 10, ymax: 10, u: 38, labels: ["A'", "B'", "C'"], base: api => axisSvg(api) + tri(api, T, C.blue, ["A", "B", "C"], o1) });
+    $("#rfnew", el).onclick = nuevo;
+    $("#rfok", el).onclick = () => {
+      const g = pp.get(), good = I.filter((q, i) => same(g[i], q)).length;
+      pp.reveal(I, api => outline(api, I) + T.map((t, i) => lineSeg(api, t, I[i], C.green, "4 4", 1.8)).join(""));
+      const lines = "ABC".split("").map((L, i) => {
+        const [x, y] = T[i], [x2, y2] = I[i];
+        if (ax === "v") return `${L}${ptxt(T[i])} está ${k - x} a la izquierda del eje → ${L}' queda ${k - x} a la derecha: <b>${L}'${ptxt(I[i])}</b>.`;
+        if (ax === "h") return `${L}${ptxt(T[i])} está ${k - y} debajo del eje → ${L}' queda ${k - y} arriba: <b>${L}'${ptxt(I[i])}</b>.`;
+        return `${L}${ptxt(T[i])} → se intercambian las coordenadas: <b>${L}'${ptxt([x2, y2])}</b>.`;
+      }).join("<br>");
+      $("#rff", el).innerHTML = fbox(good === 3, `<b class="tag">${good === 3 ? "¡Perfecto!" : `Tienes ${good} de 3 vértices bien.`}</b><br>${lines}<br><span class="small">Las líneas verdes unen cada vértice con su imagen: son perpendiculares al eje.</span>`, good === 3 ? "ok" : good ? "part" : "bad");
+    };
+  };
+  nuevo();
+}
+
+/* figuras fijas de las lecciones 10 y 11 */
+function figDiag() {
+  const T = [[1, 4], [2, 7], [3, 5]], I = T.map(([x, y]) => [y, x]);
+  const pl = plane(8, 8, 36, api => {
+    let g = lineSeg(api, [0, 0], [8, 8], C.red, "9 6", 3) + `<text x="${api.px(8) + 4}" y="${api.py(8) + 4}" font-size="15" font-weight="800" fill="${C.red}">L</text>`;
+    g += tri(api, T, C.blue, ["A", "B", "C"], offs(T)) + tri(api, I, C.orange, ["A'", "B'", "C'"], offs(I));
+    T.forEach((t, i) => {
+      g += lineSeg(api, t, I[i], "#555", "4 4", 1.6);
+      const m = [(t[0] + I[i][0]) / 2, (t[1] + I[i][1]) / 2], s = 0.28, u1 = [s, s], u2 = [-s, s];
+      const p = q => `${api.px(q[0])},${api.py(q[1])}`;
+      g += `<polyline points="${p([m[0] + u1[0], m[1] + u1[1]])} ${p([m[0] + u1[0] + u2[0], m[1] + u1[1] + u2[1]])} ${p([m[0] + u2[0], m[1] + u2[1]])}" fill="none" stroke="#555" stroke-width="1.5"/>`;
+    });
+    return g;
+  });
+  $("#figDiag").innerHTML = pl.svg;
+}
+function figCong() {
+  const T = [[1, 1], [4, 1], [1, 3]], P = [5, 4], I = T.map(([x, y]) => [2 * P[0] - x, 2 * P[1] - y]);
+  $("#figCong").innerHTML = plane(10, 8, 34, api => tri(api, T, C.blue, ["A", "B", "C"], offs(T)) + tri(api, I, C.orange, ["A'", "B'", "C'"], offs(I)) + dot(api, P, C.red, "P", 6)).svg;
 }
 
 /* ============ datos de los ensayos (fuente: PRUEBA_AMPARO_…_EnsayoA/B y PAUTA_AMPARO_…) ============ */
@@ -1003,49 +1452,49 @@ const TESTS = {
   A: {
     name: "Ensayo A", guided: true,
     mc: [
-      { q: "¿Cuál de las siguientes fracciones es equivalente a [[3/4]]?", opts: ["[[6/8]]", "[[3/8]]", "[[6/4]]", "[[4/3]]"], ans: 0, sec: 2, exp: "[[3/4]] amplificada por 2 es [[6/8]]: se multiplicó arriba y abajo por 2. [[3/8]] y [[6/4]] cambian solo un número, y [[4/3]] está dada vuelta." },
-      { q: "Al simplificar [[12/18]] hasta obtener la fracción irreducible, se obtiene:", opts: ["[[6/9]]", "[[2/3]]", "[[4/6]]", "[[3/2]]"], ans: 1, sec: 2, foco: 2, exp: "12 y 18 se dividen los dos por 6: [[2/3]]. [[6/9]] y [[4/6]] son equivalentes, pero todavía se pueden simplificar, y la pregunta pide la irreducible." },
-      { q: "Si se amplifica [[2/5]] por 3, se obtiene:", opts: ["[[5/8]]", "[[2/15]]", "[[6/15]]", "[[6/5]]"], ans: 2, sec: 2, exp: "[[2/5]] = [[2·3/5·3]] = [[6/15]]. [[5/8]] es sumar 3 arriba y abajo, y sumar no amplifica. [[2/15]] y [[6/5]] multiplican solo un número." },
-      { q: "Cada rectángulo representa un entero. ¿Qué fracción representa la parte pintada?", fig: { bars: [2, 4, 7] }, opts: ["[[7/8]]", "[[4/7]]", "[[3/4]]", "[[7/4]]"], ans: 3, sec: 3, foco: 1, exp: "Cada entero tiene 4 partes y hay 7 pintadas: [[7/4]]. [[7/8]] es el error de juntar los dos enteros como si fueran uno: el denominador es el número de partes de UN entero." },
-      { q: "La fracción [[11/4]] escrita como número mixto es:", opts: ["[[3 1/4]]", "[[2 3/4]]", "[[2 1/4]]", "[[1 7/4]]"], ans: 1, sec: 3, exp: "11 : 4 = 2, resto 3 → [[2 3/4]]. [[3 1/4]] confunde el cociente con el resto, y [[1 7/4]] no es número mixto, porque la fracción tiene que ser propia." },
-      { q: "El número mixto [[3 2/5]] escrito como fracción impropia es:", opts: ["[[13/5]]", "[[32/5]]", "[[17/5]]", "[[5/17]]"], ans: 2, sec: 3, foco: 3, exp: "3 · 5 + 2 = 17 → [[17/5]]. [[13/5]] sale de intercambiar el entero con el numerador (2 · 5 + 3), y [[32/5]] es juntar las cifras." },
-      { q: "¿Cuál de las siguientes fracciones es mayor que 1?", opts: ["[[5/6]]", "[[6/6]]", "[[1/6]]", "[[7/6]]"], ans: 3, sec: 3, exp: "[[7/6]] tiene el numerador mayor que el denominador: es impropia y vale más que 1. [[6/6]] vale exactamente 1, no más que 1." },
-      { q: "¿Cuál es la fracción mayor?", opts: ["[[2/7]]", "[[2/3]]", "[[2/9]]", "[[2/5]]"], ans: 1, sec: 4, exp: "Todas tienen numerador 2: la mayor es la de denominador menor, porque sus trozos son los más grandes. [[2/9]] es el error de elegir el denominador mayor." },
-      { q: "¿En qué alternativa las fracciones están ordenadas de menor a mayor?", tall: true, opts: ["[[1/2]], [[3/4]], [[5/8]]", "[[5/8]], [[3/4]], [[1/2]]", "[[1/2]], [[5/8]], [[3/4]]", "[[3/4]], [[5/8]], [[1/2]]"], ans: 2, sec: 4, exp: "En octavos: [[1/2]] = [[4/8]], [[3/4]] = [[6/8]] y [[5/8]]. Queda [[4/8]] &lt; [[5/8]] &lt; [[6/8]], es decir [[1/2]], [[5/8]], [[3/4]]." },
-      { q: "Observa la figura F y su imagen F'. ¿Qué transformación isométrica se aplicó?", fig: { pair: { cols: 10, rows: 6, F: [[1, 1], [2, 1], [1, 2], [1, 3]], Fl: [1, 2], Fp: [[3, 2], [4, 2], [5, 2], [5, 3]], Fpl: [4, 2] } }, tall: true, opts: ISO_OPTS_A, ans: 2, sec: 8, exp: "Es una rotación de 90° en sentido horario: F' quedó acostada. No es traslación, porque cambió la orientación, ni reflexión, porque no quedó en espejo." },
-      { q: "Al aplicar una transformación isométrica a una figura, la figura imagen:", tall: true, opts: ["tiene la misma forma y el mismo tamaño que la original.", "es más grande que la original.", "cambia de forma.", "siempre queda en la misma posición."], ans: 0, sec: 5, exp: "Las transformaciones isométricas conservan la forma y el tamaño; solo cambian la posición o la orientación." },
-      { q: "El punto P(2, 3) se traslada 4 unidades a la derecha y 1 unidad hacia arriba. ¿Cuáles son las coordenadas del punto trasladado P'?", opts: ["(3, 7)", "(6, 4)", "(6, 2)", "(4, 6)"], ans: 1, sec: 5, foco: 5, exp: "(2 + 4 , 3 + 1) = (6, 4). (3, 7) cruza los movimientos, y (4, 6) invierte el orden: primero va la x y después la y." }
+      { q: "¿Cuál de las siguientes fracciones es equivalente a [[3/4]]?", opts: ["[[6/8]]", "[[3/8]]", "[[6/4]]", "[[4/3]]"], ans: 0, sec: 3, exp: "[[3/4]] amplificada por 2 es [[6/8]]: se multiplicó arriba y abajo por 2. [[3/8]] y [[6/4]] cambian solo un número, y [[4/3]] está dada vuelta." },
+      { q: "Al simplificar [[12/18]] hasta obtener la fracción irreducible, se obtiene:", opts: ["[[6/9]]", "[[2/3]]", "[[4/6]]", "[[3/2]]"], ans: 1, sec: 4, foco: 2, exp: "12 y 18 se dividen los dos por 6: [[2/3]]. [[6/9]] y [[4/6]] son equivalentes, pero todavía se pueden simplificar, y la pregunta pide la irreducible." },
+      { q: "Si se amplifica [[2/5]] por 3, se obtiene:", opts: ["[[5/8]]", "[[2/15]]", "[[6/15]]", "[[6/5]]"], ans: 2, sec: 3, exp: "[[2/5]] = [[2·3/5·3]] = [[6/15]]. [[5/8]] es sumar 3 arriba y abajo, y sumar no amplifica. [[2/15]] y [[6/5]] multiplican solo un número." },
+      { q: "Cada rectángulo representa un entero. ¿Qué fracción representa la parte pintada?", fig: { bars: [2, 4, 7] }, opts: ["[[7/8]]", "[[4/7]]", "[[3/4]]", "[[7/4]]"], ans: 3, sec: 2, foco: 1, exp: "Cada entero tiene 4 partes y hay 7 pintadas: [[7/4]]. [[7/8]] es el error de juntar los dos enteros como si fueran uno: el denominador es el número de partes de UN entero." },
+      { q: "La fracción [[11/4]] escrita como número mixto es:", opts: ["[[3 1/4]]", "[[2 3/4]]", "[[2 1/4]]", "[[1 7/4]]"], ans: 1, sec: 2, exp: "11 : 4 = 2, resto 3 → [[2 3/4]]. [[3 1/4]] confunde el cociente con el resto, y [[1 7/4]] no es número mixto, porque la fracción tiene que ser propia." },
+      { q: "El número mixto [[3 2/5]] escrito como fracción impropia es:", opts: ["[[13/5]]", "[[32/5]]", "[[17/5]]", "[[5/17]]"], ans: 2, sec: 2, foco: 3, exp: "3 · 5 + 2 = 17 → [[17/5]]. [[13/5]] sale de intercambiar el entero con el numerador (2 · 5 + 3), y [[32/5]] es juntar las cifras." },
+      { q: "¿Cuál de las siguientes fracciones es mayor que 1?", opts: ["[[5/6]]", "[[6/6]]", "[[1/6]]", "[[7/6]]"], ans: 3, sec: 2, exp: "[[7/6]] tiene el numerador mayor que el denominador: es impropia y vale más que 1. [[6/6]] vale exactamente 1, no más que 1." },
+      { q: "¿Cuál es la fracción mayor?", opts: ["[[2/7]]", "[[2/3]]", "[[2/9]]", "[[2/5]]"], ans: 1, sec: 6, exp: "Todas tienen numerador 2: la mayor es la de denominador menor, porque sus trozos son los más grandes. [[2/9]] es el error de elegir el denominador mayor." },
+      { q: "¿En qué alternativa las fracciones están ordenadas de menor a mayor?", tall: true, opts: ["[[1/2]], [[3/4]], [[5/8]]", "[[5/8]], [[3/4]], [[1/2]]", "[[1/2]], [[5/8]], [[3/4]]", "[[3/4]], [[5/8]], [[1/2]]"], ans: 2, sec: 6, exp: "En octavos: [[1/2]] = [[4/8]], [[3/4]] = [[6/8]] y [[5/8]]. Queda [[4/8]] &lt; [[5/8]] &lt; [[6/8]], es decir [[1/2]], [[5/8]], [[3/4]]." },
+      { q: "Observa la figura F y su imagen F'. ¿Qué transformación isométrica se aplicó?", fig: { pair: { cols: 10, rows: 6, F: [[1, 1], [2, 1], [1, 2], [1, 3]], Fl: [1, 2], Fp: [[3, 2], [4, 2], [5, 2], [5, 3]], Fpl: [4, 2] } }, tall: true, opts: ISO_OPTS_A, ans: 2, sec: 11, exp: "Es una rotación de 90° en sentido horario: F' quedó acostada. No es traslación, porque cambió la orientación, ni reflexión, porque no quedó en espejo." },
+      { q: "Al aplicar una transformación isométrica a una figura, la figura imagen:", tall: true, opts: ["tiene la misma forma y el mismo tamaño que la original.", "es más grande que la original.", "cambia de forma.", "siempre queda en la misma posición."], ans: 0, sec: 8, exp: "Las transformaciones isométricas conservan la forma y el tamaño; solo cambian la posición o la orientación." },
+      { q: "El punto P(2, 3) se traslada 4 unidades a la derecha y 1 unidad hacia arriba. ¿Cuáles son las coordenadas del punto trasladado P'?", opts: ["(3, 7)", "(6, 4)", "(6, 2)", "(4, 6)"], ans: 1, sec: 8, foco: 5, exp: "(2 + 4 , 3 + 1) = (6, 4). (3, 7) cruza los movimientos, y (4, 6) invierte el orden: primero va la x y después la y." }
     ],
     dev: [
       { t: "D1. Fracciones equivalentes", subs: [
-        { h: "a) Completa para que las fracciones sean equivalentes.", kind: "fill", pts: 1, sec: 2, L: [2, 3], R: [null, 12], ans: 8, exp: "El 3 se multiplicó por 4 para llegar a 12, entonces arriba 2 · 4 = 8: [[2/3]] = [[8/12]]." },
-        { kind: "fill", pts: 1, sec: 2, L: [5, 6], R: [20, null], ans: 24, exp: "El 5 se multiplicó por 4 para llegar a 20, entonces abajo 6 · 4 = 24: [[5/6]] = [[20/24]]." },
-        { h: "b) Simplifica hasta obtener la fracción irreducible. Indica por qué número divides.", kind: "simp", pts: 2, sec: 2, foco: 2, f: [18, 24], ans: [3, 4], exp: "[[18/24]] = [[3/4]] dividiendo por 6 (o por 2 → [[9/12]] y luego por 3 → [[3/4]])." },
-        { kind: "simp", pts: 2, sec: 2, foco: 2, f: [28, 42], ans: [2, 3], exp: "[[28/42]] = [[2/3]] dividiendo por 14 (o por 2 → [[14/21]] y luego por 7 → [[2/3]]). En [[14/21]] el número que divide a los dos es el 7." }] },
+        { h: "a) Completa para que las fracciones sean equivalentes.", kind: "fill", pts: 1, sec: 3, L: [2, 3], R: [null, 12], ans: 8, exp: "El 3 se multiplicó por 4 para llegar a 12, entonces arriba 2 · 4 = 8: [[2/3]] = [[8/12]]." },
+        { kind: "fill", pts: 1, sec: 3, L: [5, 6], R: [20, null], ans: 24, exp: "El 5 se multiplicó por 4 para llegar a 20, entonces abajo 6 · 4 = 24: [[5/6]] = [[20/24]]." },
+        { h: "b) Simplifica hasta obtener la fracción irreducible. Indica por qué número divides.", kind: "simp", pts: 2, sec: 4, foco: 2, f: [18, 24], ans: [3, 4], exp: "[[18/24]] = [[3/4]] dividiendo por 6 (o por 2 → [[9/12]] y luego por 3 → [[3/4]])." },
+        { kind: "simp", pts: 2, sec: 4, foco: 2, f: [28, 42], ans: [2, 3], exp: "[[28/42]] = [[2/3]] dividiendo por 14 (o por 2 → [[14/21]] y luego por 7 → [[2/3]]). En [[14/21]] el número que divide a los dos es el 7." }] },
       { t: "D2. Cada rectángulo representa un entero.", fig: { bars: [3, 5, 12] }, subs: [
-        { h: "a) Escribe la fracción impropia que representa la parte pintada.", kind: "fracIn", pts: 1, sec: 3, foco: 1, ans: [12, 5], exp: "Cada entero tiene 5 partes y hay 12 pintadas: [[12/5]]. Si escribiste [[12/15]], juntaste los tres enteros." },
-        { h: "b) Escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 2, 5], exp: "12 : 5 = 2, resto 2 → [[2 2/5]]." },
-        { h: "c) Pinta [[9/4]] en estos rectángulos (toca las partes)…", kind: "paint", pts: 1, sec: 3, wholes: 3, parts: 4, target: 9, exp: "Se pintan los dos primeros rectángulos completos (8 cuartos) y 1 parte del tercero: 9 cuartos." },
-        { h: "…y escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 1, 4], exp: "9 : 4 = 2, resto 1 → [[9/4]] = [[2 1/4]]." }] },
+        { h: "a) Escribe la fracción impropia que representa la parte pintada.", kind: "fracIn", pts: 1, sec: 2, foco: 1, ans: [12, 5], exp: "Cada entero tiene 5 partes y hay 12 pintadas: [[12/5]]. Si escribiste [[12/15]], juntaste los tres enteros." },
+        { h: "b) Escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 2, ans: [2, 2, 5], exp: "12 : 5 = 2, resto 2 → [[2 2/5]]." },
+        { h: "c) Pinta [[9/4]] en estos rectángulos (toca las partes)…", kind: "paint", pts: 1, sec: 2, wholes: 3, parts: 4, target: 9, exp: "Se pintan los dos primeros rectángulos completos (8 cuartos) y 1 parte del tercero: 9 cuartos." },
+        { h: "…y escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 2, ans: [2, 1, 4], exp: "9 : 4 = 2, resto 1 → [[9/4]] = [[2 1/4]]." }] },
       { t: "D3. Transforma. Muestra el cálculo.", note: "Con el cálculo bien hecho vale 1 punto; con el resultado correcto pero sin cálculo, medio punto.", subs: [
-        { h: "a) De fracción impropia a número mixto:", kind: "toMix", pts: 1, sec: 3, f: [13, 4] },
-        { kind: "toMix", pts: 1, sec: 3, f: [23, 5] },
-        { kind: "toMix", pts: 1, sec: 3, f: [17, 3] },
-        { h: "b) De número mixto a fracción impropia:", kind: "toImp", pts: 1, sec: 3, foco: 3, m: [2, 3, 8] },
-        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [4, 1, 2] },
-        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [3, 5, 6] }] },
+        { h: "a) De fracción impropia a número mixto:", kind: "toMix", pts: 1, sec: 2, f: [13, 4] },
+        { kind: "toMix", pts: 1, sec: 2, f: [23, 5] },
+        { kind: "toMix", pts: 1, sec: 2, f: [17, 3] },
+        { h: "b) De número mixto a fracción impropia:", kind: "toImp", pts: 1, sec: 2, foco: 3, m: [2, 3, 8] },
+        { kind: "toImp", pts: 1, sec: 2, foco: 3, m: [4, 1, 2] },
+        { kind: "toImp", pts: 1, sec: 2, foco: 3, m: [3, 5, 6] }] },
       { t: "D4. Comparación y orden.", subs: [
-        { h: "a) Elige <, > o = según corresponda.", kind: "cmp", pts: 1, sec: 4, a: [0, 4, 9], b: [0, 7, 9] },
-        { kind: "cmp", pts: 1, sec: 4, a: [0, 3, 5], b: [0, 3, 8] },
-        { kind: "cmp", pts: 1, sec: 4, a: [0, 2, 3], b: [0, 8, 12] },
-        { kind: "cmp", pts: 1, sec: 4, foco: 4, a: [0, 7, 4], b: [1, 5, 8], exp: "[[7/4]] = [[14/8]] y [[1 5/8]] = [[13/8]]. Como 14 &gt; 13, [[7/4]] &gt; [[1 5/8]]." },
-        { h: "b) Ordena de menor a mayor. Primero escribe cada fracción con el mismo denominador; después tócalas en orden.", kind: "order", pts: 2, sec: 4, foco: 4, fr: [[5, 6], [2, 3], [3, 4], [7, 12]], common: 12 }] },
+        { h: "a) Elige <, > o = según corresponda.", kind: "cmp", pts: 1, sec: 6, a: [0, 4, 9], b: [0, 7, 9] },
+        { kind: "cmp", pts: 1, sec: 6, a: [0, 3, 5], b: [0, 3, 8] },
+        { kind: "cmp", pts: 1, sec: 6, a: [0, 2, 3], b: [0, 8, 12] },
+        { kind: "cmp", pts: 1, sec: 6, foco: 4, a: [0, 7, 4], b: [1, 5, 8], exp: "[[7/4]] = [[14/8]] y [[1 5/8]] = [[13/8]]. Como 14 &gt; 13, [[7/4]] &gt; [[1 5/8]]." },
+        { h: "b) Ordena de menor a mayor. Primero escribe cada fracción con el mismo denominador; después tócalas en orden.", kind: "order", pts: 2, sec: 6, foco: 4, fr: [[5, 6], [2, 3], [3, 4], [7, 12]], common: 12 }] },
       { t: "D5. Resuelve el problema.", subs: [
-        { h: "Sofía comió [[3/8]] de una pizza y Tomás comió [[1/4]] de otra pizza del mismo tamaño. ¿Quién comió más pizza? Justifica amplificando.", kind: "story", pts: 3, sec: 4, people: [{ name: "Sofía", f: [3, 8] }, { name: "Tomás", f: [1, 4], amp: true }], den: 8, ask: "¿Quién comió más pizza?" }] },
+        { h: "Sofía comió [[3/8]] de una pizza y Tomás comió [[1/4]] de otra pizza del mismo tamaño. ¿Quién comió más pizza? Justifica amplificando.", kind: "story", pts: 3, sec: 6, people: [{ name: "Sofía", f: [3, 8] }, { name: "Tomás", f: [1, 4], amp: true }], den: 8, ask: "¿Quién comió más pizza?" }] },
       { t: "D6. Transformaciones isométricas.", subs: [
-        { h: "a) Traslada el triángulo ABC 4 cuadrados hacia la derecha y 2 cuadrados hacia arriba. Marca A', B' y C' en el plano y escribe sus coordenadas.", kind: "trans", pts: 5, sec: 5, foco: 5, tri: [[1, 1], [3, 1], [1, 4]], d: [4, 2], lab: { dx: [-12, 12, -12], dy: [16, 16, -2] } },
-        { h: "b) Pinta la reflexión de la figura respecto del eje (línea roja punteada).", kind: "refl", pts: 3, sec: 6, foco: 6, cols: 12, rows: 7, axis: { v: 6 }, O: [[1, 2], [2, 2], [3, 2], [4, 2], [1, 3], [2, 3], [3, 3], [4, 3], [1, 4], [2, 4], [1, 5], [2, 5]], mirror: "x", at: 11 },
-        { h: "c) Observa cada figura F (gris) y su imagen F' (naranja). ¿Qué transformación se aplicó?", kind: "ident", pts: 3, sec: 8, figs: [
+        { h: "a) Traslada el triángulo ABC 4 cuadrados hacia la derecha y 2 cuadrados hacia arriba. Marca A', B' y C' en el plano y escribe sus coordenadas.", kind: "trans", pts: 5, sec: 8, foco: 5, tri: [[1, 1], [3, 1], [1, 4]], d: [4, 2], lab: { dx: [-12, 12, -12], dy: [16, 16, -2] } },
+        { h: "b) Pinta la reflexión de la figura respecto del eje (línea roja punteada).", kind: "refl", pts: 3, sec: 10, foco: 6, cols: 12, rows: 7, axis: { v: 6 }, O: [[1, 2], [2, 2], [3, 2], [4, 2], [1, 3], [2, 3], [3, 3], [4, 3], [1, 4], [2, 4], [1, 5], [2, 5]], mirror: "x", at: 11 },
+        { h: "c) Observa cada figura F (gris) y su imagen F' (naranja). ¿Qué transformación se aplicó?", kind: "ident", pts: 3, sec: 11, figs: [
           { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[6, 0], [7, 0], [6, 1], [6, 2]], Fpl: [6, 1] },
           { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[0, 1], [1, 1], [2, 1], [2, 2]], Fpl: [1, 1] },
           { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[7, 3], [8, 3], [8, 4], [8, 5]], Fpl: [8, 4] }], ans: ["t", "o", "r"], why: ["Traslación: F' mira hacia el mismo lado que F.", "Rotación de 90° en sentido horario: F' quedó acostada.", "Reflexión: F' quedó en espejo."] }] }
@@ -1054,49 +1503,49 @@ const TESTS = {
   B: {
     name: "Ensayo B", guided: false, minutes: 70,
     mc: [
-      { q: "¿Cuál de las siguientes fracciones es equivalente a [[2/5]]?", opts: ["[[4/5]]", "[[2/10]]", "[[4/10]]", "[[5/2]]"], ans: 2, sec: 2, exp: "[[2/5]] amplificada por 2 es [[4/10]]. [[4/5]] y [[2/10]] cambian solo un número, y [[5/2]] está dada vuelta." },
-      { q: "Al simplificar [[16/24]] hasta obtener la fracción irreducible, se obtiene:", opts: ["[[8/12]]", "[[2/3]]", "[[4/6]]", "[[3/2]]"], ans: 1, sec: 2, foco: 2, exp: "16 y 24 se dividen los dos por 8: [[2/3]]. [[8/12]] y [[4/6]] son equivalentes, pero todavía se pueden simplificar." },
-      { q: "Si se amplifica [[3/7]] por 4, se obtiene:", opts: ["[[12/28]]", "[[7/11]]", "[[12/7]]", "[[3/28]]"], ans: 0, sec: 2, exp: "[[3·4/7·4]] = [[12/28]]. [[7/11]] es sumar 4 arriba y abajo. [[12/7]] y [[3/28]] multiplican solo un número." },
-      { q: "Cada rectángulo representa un entero. ¿Qué fracción representa la parte pintada?", fig: { bars: [2, 3, 5] }, opts: ["[[5/6]]", "[[3/5]]", "[[2/3]]", "[[5/3]]"], ans: 3, sec: 3, foco: 1, exp: "Cada entero tiene 3 partes y hay 5 pintadas: [[5/3]]. [[5/6]] es juntar los dos enteros: el denominador es el número de partes de UN entero." },
-      { q: "La fracción [[14/3]] escrita como número mixto es:", opts: ["[[3 2/3]]", "[[4 2/3]]", "[[4 1/3]]", "[[2 4/3]]"], ans: 1, sec: 3, exp: "14 : 3 = 4, resto 2 → [[4 2/3]]. [[3 2/3]] y [[4 1/3]] se equivocan en el cociente o en el resto, y [[2 4/3]] no es número mixto." },
-      { q: "El número mixto [[2 3/4]] escrito como fracción impropia es:", opts: ["[[10/4]]", "[[23/4]]", "[[11/4]]", "[[4/11]]"], ans: 2, sec: 3, foco: 3, exp: "2 · 4 + 3 = 11 → [[11/4]]. [[10/4]] sale de intercambiar los números (2 · 3 + 4), y [[23/4]] es juntar las cifras." },
-      { q: "¿Cuál de las siguientes fracciones es menor que 1?", opts: ["[[9/8]]", "[[7/8]]", "[[8/8]]", "[[10/8]]"], ans: 1, sec: 3, exp: "[[7/8]] tiene el numerador menor que el denominador: es propia y vale menos que 1. [[8/8]] vale exactamente 1, no menos." },
-      { q: "¿Cuál es la fracción menor?", opts: ["[[3/4]]", "[[3/5]]", "[[3/10]]", "[[3/7]]"], ans: 2, sec: 4, exp: "Todas tienen numerador 3: la menor es la de denominador mayor, porque sus trozos son los más chicos." },
-      { q: "¿En qué alternativa las fracciones están ordenadas de menor a mayor?", tall: true, opts: ["[[7/12]], [[2/3]], [[5/6]]", "[[2/3]], [[5/6]], [[7/12]]", "[[5/6]], [[2/3]], [[7/12]]", "[[2/3]], [[7/12]], [[5/6]]"], ans: 0, sec: 4, exp: "En doceavos: [[7/12]], [[2/3]] = [[8/12]] y [[5/6]] = [[10/12]]. Queda [[7/12]] &lt; [[8/12]] &lt; [[10/12]]." },
-      { q: "Observa la figura F y su imagen F'. ¿Qué transformación isométrica se aplicó?", fig: { pair: { cols: 10, rows: 6, F: [[2, 2], [3, 2], [2, 3], [2, 4]], Fl: [2, 3], Fp: [[5, 1], [5, 2], [4, 3], [5, 3]], Fpl: [5, 2] } }, tall: true, opts: ISO_OPTS_B, ans: 2, sec: 8, exp: "Es una rotación de 180° (media vuelta): F' quedó «de cabeza». No es reflexión: el brazo de la figura pasó de arriba a la derecha a abajo a la izquierda, y eso un solo espejo no lo hace." },
-      { q: "¿Cuál de las siguientes afirmaciones es correcta?", tall: true, opts: ["En una traslación, la figura queda dada vuelta, como en un espejo.", "En una reflexión, la figura cambia de tamaño.", "En una traslación, la figura cambia de forma.", "En una rotación, la figura gira alrededor de un punto."], ans: 3, sec: 7, exp: "Es la única correcta. La primera describe una reflexión, y las otras dos contradicen la definición: las isometrías no cambian ni la forma ni el tamaño." },
-      { q: "El punto P(5, 2) se traslada 3 unidades a la izquierda y 4 unidades hacia arriba. ¿Cuáles son las coordenadas del punto trasladado P'?", opts: ["(8, 6)", "(2, 6)", "(6, 2)", "(1, 5)"], ans: 1, sec: 5, foco: 5, exp: "(5 − 3 , 2 + 4) = (2, 6). (8, 6) mueve hacia la derecha, (6, 2) invierte el orden y (1, 5) cruza las cantidades." }
+      { q: "¿Cuál de las siguientes fracciones es equivalente a [[2/5]]?", opts: ["[[4/5]]", "[[2/10]]", "[[4/10]]", "[[5/2]]"], ans: 2, sec: 3, exp: "[[2/5]] amplificada por 2 es [[4/10]]. [[4/5]] y [[2/10]] cambian solo un número, y [[5/2]] está dada vuelta." },
+      { q: "Al simplificar [[16/24]] hasta obtener la fracción irreducible, se obtiene:", opts: ["[[8/12]]", "[[2/3]]", "[[4/6]]", "[[3/2]]"], ans: 1, sec: 4, foco: 2, exp: "16 y 24 se dividen los dos por 8: [[2/3]]. [[8/12]] y [[4/6]] son equivalentes, pero todavía se pueden simplificar." },
+      { q: "Si se amplifica [[3/7]] por 4, se obtiene:", opts: ["[[12/28]]", "[[7/11]]", "[[12/7]]", "[[3/28]]"], ans: 0, sec: 3, exp: "[[3·4/7·4]] = [[12/28]]. [[7/11]] es sumar 4 arriba y abajo. [[12/7]] y [[3/28]] multiplican solo un número." },
+      { q: "Cada rectángulo representa un entero. ¿Qué fracción representa la parte pintada?", fig: { bars: [2, 3, 5] }, opts: ["[[5/6]]", "[[3/5]]", "[[2/3]]", "[[5/3]]"], ans: 3, sec: 2, foco: 1, exp: "Cada entero tiene 3 partes y hay 5 pintadas: [[5/3]]. [[5/6]] es juntar los dos enteros: el denominador es el número de partes de UN entero." },
+      { q: "La fracción [[14/3]] escrita como número mixto es:", opts: ["[[3 2/3]]", "[[4 2/3]]", "[[4 1/3]]", "[[2 4/3]]"], ans: 1, sec: 2, exp: "14 : 3 = 4, resto 2 → [[4 2/3]]. [[3 2/3]] y [[4 1/3]] se equivocan en el cociente o en el resto, y [[2 4/3]] no es número mixto." },
+      { q: "El número mixto [[2 3/4]] escrito como fracción impropia es:", opts: ["[[10/4]]", "[[23/4]]", "[[11/4]]", "[[4/11]]"], ans: 2, sec: 2, foco: 3, exp: "2 · 4 + 3 = 11 → [[11/4]]. [[10/4]] sale de intercambiar los números (2 · 3 + 4), y [[23/4]] es juntar las cifras." },
+      { q: "¿Cuál de las siguientes fracciones es menor que 1?", opts: ["[[9/8]]", "[[7/8]]", "[[8/8]]", "[[10/8]]"], ans: 1, sec: 2, exp: "[[7/8]] tiene el numerador menor que el denominador: es propia y vale menos que 1. [[8/8]] vale exactamente 1, no menos." },
+      { q: "¿Cuál es la fracción menor?", opts: ["[[3/4]]", "[[3/5]]", "[[3/10]]", "[[3/7]]"], ans: 2, sec: 6, exp: "Todas tienen numerador 3: la menor es la de denominador mayor, porque sus trozos son los más chicos." },
+      { q: "¿En qué alternativa las fracciones están ordenadas de menor a mayor?", tall: true, opts: ["[[7/12]], [[2/3]], [[5/6]]", "[[2/3]], [[5/6]], [[7/12]]", "[[5/6]], [[2/3]], [[7/12]]", "[[2/3]], [[7/12]], [[5/6]]"], ans: 0, sec: 6, exp: "En doceavos: [[7/12]], [[2/3]] = [[8/12]] y [[5/6]] = [[10/12]]. Queda [[7/12]] &lt; [[8/12]] &lt; [[10/12]]." },
+      { q: "Observa la figura F y su imagen F'. ¿Qué transformación isométrica se aplicó?", fig: { pair: { cols: 10, rows: 6, F: [[2, 2], [3, 2], [2, 3], [2, 4]], Fl: [2, 3], Fp: [[5, 1], [5, 2], [4, 3], [5, 3]], Fpl: [5, 2] } }, tall: true, opts: ISO_OPTS_B, ans: 2, sec: 11, exp: "Es una rotación de 180° (media vuelta): F' quedó «de cabeza». No es reflexión: el brazo de la figura pasó de arriba a la derecha a abajo a la izquierda, y eso un solo espejo no lo hace." },
+      { q: "¿Cuál de las siguientes afirmaciones es correcta?", tall: true, opts: ["En una traslación, la figura queda dada vuelta, como en un espejo.", "En una reflexión, la figura cambia de tamaño.", "En una traslación, la figura cambia de forma.", "En una rotación, la figura gira alrededor de un punto."], ans: 3, sec: 9, exp: "Es la única correcta. La primera describe una reflexión, y las otras dos contradicen la definición: las isometrías no cambian ni la forma ni el tamaño." },
+      { q: "El punto P(5, 2) se traslada 3 unidades a la izquierda y 4 unidades hacia arriba. ¿Cuáles son las coordenadas del punto trasladado P'?", opts: ["(8, 6)", "(2, 6)", "(6, 2)", "(1, 5)"], ans: 1, sec: 8, foco: 5, exp: "(5 − 3 , 2 + 4) = (2, 6). (8, 6) mueve hacia la derecha, (6, 2) invierte el orden y (1, 5) cruza las cantidades." }
     ],
     dev: [
       { t: "D1. Fracciones equivalentes", subs: [
-        { h: "a) Completa para que las fracciones sean equivalentes.", kind: "fill", pts: 1, sec: 2, L: [3, 4], R: [null, 20], ans: 15, exp: "El 4 se multiplicó por 5 para llegar a 20, entonces arriba 3 · 5 = 15: [[3/4]] = [[15/20]]." },
-        { kind: "fill", pts: 1, sec: 2, L: [4, 9], R: [16, null], ans: 36, exp: "El 4 se multiplicó por 4 para llegar a 16, entonces abajo 9 · 4 = 36: [[4/9]] = [[16/36]]." },
-        { h: "b) Simplifica hasta obtener la fracción irreducible. Indica por qué número divides.", kind: "simp", pts: 2, sec: 2, foco: 2, f: [20, 25], ans: [4, 5], exp: "[[20/25]] = [[4/5]] dividiendo por 5." },
-        { kind: "simp", pts: 2, sec: 2, foco: 2, f: [30, 45], ans: [2, 3], exp: "[[30/45]] = [[2/3]] dividiendo por 15 (o por 5 → [[6/9]] y luego por 3 → [[2/3]])." }] },
+        { h: "a) Completa para que las fracciones sean equivalentes.", kind: "fill", pts: 1, sec: 3, L: [3, 4], R: [null, 20], ans: 15, exp: "El 4 se multiplicó por 5 para llegar a 20, entonces arriba 3 · 5 = 15: [[3/4]] = [[15/20]]." },
+        { kind: "fill", pts: 1, sec: 3, L: [4, 9], R: [16, null], ans: 36, exp: "El 4 se multiplicó por 4 para llegar a 16, entonces abajo 9 · 4 = 36: [[4/9]] = [[16/36]]." },
+        { h: "b) Simplifica hasta obtener la fracción irreducible. Indica por qué número divides.", kind: "simp", pts: 2, sec: 4, foco: 2, f: [20, 25], ans: [4, 5], exp: "[[20/25]] = [[4/5]] dividiendo por 5." },
+        { kind: "simp", pts: 2, sec: 4, foco: 2, f: [30, 45], ans: [2, 3], exp: "[[30/45]] = [[2/3]] dividiendo por 15 (o por 5 → [[6/9]] y luego por 3 → [[2/3]])." }] },
       { t: "D2. Cada rectángulo representa un entero.", fig: { bars: [3, 4, 11] }, subs: [
-        { h: "a) Escribe la fracción impropia que representa la parte pintada.", kind: "fracIn", pts: 1, sec: 3, foco: 1, ans: [11, 4], exp: "Cada entero tiene 4 partes y hay 11 pintadas: [[11/4]]. Si escribiste [[11/12]], juntaste los tres enteros." },
-        { h: "b) Escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 3, 4], exp: "11 : 4 = 2, resto 3 → [[2 3/4]]." },
-        { h: "c) Pinta [[7/3]] en estos rectángulos (toca las partes)…", kind: "paint", pts: 1, sec: 3, wholes: 3, parts: 3, target: 7, exp: "Se pintan los dos primeros rectángulos completos (6 tercios) y 1 parte del tercero: 7 tercios." },
-        { h: "…y escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 3, ans: [2, 1, 3], exp: "7 : 3 = 2, resto 1 → [[7/3]] = [[2 1/3]]." }] },
+        { h: "a) Escribe la fracción impropia que representa la parte pintada.", kind: "fracIn", pts: 1, sec: 2, foco: 1, ans: [11, 4], exp: "Cada entero tiene 4 partes y hay 11 pintadas: [[11/4]]. Si escribiste [[11/12]], juntaste los tres enteros." },
+        { h: "b) Escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 2, ans: [2, 3, 4], exp: "11 : 4 = 2, resto 3 → [[2 3/4]]." },
+        { h: "c) Pinta [[7/3]] en estos rectángulos (toca las partes)…", kind: "paint", pts: 1, sec: 2, wholes: 3, parts: 3, target: 7, exp: "Se pintan los dos primeros rectángulos completos (6 tercios) y 1 parte del tercero: 7 tercios." },
+        { h: "…y escríbela como número mixto.", kind: "mixIn", pts: 1, sec: 2, ans: [2, 1, 3], exp: "7 : 3 = 2, resto 1 → [[7/3]] = [[2 1/3]]." }] },
       { t: "D3. Transforma. Muestra el cálculo.", note: "Con el cálculo bien hecho vale 1 punto; con el resultado correcto pero sin cálculo, medio punto.", subs: [
-        { h: "a) De fracción impropia a número mixto:", kind: "toMix", pts: 1, sec: 3, f: [11, 3] },
-        { kind: "toMix", pts: 1, sec: 3, f: [27, 5] },
-        { kind: "toMix", pts: 1, sec: 3, f: [15, 4] },
-        { h: "b) De número mixto a fracción impropia:", kind: "toImp", pts: 1, sec: 3, foco: 3, m: [3, 2, 5] },
-        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [5, 1, 3] },
-        { kind: "toImp", pts: 1, sec: 3, foco: 3, m: [2, 7, 8] }] },
+        { h: "a) De fracción impropia a número mixto:", kind: "toMix", pts: 1, sec: 2, f: [11, 3] },
+        { kind: "toMix", pts: 1, sec: 2, f: [27, 5] },
+        { kind: "toMix", pts: 1, sec: 2, f: [15, 4] },
+        { h: "b) De número mixto a fracción impropia:", kind: "toImp", pts: 1, sec: 2, foco: 3, m: [3, 2, 5] },
+        { kind: "toImp", pts: 1, sec: 2, foco: 3, m: [5, 1, 3] },
+        { kind: "toImp", pts: 1, sec: 2, foco: 3, m: [2, 7, 8] }] },
       { t: "D4. Comparación y orden.", subs: [
-        { h: "a) Elige <, > o = según corresponda.", kind: "cmp", pts: 1, sec: 4, a: [0, 5, 7], b: [0, 2, 7] },
-        { kind: "cmp", pts: 1, sec: 4, a: [0, 4, 9], b: [0, 4, 5] },
-        { kind: "cmp", pts: 1, sec: 4, a: [0, 3, 4], b: [0, 9, 12] },
-        { kind: "cmp", pts: 1, sec: 4, foco: 4, a: [1, 2, 3], b: [0, 11, 6], exp: "[[1 2/3]] = [[5/3]] = [[10/6]]. Como 10 &lt; 11, [[1 2/3]] &lt; [[11/6]]." },
-        { h: "b) Ordena de menor a mayor. Primero escribe cada fracción con el mismo denominador; después tócalas en orden.", kind: "order", pts: 2, sec: 4, foco: 4, fr: [[3, 4], [5, 8], [1, 2], [7, 8]], common: 8 }] },
+        { h: "a) Elige <, > o = según corresponda.", kind: "cmp", pts: 1, sec: 6, a: [0, 5, 7], b: [0, 2, 7] },
+        { kind: "cmp", pts: 1, sec: 6, a: [0, 4, 9], b: [0, 4, 5] },
+        { kind: "cmp", pts: 1, sec: 6, a: [0, 3, 4], b: [0, 9, 12] },
+        { kind: "cmp", pts: 1, sec: 6, foco: 4, a: [1, 2, 3], b: [0, 11, 6], exp: "[[1 2/3]] = [[5/3]] = [[10/6]]. Como 10 &lt; 11, [[1 2/3]] &lt; [[11/6]]." },
+        { h: "b) Ordena de menor a mayor. Primero escribe cada fracción con el mismo denominador; después tócalas en orden.", kind: "order", pts: 2, sec: 6, foco: 4, fr: [[3, 4], [5, 8], [1, 2], [7, 8]], common: 8 }] },
       { t: "D5. Resuelve el problema.", subs: [
-        { h: "Martín leyó [[2/3]] de un libro y Catalina leyó [[5/6]] del mismo libro. ¿Quién leyó más? Justifica amplificando.", kind: "story", pts: 3, sec: 4, people: [{ name: "Martín", f: [2, 3], amp: true }, { name: "Catalina", f: [5, 6] }], den: 6, ask: "¿Quién leyó más?" }] },
+        { h: "Martín leyó [[2/3]] de un libro y Catalina leyó [[5/6]] del mismo libro. ¿Quién leyó más? Justifica amplificando.", kind: "story", pts: 3, sec: 6, people: [{ name: "Martín", f: [2, 3], amp: true }, { name: "Catalina", f: [5, 6] }], den: 6, ask: "¿Quién leyó más?" }] },
       { t: "D6. Transformaciones isométricas.", subs: [
-        { h: "a) Traslada el triángulo ABC 5 cuadrados hacia la derecha y 1 cuadrado hacia abajo. Marca A', B' y C' en el plano y escribe sus coordenadas.", kind: "trans", pts: 5, sec: 5, foco: 5, tri: [[1, 2], [4, 2], [4, 5]], d: [5, -1], lab: { dx: [-12, 12, 14], dy: [16, 16, 2] } },
-        { h: "b) Pinta la reflexión de la figura respecto del eje (línea roja punteada).", kind: "refl", pts: 3, sec: 6, foco: 6, cols: 9, rows: 10, axis: { h: 5 }, O: [[2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [2, 2], [3, 2], [2, 3], [3, 3]], mirror: "y", at: 9 },
-        { h: "c) Observa cada figura F (gris) y su imagen F' (naranja). ¿Qué transformación se aplicó?", kind: "ident", pts: 3, sec: 8, figs: [
+        { h: "a) Traslada el triángulo ABC 5 cuadrados hacia la derecha y 1 cuadrado hacia abajo. Marca A', B' y C' en el plano y escribe sus coordenadas.", kind: "trans", pts: 5, sec: 8, foco: 5, tri: [[1, 2], [4, 2], [4, 5]], d: [5, -1], lab: { dx: [-12, 12, 14], dy: [16, 16, 2] } },
+        { h: "b) Pinta la reflexión de la figura respecto del eje (línea roja punteada).", kind: "refl", pts: 3, sec: 10, foco: 6, cols: 9, rows: 10, axis: { h: 5 }, O: [[2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [2, 2], [3, 2], [2, 3], [3, 3]], mirror: "y", at: 9 },
+        { h: "c) Observa cada figura F (gris) y su imagen F' (naranja). ¿Qué transformación se aplicó?", kind: "ident", pts: 3, sec: 11, figs: [
           { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[5, 3], [6, 3], [6, 4], [6, 5]], Fpl: [6, 4] },
           { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[7, 2], [8, 2], [7, 3], [7, 4]], Fpl: [7, 3] },
           { cols: 10, rows: 7, F: F_BASE, Fl: [1, 4], Fp: [[4, 0], [4, 1], [3, 2], [4, 2]], Fpl: [4, 1] }], ans: ["r", "t", "o"], why: ["Reflexión: F' quedó en espejo.", "Traslación: F' mira hacia el mismo lado que F.", "Rotación de 180°: F' quedó de cabeza."] }] }
@@ -1321,7 +1770,7 @@ const subId = (L, bi, si) => `${L}-d${bi}-${si}`;
 const nota = p => Math.round((p < 36 ? 1 + 3 * p / 36 : 4 + 3 * (p - 36) / 24) * 10 + 1e-9) / 10;
 const coma = n => String(n).replace(".", ",");
 const notaTxt = n => n.toFixed(1).replace(".", ",");
-const FOCO_SEC = [3, 2, 3, 4, 5, 6];
+const FOCO_SEC = [2, 4, 2, 6, 8, 10];
 function saveT() { save(); updateProgress(); }
 function fmtDate(iso) { const d = new Date(iso), p = x => String(x).padStart(2, "0"); return `${p(d.getDate())}-${p(d.getMonth() + 1)}-${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`; }
 function review(sec) { return `<a href="#aprender-${sec}">Repasar esto →</a>`; }
@@ -1461,6 +1910,8 @@ function init() {
   buildLessons(); buildChecks();
   lab1(); fig2(); lab2amp(); lab2simp(); lab3(); lab3conv(); fig4(); lab4();
   lab5(); fig5(); lab5pt(); lab6(); lab6p(); lab7(); lab8();
+  labRead(); labAmpT(); labSimpT(); labNat(); labNatP();
+  labPlano(); labPlanoP(); labDescribe(); labRotC(); labRefC(); figDiag(); figCong();
   buildChecklist();
   go(location.hash.slice(1) || "inicio", false);
 }
